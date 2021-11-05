@@ -1,0 +1,14 @@
+@use "variable.scss" as var;
+
+.top-bar {
+	margin: 0;
+	height: var.$top-bar-height;
+	padding: 0;
+	width: 100%;
+	background-color: var.$primary-color;
+	position: fixed;
+
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}

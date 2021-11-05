@@ -1,0 +1,7 @@
+@use "variable.scss" as var;
+
+.button {
+	width: fit-content;
+	width: -moz-fit-content;
+	background-color: red;
+}
