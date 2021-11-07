@@ -1,0 +1,22 @@
+@use "variable.scss" as var;
+
+p {
+	margin: var.$p-margin;
+
+	&:last-child {
+		margin: 0;
+	}
+
+	&.label {
+		color: var.$primary-color;
+		font-weight: bold;
+	}
+
+	&.textBox {
+		max-width: var.$p-textBox-max-width;
+	}
+}
+
+h3 {
+	color: var.$primary-color;
+}

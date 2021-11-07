@@ -3,5 +3,68 @@
 .button {
 	width: fit-content;
 	width: -moz-fit-content;
-	background-color: red;
+
+	color: var.$button-font-color;
+	font-size: var.$button-font-size;
+	font-weight: var.$button-font-weight;
+
+	margin: var.$small-margin;
+	padding: var.$button-padding;
+
+	border-radius: var.$button-border-radius;
+	border-width: 0;
+
+	cursor: pointer;
+
+	&.primary-button {
+		background-color: var.$primary-color;
+
+		&:active  {
+			transform: translateY(0.1rem);
+		}
+
+		&:hover {
+			box-shadow: inset 0 0 0 10em rgba(255, 255, 255, 0.3);
+		}
+	}
+
+	&.secondary-button {
+		background-color: var.$secondary-color;
+
+		&:active  {
+			transform: translateY(0.1rem);
+		}
+
+		&:hover {
+			box-shadow: inset 0 0 0 10em rgba(255, 255, 255, 0.3);
+		}
+	}
+
+	&.button-title {
+		background-color: transparent;
+		margin: 0;
+	}
+
+	&.button-fixed-width {
+		&-small {
+			width: var.$button-fixed-width-small;
+		}
+		&-medium {
+			width: var.$button-fixed-width-medium;
+		}
+		&-big {
+			width: var.$button-fixed-width-big;
+		}
+	}
+
+	&.icon-button {
+		margin: 0;
+		padding: 0;
+		background-color: transparent;
+		color: black;
+
+		:hover {
+			color: var.$primary-color;
+		}
+	}
 }

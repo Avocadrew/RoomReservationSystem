@@ -1,16 +1,11 @@
 <template>
 	<div class="top-bar">
 		<div>
-			<button class="button" @click="testEvent">
-				<h2>
-					hi
-				</h2>
+			<button class="button button-title" @click="testEvent">
+				Reservation System
 			</button>
 		</div>
 		<div>
-			<button class="button" @click="testEvent">
-				HI
-			</button>
 		</div>
 	</div>
 </template>

@@ -1,0 +1,13 @@
+@use "variable.scss" as var;
+
+input[type="radio"] {
+	margin: var.$small-margin;
+}
+
+label {
+	color: var.$primary-color;
+}
+
+input[type="text"], input[type="tel"] {
+	border: 0.1rem solid var.$primary-color;
+}

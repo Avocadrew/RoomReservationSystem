@@ -1,6 +1,9 @@
 <template>
-	<div class="home">
-		<TopBar></TopBar>
+	<div>
+		<TopBar />
+		<div class="post-top-bar">
+			<router-view />
+		</div>
 	</div>
 </template>
 
@@ -8,7 +11,7 @@
 import TopBar from "@/components/TopBar.vue";
 
 export default {
-	name: "Home",
+	name: "Main",
 	components: {
 		TopBar, 
 	}, 
@@ -27,4 +30,5 @@ export default {
 	}, 
 };
 </script>
+
 

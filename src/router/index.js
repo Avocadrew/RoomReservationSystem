@@ -1,11 +1,37 @@
 import { createRouter, createWebHistory } from "vue-router";
 import Home from "../views/Home.vue";
+import Main from "../views/Main.vue";
+import DateAndRoom from "../views/DateAndRoom.vue";
+import MeetingInfo from "../views/MeetingInfo.vue";
+import CreateAccount from "../views/CreateAccount.vue";
 
 const routes = [
   {
-    path: "/",
-    name: "Home",
-    component: Home,
+    path: "/main",
+    name: "Main",
+    component: Main, 
+    children: [
+      {
+        path: "", 
+        name: "Home", 
+        component: Home, 
+      }, 
+      {
+        path: "dateandroom", 
+        name: "DateAndRoom", 
+        component: DateAndRoom, 
+      }, 
+      {
+        path: "meetinginfo", 
+        name: "MeetingInfo", 
+        component: MeetingInfo, 
+      }, 
+      {
+        path: "createaccount", 
+        name: "CreateAccount", 
+        component: CreateAccount, 
+      }, 
+    ], 
   },
   {
     path: "/about",
@@ -16,12 +42,6 @@ const routes = [
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/About.vue"),
   },
-	{
-		path: "/landingPage", 
-		name: "LandingPage", 
-		component: () => 
-			import ("../views/LandingPage.vue"), 
-	}, 
 ];
 
 const router = createRouter({

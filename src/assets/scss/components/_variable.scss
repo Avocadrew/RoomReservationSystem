@@ -1,4 +1,27 @@
-$primary-color: red;
-$secondary-color: blue;
+$primary-color: #1CC497;
+$secondary-color: #88E7DD;
 
-$top-bar-height: 80px;
+$button-font-color: white;
+$button-border-radius: 2rem;
+$button-font-size: 1.2rem;
+$button-font-weight: bold;
+$button-padding: 1rem 0.5rem;
+$button-fixed-width-small: 5rem;
+$button-fixed-width-medium: 7rem;
+$button-fixed-width-big: 9rem;
+
+$top-bar-height: 4rem;
+
+$small-margin: 0.5rem;
+$medium-margin: 0.7rem;
+$big-margin: 0.9rem;
+
+$small-padding: 0.5rem;
+$medium-padding: 0.7rem;
+$big-padding: 0.9rem;
+
+$v-select-min-width: 10rem;
+
+$p-margin: 0 $small-margin 0 0;
+$p-textBox-max-width: 20rem;
+

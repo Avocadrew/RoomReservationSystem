@@ -5,10 +5,20 @@
 	height: var.$top-bar-height;
 	padding: 0;
 	width: 100%;
-	background-color: var.$primary-color;
+	background-color: var.$secondary-color;
 	position: fixed;
+	left: 0;
+	top: 0;
 
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
+
+	* {
+		margin: var.$small-margin;
+	}
+}
+
+.post-top-bar {
+	margin-top: var.$top-bar-height;
 }

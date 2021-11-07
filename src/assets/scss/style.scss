@@ -1,3 +1,11 @@
 @use "components/button.scss";
 @use "components/top-bar.scss";
 @use "components/body.scss";
+@use "components/container.scss";
+@use "components/v-select.scss";
+@use "components/calendar.scss";
+@use "components/typography.scss";
+@use "components/input.scss";
+
+// For v-select
+@use "vue-select/src/scss/vue-select.scss";
