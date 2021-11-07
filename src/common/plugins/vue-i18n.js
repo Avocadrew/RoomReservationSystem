@@ -12,9 +12,9 @@ messages = { ...messages, en, tw };
 const lang = localStorage.getItem("language") || "tw";
 
 const i18n = new VueI18n({
-	locale: lang, 
-	globalInjection: true, 
-	messages, 
+  locale: lang,
+  globalInjection: true,
+  messages,
 });
 
 export default i18n;
