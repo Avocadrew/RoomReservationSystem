@@ -6,7 +6,7 @@
         class="button primary-button button-fixed-width-big"
         @click="goToChooseTypes"
       >
-				RESERVATION
+        RESERVATION
       </button>
       <button
         class="button primary-button button-fixed-width-big"
@@ -38,10 +38,9 @@ export default {
     testEvent: function () {
       window.alert("HI");
     },
-		goToChooseTypes: function() {
-			this.$router.push({path: "reservation/choosetypes"});
-		}, 
+    goToChooseTypes: function () {
+      this.$router.push({ path: "reservation/choosetypes" });
+    },
   },
 };
 </script>
-

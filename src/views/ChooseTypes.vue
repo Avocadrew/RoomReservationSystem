@@ -6,7 +6,7 @@
         class="button primary-button button-fixed-width-big"
         @click="testEvent"
       >
-				SINGLE
+        SINGLE
       </button>
       <button
         class="button primary-button button-fixed-width-big"
@@ -32,11 +32,9 @@ export default {
     testEvent: function () {
       window.alert("HI");
     },
-		goToChooseDateAndRoom: function() {
-			this.$router.push({path: "multiple/choosedateandroom"});
-		}, 
+    goToChooseDateAndRoom: function () {
+      this.$router.push({ path: "multiple/choosedateandroom" });
+    },
   },
 };
 </script>
-
-

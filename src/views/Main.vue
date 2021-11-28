@@ -18,9 +18,9 @@ export default {
   },
   computed: {},
   created() {},
-	mounted() {
-		eruda.init();
-	},
+  mounted() {
+    eruda.init();
+  },
   data() {
     return {};
   },

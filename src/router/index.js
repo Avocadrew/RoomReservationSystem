@@ -13,7 +13,7 @@ const routes = [
     path: "/main",
     name: "Main",
     component: Main,
-		redirect: "/main/chooseactions", 
+    redirect: "/main/chooseactions",
     children: [
       {
         path: "meetinginfo",
@@ -30,28 +30,28 @@ const routes = [
         name: "ChooseActions",
         component: ChooseActions,
       },
-			{
-				path: "reservation/choosetypes", 
-				name: "ChooseTypes", 
-				component: ChooseTypes, 
-			}, 
-			{
-				path: "reservation/multiple", 
+      {
+        path: "reservation/choosetypes",
+        name: "ChooseTypes",
+        component: ChooseTypes,
+      },
+      {
+        path: "reservation/multiple",
         name: "ChooseDateAndRoom",
         component: ChooseDateAndRoom,
-				children: [
-					{
-						path: "chooseTime", 
-						name: "ChooseTime", 
-						component: ChooseTime, 
-					}, 
-				], 
-			}, 
-			{
-				path: "reservation/filloutmeetinginfo", 
-				name: "FillOutMeetingInfo", 
-				component: FillOutMeetingInfo, 
-			}, 
+        children: [
+          {
+            path: "chooseTime",
+            name: "ChooseTime",
+            component: ChooseTime,
+          },
+        ],
+      },
+      {
+        path: "reservation/filloutmeetinginfo",
+        name: "FillOutMeetingInfo",
+        component: FillOutMeetingInfo,
+      },
     ],
   },
   {

@@ -40,9 +40,9 @@ app.config.globalProperties.$ROOMS = [
   "Room6",
 ];
 app.config.globalProperties.$AVAILABLE_TIME = {
-	STARTING_HOURS: 9, 
-	STARTING_MINUTES: 0, 
-	ENDING_HOURS: 17, 
-	ENDING_MINUTES: 0, 
-	INTERVAL: 30, 
+  STARTING_HOURS: 9,
+  STARTING_MINUTES: 0,
+  ENDING_HOURS: 17,
+  ENDING_MINUTES: 0,
+  INTERVAL: 30,
 };
