@@ -2,8 +2,8 @@
 
 .container {
 
-	margin: var.$small-margin;
-	padding: var.$small-padding;
+	margin: var.$container-margin;
+	padding: var.$container-padding;
 
 	&.container-flex {
 		display: flex;
@@ -16,6 +16,10 @@
 		&.container-flex-column {
 			flex-direction: column;
 		}
+	}
+
+	&-wrap {
+		flex-wrap: wrap;
 	}
 
 	&.line-container {
@@ -32,10 +36,66 @@
 		padding: 0;
 
 		& > * {
-			margin: 0 0 var.$small-margin 0;
+			margin: 0 0 var.$container-margin 0;
 
 			&:last-child {
 				margin: 0;
+			}
+		}
+	}
+
+	&.floating-container {
+		position: absolute;
+		width: var.$floating-container-width;
+		max-height: var.$floating-container-max-height;
+		top: var.$top-bar-height;
+		left: calc(50% - #{var.$floating-container-width / 2} - #{var.$container-margin} - #{var.$container-padding});
+		z-index: 1;
+		box-shadow: var.$floating-container-box-shadow-color;
+		border-radius: var.$floating-container-border-radius;
+		background-color: var.$floating-container-background-color;
+		margin: var.$floating-container-margin;
+		padding: var.$floating-container-padding;
+
+		// You can only put two elements in this container. 
+		& > .floating-container-header {
+			display: flex;
+			//align-items: center;
+			flex-direction: row;
+
+			& > * {
+				height: fit-content;
+				height: -moz-fit-content;
+
+				&:first-child {
+					flex-grow: 1;
+					flex-shrink: 0;
+				}
+
+				&:last-child {
+					flex-grow: 0;
+					flex-shrink: 1;
+				}
+			}
+		}
+
+		// You can only put two elements in this container. 
+		& > .floating-container-footer {
+			display: flex;
+			//align-items: center;
+			flex-direction: row;
+
+			& > div {
+				flex-grow: 1;
+				display: flex;
+
+				&:first-child {
+					justify-content: flex-start;
+				}
+
+				&:last-child {
+					justify-content: flex-end;
+				}
 			}
 		}
 	}

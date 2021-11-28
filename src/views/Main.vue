@@ -9,6 +9,7 @@
 
 <script>
 import TopBar from "@/components/TopBar.vue";
+import eruda from "../../node_modules/eruda/eruda.js";
 
 export default {
   name: "Main",
@@ -17,7 +18,9 @@ export default {
   },
   computed: {},
   created() {},
-  mounted() {},
+	mounted() {
+		eruda.init();
+	},
   data() {
     return {};
   },

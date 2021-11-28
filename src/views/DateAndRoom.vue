@@ -1,25 +1,41 @@
 <template>
   <div class="container container-flex container-flex-column">
     <v-select v-model="room" label="Room" :options="$ROOMS" />
-    <Calendar @dayclick="testEvent" />
+    <Calendar @dayclick="chooseDate" />
   </div>
+	<FloatingWindow :window="window" ref="floatingWindow"/>
 </template>
 
 <script>
+import FloatingWindow from "@/components/FloatingWindow.vue";
+
 export default {
-  name: "DateAndRoom",
+  name: "ChooseDateAndRoom",
+	components: {
+		FloatingWindow, 
+	}, 
   data() {
     return {
       room: "Room1",
+			floatingContainerOpened: false, 
+			chosenDate: "", 
     };
   },
-  components: {},
-  computed: {},
+	computed: {
+		window: function() {
+			return {
+				title: this.chosenDate, 
+				nextPath: "../filloutmeetinginfo", 
+			};
+		}, 
+	},
   created() {},
   mounted() {},
   methods: {
-    testEvent: function () {
-      window.alert("HI");
+    chooseDate: function (param) {
+      console.log(param);
+			this.chosenDate = param.ariaLabel;
+			this.$refs.floatingWindow.openWindow();
     },
   },
 };

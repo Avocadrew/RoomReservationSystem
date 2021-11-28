@@ -67,4 +67,45 @@
 			color: var.$primary-color;
 		}
 	}
+
+	&.chooseTime-button {
+		font-size: var.$chooseTime-button-font-size;
+		color: var.$button-font-color;
+		background-color: var.$secondary-color;
+		flex-grow: 0;
+		flex-shrink: 0;
+		margin: var.$chooseTime-button-margin;
+		padding: var.$chooseTime-button-padding;
+		border-radius: 0;
+		width: 50%;
+
+		&:nth-child(odd) {
+			border-top: var.$chooseTime-button-border;
+			border-right: var.$chooseTime-button-border;
+			border-left: var.$chooseTime-button-border;
+		}
+
+		&:nth-child(even) {
+			border-top: var.$chooseTime-button-border;
+			border-right: var.$chooseTime-button-border;
+		}
+
+		&:nth-child(1) {
+			border-top-left-radius: var.$chooseTime-button-border-radius;
+		}
+
+		&:nth-child(2) {
+			border-top-right-radius: var.$chooseTime-button-border-radius;
+		}
+		
+		&:nth-last-child(1) {
+			border-bottom-right-radius: var.$chooseTime-button-border-radius;
+			border-bottom: var.$chooseTime-button-border;
+		}
+		
+		&:nth-last-child(2) {
+			border-bottom-left-radius: var.$chooseTime-button-border-radius;
+			border-bottom: var.$chooseTime-button-border;
+		}
+	}
 }
