@@ -7,6 +7,9 @@ import ChooseActions from "../views/ChooseActions.vue";
 import ChooseTypes from "../views/ChooseTypes.vue";
 import ChooseTime from "../views/ChooseTime.vue";
 import FillOutMeetingInfo from "../views/FillOutMeetingInfo.vue";
+import LandingPage from "../views/LandingPage.vue";
+import PersonalInformation from "../views/PersonalInformation.vue"
+import EditPersonalInformation from "../views/EditPersonalInformation.vue"
 
 const routes = [
   {
@@ -51,6 +54,21 @@ const routes = [
         path: "reservation/filloutmeetinginfo",
         name: "FillOutMeetingInfo",
         component: FillOutMeetingInfo,
+      },
+      {
+        path: "personalinformation",
+        name: "PersonalInformation",
+        component: PersonalInformation,
+      },
+      {
+        path: "editpersonalinformation",
+        name: "EditPersonalInformation",
+        component: EditPersonalInformation,
+      },
+      {
+        path: "landingpage",
+        name: "LandingPage",
+        component: LandingPage,
       },
     ],
   },
