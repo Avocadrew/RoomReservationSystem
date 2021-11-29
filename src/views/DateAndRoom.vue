@@ -17,7 +17,6 @@ export default {
   data() {
     return {
       room: "Room1",
-      floatingContainerOpened: false,
       chosenDate: "",
     };
   },

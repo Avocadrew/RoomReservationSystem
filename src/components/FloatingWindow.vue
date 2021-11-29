@@ -4,7 +4,7 @@
       <h3>{{ window.title }}</h3>
       <button class="button icon-button" @click="closeWindow">X</button>
     </div>
-    <router-view />
+    <router-view :params="params" :isDone="isDone" @params="emitNewParams" />
     <div class="floating-container-footer">
       <div></div>
       <div>
@@ -25,10 +25,12 @@ export default {
   data() {
     return {
       isShown: false,
+      isDone: false,
     };
   },
   props: {
     window: Object,
+    params: Object,
   },
   methods: {
     openWindow: function () {
@@ -38,7 +40,15 @@ export default {
       this.isShown = false;
     },
     done: function () {
-      this.$router.push(this.window.nextPath);
+      this.closeWindow();
+      if (this.window.nextPath && this.window.nextPath.length != 0) {
+        this.$router.push(this.window.nextPath);
+      }
+      this.isDone = true;
+      this.$emit("done", true);
+    },
+    emitNewParams: function (value) {
+      this.$emit("params", value);
     },
   },
 };

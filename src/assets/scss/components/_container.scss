@@ -5,6 +5,11 @@
 	margin: var.$container-margin;
 	padding: var.$container-padding;
 
+	&.container-useless-wrapper {
+		margin: 0;
+		padding: 0;
+	}
+
 	&.container-flex {
 		display: flex;
 		align-items: center;

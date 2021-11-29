@@ -33,7 +33,7 @@ export default {
       window.alert("HI");
     },
     goToChooseDateAndRoom: function () {
-      this.$router.push({ path: "multiple/choosedateandroom" });
+      this.$router.push({ path: "multiple" });
     },
   },
 };

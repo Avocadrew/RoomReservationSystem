@@ -1,10 +1,9 @@
 <template>
-
   <div class="container container-flex container-flex-column">
     <h1>Easier, Quickier, Better</h1>
     <h4>Simplest Meeting Room Reservation System Ever</h4>
 
-     <div class="container container-flex container-flex-row">
+    <div class="container container-flex container-flex-row">
       <button
         class="button secondary-button button-fixed-width-medium"
         @click="testEvent"

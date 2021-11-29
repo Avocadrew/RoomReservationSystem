@@ -8,8 +8,9 @@ import ChooseTypes from "../views/ChooseTypes.vue";
 import ChooseTime from "../views/ChooseTime.vue";
 import FillOutMeetingInfo from "../views/FillOutMeetingInfo.vue";
 import LandingPage from "../views/LandingPage.vue";
-import PersonalInformation from "../views/PersonalInformation.vue"
-import EditPersonalInformation from "../views/EditPersonalInformation.vue"
+import PersonalInformation from "../views/PersonalInformation.vue";
+import EditPersonalInformation from "../views/EditPersonalInformation.vue";
+import CreateAndModifyAGroup from "../views/CreateAndModifyAGroup.vue";
 
 const routes = [
   {
@@ -44,7 +45,7 @@ const routes = [
         component: ChooseDateAndRoom,
         children: [
           {
-            path: "chooseTime",
+            path: "",
             name: "ChooseTime",
             component: ChooseTime,
           },
@@ -54,6 +55,13 @@ const routes = [
         path: "reservation/filloutmeetinginfo",
         name: "FillOutMeetingInfo",
         component: FillOutMeetingInfo,
+        children: [
+          {
+            path: "",
+            name: "CreateAndModifyAGroup",
+            component: CreateAndModifyAGroup,
+          },
+        ],
       },
       {
         path: "personalinformation",

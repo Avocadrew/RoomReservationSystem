@@ -40,6 +40,12 @@
 		}
 	}
 
+	&.sub-button {
+		margin: var.$tiny-margin;
+		padding: var.$sub-button-padding;
+		font-size: var.$sub-button-font-size;
+	}
+
 	&.button-title {
 		background-color: transparent;
 		margin: 0;
@@ -58,7 +64,7 @@
 	}
 
 	&.icon-button {
-		margin: 0;
+		margin: var.$icon-button-margin;
 		padding: 0;
 		background-color: transparent;
 		color: black;
