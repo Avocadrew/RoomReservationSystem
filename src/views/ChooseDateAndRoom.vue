@@ -24,7 +24,7 @@ export default {
     window: function () {
       return {
         title: this.chosenDate,
-        nextPath: "../filloutmeetinginfo",
+        nextPath: "filloutmeetinginfo",
       };
     },
   },
