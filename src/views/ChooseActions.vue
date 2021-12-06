@@ -10,13 +10,13 @@
       </button>
       <button
         class="button primary-button button-fixed-width-big"
-        @click="testEvent"
+        @click="goToRecords"
       >
         RECORDS
       </button>
       <button
         class="button primary-button button-fixed-width-big"
-        @click="testEvent"
+        @click="goToPersonalInformation"
       >
         PROFILE
       </button>
@@ -39,7 +39,13 @@ export default {
       window.alert("HI");
     },
     goToChooseTypes: function () {
-      this.$router.push({ path: "reservation/choosetypes" });
+      this.$router.push({ path: "choosetypes" });
+    },
+    goToRecords: function () {
+      this.$router.push({ path: "records" });
+    },
+    goToPersonalInformation: function () {
+      this.$router.push({ path: "personalinformation" });
     },
   },
 };

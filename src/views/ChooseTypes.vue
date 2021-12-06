@@ -4,13 +4,13 @@
     <div class="container container-flex container-flex-column">
       <button
         class="button primary-button button-fixed-width-big"
-        @click="testEvent"
+        @click="goToSingle"
       >
         SINGLE
       </button>
       <button
         class="button primary-button button-fixed-width-big"
-        @click="goToChooseDateAndRoom"
+        @click="goToMultiple"
       >
         MULTIPLE
       </button>
@@ -32,7 +32,10 @@ export default {
     testEvent: function () {
       window.alert("HI");
     },
-    goToChooseDateAndRoom: function () {
+    goToSingle: function () {
+      this.$router.push({ path: "single" });
+    },
+    goToMultiple: function () {
       this.$router.push({ path: "multiple" });
     },
   },

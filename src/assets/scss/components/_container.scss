@@ -49,6 +49,22 @@
 		}
 	}
 
+	&.container-tab {
+		&-buttons {
+			display: flex;
+			width: 100%;
+			align-items: flex-start;
+			flex-direction: row;
+			padding: 0;
+			margin-bottom: 0;
+		}
+
+		&-body {
+			margin-top: 0;
+			border: 0.1rem solid var.$secondary-color;
+		}
+	}
+
 	&.floating-container {
 		position: absolute;
 		width: var.$floating-container-width;
@@ -102,6 +118,18 @@
 					justify-content: flex-end;
 				}
 			}
+		}
+	}
+
+	&.container-fixed-width {
+		&-small {
+			width: var.$container-fixed-width-small;
+		}
+		&-medium {
+			width: var.$container-fixed-width-medium;
+		}
+		&-big {
+			width: var.$container-fixed-width-big;
 		}
 	}
 }

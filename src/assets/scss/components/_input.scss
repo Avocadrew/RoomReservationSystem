@@ -8,8 +8,17 @@ label {
 	color: var.$primary-color;
 }
 
-input[type="text"], input[type="tel"] {
+input[type="text"], input[type="tel"], input[type="number"] {
 	border: 0.1rem solid var.$primary-color;
+
+	&:focus {
+		border: 0.2rem solid var.$primary-color;
+		outline: none;
+	}
+}
+
+input[type="number"] {
+	width: 1rem;
 }
 
 textarea {

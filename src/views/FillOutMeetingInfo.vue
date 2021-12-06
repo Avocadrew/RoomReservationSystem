@@ -49,8 +49,23 @@
       <button
         class="button primary-button button-fixed-width-medium"
         @click="reserve()"
+        v-show="mode == 'reserve'"
       >
         RESERVE
+      </button>
+      <button
+        class="button secondary-button button-fixed-width-medium"
+        @click="cancel()"
+        v-show="mode == 'edit'"
+      >
+        CANCEL
+      </button>
+      <button
+        class="button primary-button button-fixed-width-medium"
+        @click="save()"
+        v-show="mode == 'edit'"
+      >
+        SAVE
       </button>
     </div>
   </div>
@@ -73,6 +88,7 @@ export default {
   },
   data() {
     return {
+      mode: "reserve",
       meeting: {
         name: "",
         date: "",
@@ -116,8 +132,13 @@ export default {
   },
   created() {},
   mounted() {
-    this.useDefaultValue();
-    console.log(this.meeting.name);
+    if (this.$route.query.meetingid) {
+      // Fetch the meeting.
+      this.mode = "edit";
+      this.useDefaultValue();
+    } else {
+      this.mode = "reserve";
+    }
     // Fetch groups and after success:
     if (this.groups.length != 0) {
       this.meeting.groupID = this.groups[0].id;
@@ -161,6 +182,12 @@ export default {
     },
     reserve: function () {
       window.alert("Reserve");
+    },
+    cancel: function () {
+      this.$router.go(-1);
+    },
+    save: function () {
+      window.alert("Save");
     },
   },
 };

@@ -43,21 +43,21 @@ export default {
     isDone: Boolean,
   },
   watch: {
-    isDone: function (oldValue, newValue) {
+    isDone: function (newValue) {
       if (newValue) {
         this.$emit("params", this.newParams);
       }
     },
     params: {
-      handler: function () {
-        this.newParams = this.params;
+      handler: function (newValue) {
+        this.newParams = newValue;
       },
       deep: true,
       immediate: true,
     },
     newParams: {
-      handler: function () {
-        this.$emit("params", this.newParams);
+      handler: function (newValue) {
+        this.$emit("params", newValue);
       },
       deep: true,
       immediate: true,

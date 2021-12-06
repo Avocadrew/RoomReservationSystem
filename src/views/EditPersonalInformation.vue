@@ -30,13 +30,13 @@
     <div class="container container-flex container-flex-row">
       <button
         class="button secondary-button button-fixed-width-medium"
-        @click="testEvent"
+        @click="cancel"
       >
         CANCEL
       </button>
       <button
         class="button primary-button button-fixed-width-medium"
-        @click="testEvent"
+        @click="confirm"
       >
         CONFIRM
       </button>
@@ -73,8 +73,12 @@ export default {
       this.profile.occupation = "";
       this.profile.phonenumber = "";
     },
-    testEvent: function () {
-      window.alert("HI");
+    cancel: function () {
+      this.$router.go(-1);
+    },
+    confirm: function () {
+      window.alert("Confirm");
+      this.$router.push({ path: "personalinformation" });
     },
   },
 };

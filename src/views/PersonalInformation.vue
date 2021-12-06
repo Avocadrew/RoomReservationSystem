@@ -30,7 +30,7 @@
     <div class="container container-flex container-flex-row">
       <button
         class="button primary-button button-fixed-width-medium"
-        @click="testEvent"
+        @click="goToEditPersonalInformation"
       >
         EDIT
       </button>
@@ -67,8 +67,8 @@ export default {
       this.profile.occupation = "Student";
       this.profile.phonenumber = "0912-345678";
     },
-    testEvent: function () {
-      window.alert("HI");
+    goToEditPersonalInformation: function () {
+      this.$router.push({ path: "editpersonalinformation" });
     },
   },
 };

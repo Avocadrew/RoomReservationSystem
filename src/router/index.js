@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
 import Main from "../views/Main.vue";
-import ChooseDateAndRoom from "../views/DateAndRoom.vue";
+import ChooseDateAndRoom from "../views/ChooseDateAndRoom.vue";
+import ChooseMultiDateAndRoom from "../views/ChooseMultiDateAndRoom.vue";
 import MeetingInfo from "../views/MeetingInfo.vue";
 import CreateAccount from "../views/CreateAccount.vue";
 import ChooseActions from "../views/ChooseActions.vue";
@@ -11,6 +12,7 @@ import LandingPage from "../views/LandingPage.vue";
 import PersonalInformation from "../views/PersonalInformation.vue";
 import EditPersonalInformation from "../views/EditPersonalInformation.vue";
 import CreateAndModifyAGroup from "../views/CreateAndModifyAGroup.vue";
+import Records from "../views/Records.vue";
 
 const routes = [
   {
@@ -35,12 +37,12 @@ const routes = [
         component: ChooseActions,
       },
       {
-        path: "reservation/choosetypes",
+        path: "choosetypes",
         name: "ChooseTypes",
         component: ChooseTypes,
       },
       {
-        path: "reservation/multiple",
+        path: "single",
         name: "ChooseDateAndRoom",
         component: ChooseDateAndRoom,
         children: [
@@ -52,7 +54,12 @@ const routes = [
         ],
       },
       {
-        path: "reservation/filloutmeetinginfo",
+        path: "multiple",
+        name: "ChooseMultiDateAndRoom",
+        component: ChooseMultiDateAndRoom,
+      },
+      {
+        path: "filloutmeetinginfo",
         name: "FillOutMeetingInfo",
         component: FillOutMeetingInfo,
         children: [
@@ -77,6 +84,11 @@ const routes = [
         path: "landingpage",
         name: "LandingPage",
         component: LandingPage,
+      },
+      {
+        path: "records",
+        name: "Records",
+        component: Records,
       },
     ],
   },

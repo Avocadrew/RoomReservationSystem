@@ -6,6 +6,8 @@ import router from "./router";
 import { SetupCalendar, Calendar, DatePicker } from "v-calendar";
 import vSelect from "vue-select";
 import mdiVue from "mdi-vue/v3";
+import Datepicker from "vue3-date-time-picker";
+import "vue3-date-time-picker/dist/main.css";
 import * as mdijs from "@mdi/js";
 
 const app = createApp(App);
@@ -16,6 +18,7 @@ app
   .component("Calendar", Calendar)
   .component("DatePicker", DatePicker)
   .component("v-select", vSelect)
+  .component("Datepicker", Datepicker)
   .mount("#app");
 
 app.config.globalProperties.$MONTHS = [
@@ -46,3 +49,4 @@ app.config.globalProperties.$AVAILABLE_TIME = {
   ENDING_MINUTES: 0,
   INTERVAL: 30,
 };
+app.config.globalProperties.$REPEAT_UNITS = ["day", "week", "month"];
