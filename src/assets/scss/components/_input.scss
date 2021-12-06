@@ -8,7 +8,7 @@ label {
 	color: var.$primary-color;
 }
 
-input[type="text"], input[type="tel"], input[type="number"] {
+input[type="text"], input[type="tel"], input[type="number"], input[type="email"] {
 	border: 0.1rem solid var.$primary-color;
 
 	&:focus {
