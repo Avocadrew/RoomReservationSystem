@@ -15,11 +15,16 @@ import CreateAndModifyAGroup from "../views/CreateAndModifyAGroup.vue";
 import Records from "../views/Records.vue";
 
 const routes = [
+	{
+		path: "", 
+		name: "Root", 
+		redirect: "/main", 
+	}, 
   {
     path: "/main",
     name: "Main",
     component: Main,
-    redirect: "/main/chooseactions",
+    redirect: "/main/landingpage",
     children: [
       {
         path: "meetinginfo",
