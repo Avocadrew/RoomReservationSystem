@@ -8,7 +8,7 @@
       >
         <mdicon class="mdicon-white" name="arrow-left" />
       </button>
-      <button class="button button-title" @click="goToChooseActions">
+      <button class="button button-title" @click="goToLandingPage">
         Reservation System
       </button>
     </div>
@@ -53,8 +53,8 @@ export default {
     },
   },
   methods: {
-    goToChooseActions: function () {
-      this.$router.push({ path: "/main/chooseactions" });
+    goToLandingPage: function () {
+      this.$router.push({ path: "/main/landingpage" });
     },
     logIn: function () {
       this.$cookies.set("account", "testAccount");
