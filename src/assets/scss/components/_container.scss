@@ -132,4 +132,8 @@
 			width: var.$container-fixed-width-big;
 		}
 	}
+
+	&.container-no-left-margin {
+		margin-left: 0;
+	}
 }

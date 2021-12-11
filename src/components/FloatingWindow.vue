@@ -11,6 +11,7 @@
         <button
           class="button primary-button button-fixed-width-medium"
           @click="done"
+          v-show="showDoneButton"
         >
           DONE
         </button>
@@ -31,6 +32,10 @@ export default {
   props: {
     window: Object,
     params: Object,
+    showDoneButton: {
+      type: Boolean,
+      default: true,
+    },
   },
   methods: {
     openWindow: function () {

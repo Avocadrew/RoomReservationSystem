@@ -6,16 +6,16 @@
     <div class="container container-flex container-flex-row">
       <button
         class="button secondary-button button-fixed-width-medium"
-        @click="testEvent"
+        @click="goToGuest"
       >
         GUEST
       </button>
 
       <button
         class="button primary-button button-fixed-width-medium"
-        @click="testEvent"
+        @click="logIn"
       >
-        LOGIN
+        LOG IN
       </button>
     </div>
   </div>
@@ -29,14 +29,24 @@ export default {
   },
   components: {},
   computed: {},
-  created() {},
+  created() {
+    let account = this.$cookies.get("account");
+    if (account != undefined && account != "") {
+      this.$router.push("chooseactions");
+    }
+  },
   mounted() {},
   methods: {
-    testEvent: function () {
-      window.alert("HI");
+    logIn: function () {
+      this.$cookies.set("account", "testAccount");
+      this.$router.push({ path: "chooseactions" });
+      this.$router.go(); // Refreshing the page to make the TopBar refresh, so the button in it can refreshes.
     },
     goToChooseTypes: function () {
       this.$router.push({ path: "reservation/choosetypes" });
+    },
+    goToGuest: function () {
+      this.$router.push({ path: "single" });
     },
   },
 };

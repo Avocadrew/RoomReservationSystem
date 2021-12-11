@@ -1,0 +1,5 @@
+@use "variable.scss" as var;
+
+.mdicon-white {
+	color: var.$light-color;
+}

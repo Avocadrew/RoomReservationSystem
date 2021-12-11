@@ -9,12 +9,17 @@ import mdiVue from "mdi-vue/v3";
 import Datepicker from "vue3-date-time-picker";
 import "vue3-date-time-picker/dist/main.css";
 import * as mdijs from "@mdi/js";
+import VueCookies from "vue3-cookies";
 
 const app = createApp(App);
 app
   .use(router)
   .use(SetupCalendar, {})
   .use(mdiVue, { icons: mdijs })
+  .use(VueCookies, {
+    expireTimes: "30d",
+    secure: true,
+  })
   .component("Calendar", Calendar)
   .component("DatePicker", DatePicker)
   .component("v-select", vSelect)

@@ -4,6 +4,8 @@
       class="button chooseTime-button"
       v-for="(time, index) in times"
       :key="index"
+      :disabled="viewingMode"
+      @click="testEvent"
     >
       {{ ("0" + time.startingTime.hours).slice(-2) }} :
       {{ ("0" + time.startingTime.minutes).slice(-2) }} ~
@@ -18,6 +20,9 @@ export default {
   name: "ChooseTime",
   data() {
     return {};
+  },
+  props: {
+    params: Object,
   },
   computed: {
     times: function () {
@@ -74,6 +79,9 @@ export default {
 
       return t;
     },
+    viewingMode: function () {
+      return this.params.viewingMode;
+    },
   },
   created() {},
   mounted() {
@@ -81,6 +89,10 @@ export default {
       console.log(i, this.times[i]);
     }
   },
-  methods: {},
+  methods: {
+    testEvent: function () {
+      window.alert("HI");
+    },
+  },
 };
 </script>

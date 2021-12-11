@@ -23,22 +23,24 @@
           Create a Group
         </button>
       </div>
-      <div class="container container-useless-wrapper">
-        <div v-for="(group, index) in groups" :key="index">
-          <input
-            type="radio"
-            name="group"
-            :value="group.id"
-            v-model="meeting.groupID"
-          />
-          <label :for="index">{{ group.name }}</label>
-          <button class="button icon-button" @click="modifyGroup(index)">
-            <mdicon name="pencil" :size="20" />
-          </button>
-          <button class="button icon-button" @click="deleteGroup(index)">
-            <mdicon name="delete" :size="20" />
-          </button>
-        </div>
+      <div
+        class="container line-container"
+        v-for="(group, index) in groups"
+        :key="index"
+      >
+        <input
+          type="radio"
+          name="group"
+          :value="group.id"
+          v-model="meeting.groupID"
+        />
+        <label :for="index">{{ group.name }}</label>
+        <button class="button icon-button" @click="modifyGroup(index)">
+          <mdicon name="pencil" :size="20" />
+        </button>
+        <button class="button icon-button" @click="deleteGroup(index)">
+          <mdicon name="delete" :size="20" />
+        </button>
       </div>
     </div>
     <div class="container area-container">

@@ -3,7 +3,12 @@
     <v-select v-model="room" label="Room" :options="$ROOMS" />
     <Calendar @dayclick="chooseDate" />
   </div>
-  <FloatingWindow :window="window" ref="floatingWindow" />
+  <FloatingWindow
+    :window="window"
+    :params="paramsForChooseTime"
+    ref="floatingWindow"
+    :showDoneButton="!viewingMode"
+  />
 </template>
 
 <script>
@@ -27,7 +32,23 @@ export default {
         nextPath: "filloutmeetinginfo",
       };
     },
+    paramsForChooseTime: function () {
+      return {
+        viewingMode: this.viewingMode,
+      };
+    },
+    account: function () {
+      return this.$cookies.get("account");
+    },
+    viewingMode: function () {
+      if (this.account == undefined || this.account == "") {
+        return true;
+      } else {
+        return false;
+      }
+    },
   },
+  watch: {},
   created() {},
   mounted() {},
   methods: {
