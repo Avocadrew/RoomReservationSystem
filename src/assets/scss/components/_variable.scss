@@ -18,6 +18,8 @@ $container-padding: $small-padding;
 $container-fixed-width-small: 10rem;
 $container-fixed-width-medium: 14rem;
 $container-fixed-width-big: 18rem;
+$floating-container-width: 80%;
+$floating-container-max-height: 90%;
 $floating-container-border-radius: 0.5rem;
 $floating-container-box-shadow-color: 0 0 1rem $dark-color;
 $floating-container-background-color: $light-color;
@@ -53,5 +55,6 @@ $v-select-min-width: 10rem;
 $p-margin: 0 $small-margin 0 0;
 $p-textBox-max-width: 20rem;
 
-$floating-container-width: 80%;
-$floating-container-max-height: 90%;
+$img-icon-google-width: 1rem;
+$img-icon-google-height: 1rem;
+$img-icon-google-margin: 0 $tiny-margin 0 0;

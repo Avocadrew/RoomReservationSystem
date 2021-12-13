@@ -15,13 +15,15 @@
         class="button primary-button button-fixed-width-medium"
         @click="logIn"
       >
-        LOG IN
+				<img class="img-icon img-icon-google" :src="googleLogo" alt="Google-Logo" /> LOG IN 
       </button>
     </div>
   </div>
 </template>
 
 <script>
+import googleLogo from "@/assets/Google-icon-logo.svg";
+
 export default {
   name: "LandingPage",
   data() {
@@ -30,24 +32,58 @@ export default {
   components: {},
   computed: {},
   created() {
-    let account = this.$cookies.get("account");
+    let account = this.$cookies.get("userId");
     if (account != undefined && account != "") {
       this.$router.push("chooseactions");
     }
   },
   mounted() {},
   methods: {
-    logIn: function () {
-      this.$cookies.set("account", "testAccount");
-      this.$router.push({ path: "chooseactions" });
-      this.$router.go(); // Refreshing the page to make the TopBar refresh, so the button in it can refreshes.
+    logIn: async function () {
+      try {
+				//const googleUser = await this.$gAuth.signIn();
+        //if (!googleUser) {
+        //  return null;
+        //}
+        //console.log("googleUser", googleUser);
+        //this.user = googleUser.getBasicProfile().getEmail();
+        //console.log("getId", this.user);
+        //console.log("getBasicProfile", googleUser.getBasicProfile());
+        //console.log("getAuthResponse", googleUser.getAuthResponse());
+        //console.log(
+        //  "getAuthResponse",
+        //  this.$gAuth.instance.currentUser.get().getAuthResponse()
+        //);
+				const authCode = await this.$gAuth.getAuthCode();
+				this.axios.post("https://ntustsers.xyz/api/signIn", {
+					token: authCode, 
+				})
+				.then((response) => {
+					console.log(response.data.id_token.email);
+					this.$cookies.set("userId", response.data.id_token.email);
+					this.haveLoggedIn = true;
+					this.$router.push({ path: "chooseactions" });
+				});
+
+      } catch (error) {
+        //on fail do something
+        console.error(error);
+        return null;
+      }
     },
     goToChooseTypes: function () {
       this.$router.push({ path: "reservation/choosetypes" });
     },
     goToGuest: function () {
+			this.$cookies.set("userId", "testAccount");
+			window.alert(this.$cookies.get("userId"));
       this.$router.push({ path: "single" });
     },
   },
+	setup() {
+		return {
+			googleLogo,  
+		};
+	}, 
 };
 </script>

@@ -1,0 +1,9 @@
+@use "variable.scss" as var;
+
+.img-icon {
+	&.img-icon-google {
+		width: var.$img-icon-google-width;
+		height: var.$img-icon-google-height;
+		margin: var.$img-icon-google-margin;
+	}
+}

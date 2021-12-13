@@ -1,6 +1,10 @@
 @use "variable.scss" as var;
 
 .button {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
 	width: fit-content;
 	width: -moz-fit-content;
 
