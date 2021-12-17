@@ -40,7 +40,7 @@ export default {
       };
     },
     account: function () {
-      return this.$cookies.get("account");
+      return this.$cookies.get("userId");
     },
     viewingMode: function () {
       if (this.account == undefined || this.account == "") {

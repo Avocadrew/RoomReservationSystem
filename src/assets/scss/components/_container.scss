@@ -85,7 +85,7 @@
 			top: var.$floating-container-padding;
 			left: var.$floating-container-padding;
 			height: var.$floating-container-header-height;
-			width: calc(100% - var.$floating-container-padding * 2);
+			width: calc(100% - #{var.$floating-container-padding * 2});
 			background-color: var.$light-color;
 			display: flex;
 			//align-items: center;
@@ -119,7 +119,7 @@
 			bottom: var.$floating-container-padding;
 			height: var.$floating-container-footer-height;
 			left: var.$floating-container-padding;
-			width: calc(100% - var.$floating-container-padding * 2);
+			width: calc(100% - #{var.$floating-container-padding * 2});
 			display: flex;
 			//align-items: center;
 			flex-direction: row;
