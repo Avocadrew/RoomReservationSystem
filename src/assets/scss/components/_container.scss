@@ -77,9 +77,16 @@
 		background-color: var.$floating-container-background-color;
 		margin: var.$floating-container-margin;
 		padding: var.$floating-container-padding;
+		overflow: auto;
 
 		// You can only put two elements in this container. 
 		& > .floating-container-header {
+			position: absolute;
+			top: var.$floating-container-padding;
+			left: var.$floating-container-padding;
+			height: var.$floating-container-header-height;
+			width: calc(100% - var.$floating-container-padding * 2);
+			background-color: var.$light-color;
 			display: flex;
 			//align-items: center;
 			flex-direction: row;
@@ -100,8 +107,19 @@
 			}
 		}
 
+		& > .floating-container-body {
+			margin: var.$floating-container-body-margin;
+			height: var.$floating-container-body-height;
+			overflow: auto;
+		}
+
 		// You can only put two elements in this container. 
 		& > .floating-container-footer {
+			position: absolute;
+			bottom: var.$floating-container-padding;
+			height: var.$floating-container-footer-height;
+			left: var.$floating-container-padding;
+			width: calc(100% - var.$floating-container-padding * 2);
 			display: flex;
 			//align-items: center;
 			flex-direction: row;

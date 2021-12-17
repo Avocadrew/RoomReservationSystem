@@ -2,6 +2,10 @@
   <div class="container container-flex container-flex-row container-wrap">
     <button
       class="button chooseTime-button"
+			v-bind:class="{
+				'chooseTime-button-occupied': params.dailyReservation[time.startingTime.hours + ':' + ('0' + time.startingTime.minutes).slice(-2)], 
+				'chooseTime-button-empty': !params.dailyReservation[time.startingTime.hours + ':' + ('0' + time.startingTime.minutes).slice(-2)], 
+			}"
       v-for="(time, index) in times"
       :key="index"
       :disabled="viewingMode"
@@ -84,11 +88,7 @@ export default {
     },
   },
   created() {},
-  mounted() {
-    for (let i = 0; i < this.times.length; i++) {
-      console.log(i, this.times[i]);
-    }
-  },
+  mounted() {},
   methods: {
     testEvent: function () {
       window.alert("HI");

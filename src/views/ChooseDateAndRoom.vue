@@ -23,18 +23,20 @@ export default {
     return {
       room: "Room1",
       chosenDate: "",
+			dailyReservation: {}, 
     };
   },
   computed: {
     window: function () {
       return {
-        title: this.chosenDate,
+				title: this.room + " on " + this.chosenDate,
         nextPath: "filloutmeetinginfo",
       };
     },
     paramsForChooseTime: function () {
       return {
         viewingMode: this.viewingMode,
+				dailyReservation: this.dailyReservation, 
       };
     },
     account: function () {
@@ -52,9 +54,20 @@ export default {
   created() {},
   mounted() {},
   methods: {
+		generateTestData: function() {
+			this.dailyReservation = {
+				"9:00": true, 
+				"9:30": false, 
+				"10:00": true, 
+				"14:00": true, 
+				"15:00": true, 
+			};
+		}, 
     chooseDate: function (param) {
       console.log(param);
       this.chosenDate = param.ariaLabel;
+			// Get one day reservation information. 
+			this.generateTestData();
       this.$refs.floatingWindow.openWindow();
     },
   },

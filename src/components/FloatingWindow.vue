@@ -4,7 +4,9 @@
       <h3>{{ window.title }}</h3>
       <button class="button icon-button" @click="closeWindow">X</button>
     </div>
-    <router-view :params="params" :isDone="isDone" @params="emitNewParams" />
+		<div class="floating-container-body">
+			<router-view :params="params" :isDone="isDone" @params="emitNewParams" />
+		</div>
     <div class="floating-container-footer">
       <div></div>
       <div>

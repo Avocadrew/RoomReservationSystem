@@ -75,17 +75,24 @@ export default {
         //  "getAuthResponse",
         //  this.$gAuth.instance.currentUser.get().getAuthResponse()
         //);
-				const authCode = await this.$gAuth.getAuthCode();
-				this.axios.post("https://ntustsers.xyz/api/signIn", {
-					token: authCode, 
-				})
-				.then((response) => {
-					console.log(response.data.id_token.email);
-					this.$cookies.set("userId", response.data.id_token.email);
-					this.haveLoggedIn = true;
-					this.$router.push({ path: "chooseactions" });
-				});
 
+				//const authCode = await this.$gAuth.getAuthCode();
+				//this.axios.post("https://ntustsers.xyz/api/signIn", {
+				//	token: authCode, 
+				//})
+				//.then((response) => {
+				//	console.log(response.data.id_token.email);
+				//	this.$cookies.set("userId", response.data.id_token.email);
+				//	this.haveLoggedIn = true;
+				//	this.$router.push({ path: "chooseactions" });
+				//});
+
+				// For testing
+				let account = "aabb9052@gmail.com";
+				console.log(account);
+				this.$cookies.set("userId", account);
+				this.haveLoggedIn = true;
+				this.$router.push({ path: "chooseactions" });
       } catch (error) {
         //on fail do something
         console.error(error);

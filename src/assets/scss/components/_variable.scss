@@ -1,5 +1,6 @@
 $primary-color: #1CC497;
 $secondary-color: #88E7DD;
+$negative-color: #EF7C8E;
 $dark-color: black;
 $light-color: white;
 
@@ -19,12 +20,16 @@ $container-fixed-width-small: 10rem;
 $container-fixed-width-medium: 14rem;
 $container-fixed-width-big: 18rem;
 $floating-container-width: 80%;
-$floating-container-max-height: 90%;
+$floating-container-max-height: 80%;
 $floating-container-border-radius: 0.5rem;
 $floating-container-box-shadow-color: 0 0 1rem $dark-color;
 $floating-container-background-color: $light-color;
 $floating-container-margin: $small-margin;
 $floating-container-padding: $small-padding;
+$floating-container-header-height: 4rem;
+$floating-container-footer-height: 4rem;
+$floating-container-body-margin: $floating-container-header-height 0 $floating-container-footer-height 0;
+$floating-container-body-height: calc(100% - 20rem);
 
 $button-font-color: $light-color;
 $button-border-radius: 2rem;
