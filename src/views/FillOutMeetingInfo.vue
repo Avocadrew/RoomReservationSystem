@@ -374,7 +374,7 @@ export default {
           group_ID: this.meeting.groupID,
           title: this.meeting.name,
           date: this.meeting.date,
-          time: this.meeting.timeString,
+          time: this.meeting.time,
           description: this.meeting.description,
           room: this.meeting.room,
         })
