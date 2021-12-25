@@ -359,6 +359,15 @@ export default {
     },
     reserve: function () {
 			this.$refs.loadingAnimation.start();
+			console.log({
+          user_ID: this.$cookies.get("userID"),
+          group_ID: this.meeting.groupID,
+          title: this.meeting.name,
+          date: this.meeting.date,
+          time: this.meeting.time,
+          description: this.meeting.description,
+          room: this.meeting.room,
+        });
       this.axios
         .post("https://ntustsers.xyz/api/reserveOneTime", {
           user_ID: this.$cookies.get("userID"),
