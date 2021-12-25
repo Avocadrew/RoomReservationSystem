@@ -2,7 +2,7 @@
   <div class="container container-flex container-flex-column">
     <div class="container line-container">
       <p class="label">Group Name:</p>
-      <input type="text" name="name" v-model="newParams.name" />
+      <input type="text" name="name" v-model="newGroup.name" />
     </div>
     <div class="container area-container">
       <div class="container line-container">
@@ -12,14 +12,14 @@
         </button>
       </div>
       <div
-        class="container container-useless-wrapper"
-        v-for="(member, index) in newParams.members"
+        class="container line-container container-useless-wrapper"
+        v-for="(member, index) in newGroup.members"
         :key="index"
       >
         <input
           type="email"
           :name="'member-' + index"
-          v-model="newParams.members[index]"
+          v-model="newGroup.members[index]"
         />
         <button class="button icon-button" @click="deleteMember(index)">
           <mdicon name="delete" :size="20" />
@@ -35,7 +35,7 @@ export default {
   components: {},
   data() {
     return {
-      newParams: Object,
+      newGroup: Object,
     };
   },
   props: {
@@ -45,33 +45,27 @@ export default {
   watch: {
     isDone: function (newValue) {
       if (newValue) {
-        this.$emit("params", this.newParams);
+        this.$emit("updateInfo", this.newGroup);
       }
     },
-    params: {
+    newGroup: {
       handler: function (newValue) {
-        this.newParams = newValue;
+        this.$emit("updateInfo", newValue);
       },
       deep: true,
-      immediate: true,
-    },
-    newParams: {
-      handler: function (newValue) {
-        this.$emit("params", newValue);
-      },
-      deep: true,
-      immediate: true,
     },
   },
   computed: {},
   created() {},
-  mounted() {},
+  mounted() {
+    this.newGroup = this.params;
+  },
   methods: {
     addNewMember: function () {
-      this.newParams.members.push("");
+      this.newGroup.members.push("");
     },
     deleteMember: function (index) {
-      this.newParams.members.splice(index, 1);
+      this.newGroup.members.splice(index, 1);
     },
   },
 };

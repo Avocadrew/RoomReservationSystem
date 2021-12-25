@@ -74,19 +74,22 @@
   <FloatingWindow
     :window="window"
     :params="tempGroup"
-    @params="tempGroup"
     ref="floatingWindow"
     @done="saveGroup"
+    @updateInfo="updateTempGroup"
   />
+	<LoadingAnimation ref="loadingAnimation" />
 </template>
 
 <script>
 import FloatingWindow from "@/components/FloatingWindow.vue";
+import LoadingAnimation from "@/components/LoadingAnimation.vue";
 
 export default {
   name: "FillOutMeetingInfo",
   components: {
     FloatingWindow,
+		LoadingAnimation, 
   },
   data() {
     return {
@@ -100,16 +103,16 @@ export default {
         groupID: "",
       },
       groups: [
-        {
-          id: "id1",
-          name: "Group1",
-          members: ["abc@gmail.com", "haha@gmail.com"],
-        },
-        {
-          id: "id2",
-          name: "Group2",
-          members: ["def@gmail.com", "hello@gmail.com"],
-        },
+        //{
+        //  id: "id1",
+        //  name: "Group1",
+        //  members: ["abc@gmail.com", "haha@gmail.com"],
+        //},
+        //{
+        //  id: "id2",
+        //  name: "Group2",
+        //  members: ["def@gmail.com", "hello@gmail.com"],
+        //},
       ],
       window: {
         title: "Create a Group",
@@ -132,29 +135,86 @@ export default {
       return group;
     },
   },
-  created() {},
+	created() {},
   mounted() {
-    if (this.$route.query.meetingid) {
+    if (this.$route.params.meetingID) {
       // Fetch the meeting.
+			this.$refs.loadingAnimation.start();
+      this.axios
+        .post("https://ntustsers.xyz/api/checkReservation", {
+          meeting_ID: this.$route.params.meetingID,
+        })
+        .then((response) => {
+          let success = response.data.success;
+          if (success) {
+            let reservation = response.data.reservation;
+            this.meeting.id = this.$route.params.meetingID;
+            this.meeting.name = reservation.title;
+            this.meeting.time = reservation.time;
+            this.meeting.date = reservation.date;
+            this.meeting.description = reservation.description;
+            this.meeting.room = reservation["room number"];
+						this.meeting.groupID = reservation.group_ID;
+						console.log(this.meeting);
+
+            // Fetch groups
+            this.axios
+              .post("https://ntustsers.xyz/api/getGroupList", {
+                userID: this.$cookies.get("userID"),
+              })
+              .then((response) => {
+                let success = response.data.success;
+                if (success) {
+									let groups = response.data.groupList;
+									console.log(groups);
+									for (let i = 0; i < groups.length; i++) {
+										this.groups.push({"id": groups[i].groupID, "name": groups[i].GroupName, "members": groups[i].emails});
+									}
+                } else {
+                  console.log("getGroupList failed");
+                }
+              });
+          } else {
+            console.log("checkReservation failed");
+          }
+					this.$refs.loadingAnimation.stop();
+        });
       this.mode = "edit";
-      this.useDefaultValue();
+      //this.useDefaultValue();
     } else {
+      this.meeting.room = this.$route.params.room;
+      this.meeting.date = this.$route.params.chosenDate;
+      this.meeting.time = this.$route.params.selectedTime;
       this.mode = "reserve";
-    }
-    // Fetch groups and after success:
-    if (this.groups.length != 0) {
-      this.meeting.groupID = this.groups[0].id;
+
+			this.$refs.loadingAnimation.start();
+      // Fetch groups
+      this.axios
+        .post("https://ntustsers.xyz/api/getGroupList", {
+          userID: this.$cookies.get("userID"),
+        })
+        .then((response) => {
+          let groups = response.data.groupList;
+          console.log(groups);
+          for (let i = 0; i < groups.length; i++) {
+						this.groups.push({"id": groups[i].groupID, "name": groups[i].GroupName, "members": groups[i].emails});
+          }
+					if (groups.length > 0) {
+						this.meeting.groupID = this.groups[0].id;
+					}
+					this.$refs.loadingAnimation.stop();
+        });
     }
   },
   methods: {
     useDefaultValue: function () {
-      this.meeting.name = "Financial Meeting";
-      this.meeting.date = "Nov 7th, 2021";
-      this.meeting.time = "13:00 ~ 14:30";
+      //this.meeting.name = "";
+      this.meeting.date = "2021-12-23";
+      this.meeting.time = '[ "15:30", "16:00", "16:30" ]';
       this.meeting.room = "Room1";
-      this.meeting.description =
-        "Group 06 will discuss for the system of the game. ";
-      this.meeting.groupID = "id1";
+      //this.meeting.description =
+      //  "Group 06 will discuss for the system of the game. ";
+      //this.meeting.groupID = "id1";
     },
     testEvent: function () {
       console.log(this.meetingGroup);
@@ -170,26 +230,110 @@ export default {
     },
     modifyGroup: function (index) {
       this.tempGroup = this.groups[index];
-      this.window.title = "Modify a Group";
       this.$refs.floatingWindow.openWindow();
     },
     saveGroup: function () {
-      console.log(this.tempGroup);
-      // Call api to create a new group using tempGroup.
-      window.alert("Save group");
+
+      if (!this.tempGroup.id) {
+        // Call api to create a new group using this.tempGroup.
+				this.$refs.loadingAnimation.start();
+        this.axios
+          .post("https://ntustsers.xyz/api/addGroup", {
+            groupName: this.tempGroup.name,
+            emails: this.tempGroup.members,
+            userID: this.$cookies.get("userID"),
+						description: "", 
+          })
+          .then((response) => {
+            let success = response.data.success;
+            console.log(response.data);
+            if (success) {
+              this.tempGroup.id = response.data.groupID;
+              this.groups.push(this.tempGroup);
+							this.meeting.groupID = response.data.groupID;
+            } else {
+              console.log("addGroup failed");
+            }
+						this.$refs.loadingAnimation.stop();
+          });
+      } else {
+				for (let i = 0; i < this.groups.length; i++) {
+					if (this.tempGroup == this.groups[i]) {
+						return;
+					}
+				}
+				
+        // Call api to save a group using this.tempGroup.
+				this.$refs.loadingAnimation.start();
+        this.axios
+          .post("https://ntustsers.xyz/api/saveGroup", {
+            groupID: this.tempGroup.id,
+            groupName: this.tempGroup.name,
+            emails: this.tempGroup.members,
+            userID: this.$cookies.get("userID"),
+						description: "", 
+          })
+          .then((response) => {
+            let success = response.data.success;
+            console.log(response.data);
+            if (success) {
+              window.alert("Save group successfully. ");
+            } else {
+              console.log("saveGroup failed");
+            }
+						this.$refs.loadingAnimation.stop();
+          });
+      }
     },
     deleteGroup: function (index) {
-      // Call api to delete a group, and then refetch groups.
-      window.alert("Delete group " + index.toString());
+      // Call api to delete a group.
+			this.$refs.loadingAnimation.start();
+      this.axios
+        .post("https://ntustsers.xyz/api/deleteGroup", {
+          userID: this.$cookies.get("userID"),
+          groupID: this.groups[index].groupID,
+        })
+        .then((response) => {
+          let success = response.data.success;
+          if (success) {
+            this.groups.splice(index, 1);
+          } else {
+            console.log("deleteGroup failed");
+          }
+					this.$refs.loadingAnimation.stop();
+        });
     },
     reserve: function () {
-      window.alert("Reserve");
+			this.$refs.loadingAnimation.start();
+      this.axios
+        .post("https://ntustsers.xyz/api/reserveOneTime", {
+          user_ID: this.$cookies.get("userID"),
+          group_ID: this.meeting.groupID,
+          title: this.meeting.name,
+          date: this.meeting.date,
+          time: this.meeting.time,
+          description: this.meeting.description,
+          room: this.meeting.room,
+        })
+        .then((response) => {
+          let success = response.data.success;
+          if (success) {
+            console.log("meeting_ID", response.data.meeting_ID);
+            this.$router.push({ path: "chooseactions" });
+          } else {
+            console.log("reserveOneTime failed");
+          }
+					this.$refs.loadingAnimation.stop();
+        });
     },
     cancel: function () {
       this.$router.go(-1);
     },
     save: function () {
       window.alert("Save");
+    },
+    updateTempGroup(newGroup) {
+      this.tempGroup = newGroup;
     },
   },
 };

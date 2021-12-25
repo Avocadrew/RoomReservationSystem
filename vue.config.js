@@ -1,5 +1,5 @@
 module.exports = {
-	devServer: {
-		public: 'ntustsers.xyz:80', 
-	}
+  devServer: {
+    public: "ntustsers.xyz:80",
+  },
 };

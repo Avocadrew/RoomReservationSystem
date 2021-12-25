@@ -20,13 +20,7 @@
       <p class="label">Phone Number:</p>
       <input type="tel" name="phone" pattern="09[0-9]{8}" />
     </div>
-    <div class="container container-flex container-flex-row">
-      <button
-        class="button secondary-button button-fixed-width-medium"
-        @click="testEvent"
-      >
-        CANCEL
-      </button>
+    <div>
       <button
         class="button primary-button button-fixed-width-medium"
         @click="testEvent"
@@ -45,8 +39,10 @@ export default {
   },
   components: {},
   computed: {},
-  created() {},
-  mounted() {},
+  created() {
+  },
+  mounted() {
+  },
   methods: {
     testEvent: function () {
       window.alert("HI");

@@ -3,6 +3,7 @@ $secondary-color: #88E7DD;
 $negative-color: #EF7C8E;
 $dark-color: black;
 $light-color: white;
+$grey-color: rgba(0, 0, 0, 0.5);
 
 $tiny-margin: 0.3rem;
 $small-margin: 0.5rem;
@@ -27,9 +28,12 @@ $floating-container-background-color: $light-color;
 $floating-container-margin: $small-margin;
 $floating-container-padding: $small-padding;
 $floating-container-header-height: 4rem;
+$floating-container-header-width: calc(100% - #{$floating-container-padding * 2});
 $floating-container-footer-height: 4rem;
-$floating-container-body-margin: $floating-container-header-height 0 $floating-container-footer-height 0;
-$floating-container-body-height: calc(100% - 20rem);
+$floating-container-footer-width: calc(100% - #{$floating-container-padding * 2});
+$floating-container-body-margin: calc(#{$floating-container-header-height} - #{$floating-container-margin} - #{$floating-container-padding}) 0 0;
+$floating-container-body-padding: calc(#{$floating-container-footer-height} - #{$floating-container-margin} - #{$floating-container-padding});
+$floating-container-body-height: calc(100% - #{$floating-container-header-height} - #{$floating-container-margin} * 2 - #{$floating-container-padding} * 2);
 
 $button-font-color: $light-color;
 $button-border-radius: 2rem;
@@ -63,3 +67,10 @@ $p-textBox-max-width: 20rem;
 $img-icon-google-width: 1rem;
 $img-icon-google-height: 1rem;
 $img-icon-google-margin: 0 $tiny-margin 0 0;
+
+$loading-animation-background-color: $grey-color;
+$loading-animation-icon-width: 2rem;
+$loading-animation-icon-height: 2rem;
+$loading-animation-icon-border: 5px solid $primary-color;
+$loading-animation-icon-border-radius-big: 1.1rem;
+$loading-animation-icon-border-radius-small: 0.8rem;

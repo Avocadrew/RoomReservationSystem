@@ -67,6 +67,7 @@
 
 	&.floating-container {
 		position: absolute;
+		height: 100%;
 		width: var.$floating-container-width;
 		max-height: var.$floating-container-max-height;
 		top: var.$top-bar-height;
@@ -85,7 +86,7 @@
 			top: var.$floating-container-padding;
 			left: var.$floating-container-padding;
 			height: var.$floating-container-header-height;
-			width: calc(100% - #{var.$floating-container-padding * 2});
+			width: var.$floating-container-header-width;
 			background-color: var.$light-color;
 			display: flex;
 			//align-items: center;
@@ -109,6 +110,7 @@
 
 		& > .floating-container-body {
 			margin: var.$floating-container-body-margin;
+			padding-bottom: var.$floating-container-body-padding;
 			height: var.$floating-container-body-height;
 			overflow: auto;
 		}
@@ -119,10 +121,11 @@
 			bottom: var.$floating-container-padding;
 			height: var.$floating-container-footer-height;
 			left: var.$floating-container-padding;
-			width: calc(100% - #{var.$floating-container-padding * 2});
+			width: var.$floating-container-footer-width;
 			display: flex;
 			//align-items: center;
 			flex-direction: row;
+			background-color: transparent;
 
 			& > div {
 				flex-grow: 1;

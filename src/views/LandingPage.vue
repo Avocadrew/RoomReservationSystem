@@ -15,7 +15,12 @@
         class="button primary-button button-fixed-width-medium"
         @click="logIn"
       >
-				<img class="img-icon img-icon-google" :src="googleLogo" alt="Google-Logo" /> LOG IN 
+        <img
+          class="img-icon img-icon-google"
+          :src="googleLogo"
+          alt="Google-Logo"
+        />
+        LOG IN
       </button>
     </div>
   </div>
@@ -32,7 +37,7 @@ export default {
   components: {},
   computed: {},
   created() {
-    let account = this.$cookies.get("userId");
+    let account = this.$cookies.get("userID");
     if (account != undefined && account != "") {
       this.$router.push("chooseactions");
     }
@@ -41,7 +46,7 @@ export default {
   methods: {
     logIn: async function () {
       try {
-				//const googleUser = await this.$gAuth.signIn();
+        //const googleUser = await this.$gAuth.signIn();
         //if (!googleUser) {
         //  return null;
         //}
@@ -55,23 +60,26 @@ export default {
         //  this.$gAuth.instance.currentUser.get().getAuthResponse()
         //);
 
-				//const authCode = await this.$gAuth.getAuthCode();
-				//this.axios.post("https://ntustsers.xyz/api/signIn", {
-				//	token: authCode, 
-				//})
-				//.then((response) => {
-				//	console.log(response.data.id_token.email);
-				//	this.$cookies.set("userId", response.data.id_token.email);
-				//	this.haveLoggedIn = true;
-				//	this.$router.push({ path: "chooseactions" });
-				//});
+        //const authCode = await this.$gAuth.getAuthCode();
+        //this.axios.post("https://ntustsers.xyz/api/signIn", {
+        //	token: authCode,
+        //})
+        //.then((response) => {
+        //	let success = response.data.success;
+        //	if (success) {
+        //		console.log(response.data.userInfo.user_ID);
+        //		this.$cookies.set("userID", response.data.userInfo.user_ID);
+        //		this.haveLoggedIn = true;
+        //		this.$router.push({ path: "chooseactions" });
+        //	}
+        //});
 
-				// For testing
-				let account = "aabb9052@gmail.com";
-				console.log(account);
-				this.$cookies.set("userId", account);
-				this.haveLoggedIn = true;
-				this.$router.push({ path: "chooseactions" });
+        // For testing
+        let account = "aabb9052@gmail.com";
+        console.log(account);
+        this.$cookies.set("userID", account);
+        this.haveLoggedIn = true;
+        this.$router.push({ path: "chooseactions" });
       } catch (error) {
         //on fail do something
         console.error(error);
@@ -82,15 +90,15 @@ export default {
       this.$router.push({ path: "reservation/choosetypes" });
     },
     goToGuest: function () {
-			this.$cookies.set("userId", "testAccount");
-			window.alert(this.$cookies.get("userId"));
+      this.$cookies.set("userID", "testAccount");
+      window.alert(this.$cookies.get("userID"));
       this.$router.push({ path: "single" });
     },
   },
-	setup() {
-		return {
-			googleLogo,  
-		};
-	}, 
+  setup() {
+    return {
+      googleLogo,
+    };
+  },
 };
 </script>

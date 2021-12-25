@@ -2,18 +2,34 @@
   <div class="container container-flex container-flex-row container-wrap">
     <button
       class="button chooseTime-button"
-			v-bind:class="{
-				'chooseTime-button-occupied': params.dailyReservation[time.startingTime.hours + ':' + ('0' + time.startingTime.minutes).slice(-2)], 
-				'chooseTime-button-empty': !params.dailyReservation[time.startingTime.hours + ':' + ('0' + time.startingTime.minutes).slice(-2)], 
-			}"
+      v-bind:class="{
+        'chooseTime-button-occupied':
+          params.dailyReservation[
+            time.startingTime.hours +
+              ':' +
+              ('0' + time.startingTime.minutes).slice(-2)
+          ],
+        'chooseTime-button-empty':
+          !params.dailyReservation[
+            time.startingTime.hours +
+              ':' +
+              ('0' + time.startingTime.minutes).slice(-2)
+          ],
+        'chooseTime-button-selected':
+          selectedTime.indexOf(
+            time.startingTime.hours +
+              ':' +
+              ('0' + time.startingTime.minutes).slice(-2)
+          ) > -1,
+      }"
       v-for="(time, index) in times"
       :key="index"
       :disabled="viewingMode"
-      @click="testEvent"
+      @click="select(time)"
     >
-      {{ ("0" + time.startingTime.hours).slice(-2) }} :
+      {{ time.startingTime.hours }} :
       {{ ("0" + time.startingTime.minutes).slice(-2) }} ~
-      {{ ("0" + time.endingTime.hours).slice(-2) }} :
+      {{ time.endingTime.hours }} :
       {{ ("0" + time.endingTime.minutes).slice(-2) }}
     </button>
   </div>
@@ -23,10 +39,13 @@
 export default {
   name: "ChooseTime",
   data() {
-    return {};
+    return {
+      selectedTime: [],
+    };
   },
   props: {
     params: Object,
+    isDone: Boolean,
   },
   computed: {
     times: function () {
@@ -87,11 +106,30 @@ export default {
       return this.params.viewingMode;
     },
   },
+  watch: {
+    isDone: function (newValue) {
+      if (newValue == true) {
+        this.emit("updateInfo", this.selectedTime);
+      }
+    },
+  },
   created() {},
   mounted() {},
   methods: {
-    testEvent: function () {
-      window.alert("HI");
+    select: function (time) {
+      let timeString =
+        time.startingTime.hours +
+        ":" +
+        ("0" + time.startingTime.minutes).slice(-2);
+      let index = this.selectedTime.indexOf(timeString);
+      if (this.params.dailyReservation[timeString]) {
+        window.alert("This time is reserved, please choose another time. ");
+      } else if (index > -1) {
+        this.selectedTime.splice(index, 1);
+      } else {
+        this.selectedTime.push(timeString);
+      }
+      this.$emit("updateInfo", this.selectedTime);
     },
   },
 };

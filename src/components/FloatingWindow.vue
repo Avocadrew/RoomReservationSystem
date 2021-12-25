@@ -4,9 +4,13 @@
       <h3>{{ window.title }}</h3>
       <button class="button icon-button" @click="closeWindow">X</button>
     </div>
-		<div class="floating-container-body">
-			<router-view :params="params" :isDone="isDone" @params="emitNewParams" />
-		</div>
+    <div class="floating-container-body">
+      <router-view
+        :params="params"
+        :isDone="isDone"
+        @updateInfo="emitNewInfo"
+      />
+    </div>
     <div class="floating-container-footer">
       <div></div>
       <div>
@@ -48,14 +52,14 @@ export default {
     },
     done: function () {
       this.closeWindow();
+      this.isDone = true;
+      this.$emit("done");
       if (this.window.nextPath && this.window.nextPath.length != 0) {
         this.$router.push(this.window.nextPath);
       }
-      this.isDone = true;
-      this.$emit("done", true);
     },
-    emitNewParams: function (value) {
-      this.$emit("params", value);
+    emitNewInfo: function (value) {
+      this.$emit("updateInfo", value);
     },
   },
 };

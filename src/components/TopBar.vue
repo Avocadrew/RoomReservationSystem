@@ -1,6 +1,10 @@
 <template>
   <div class="top-bar">
-    <div class="container container-flex container-flex-row container-no-left-margin">
+    <div
+      class="
+        container container-flex container-flex-row container-no-left-margin
+      "
+    >
       <button
         class="button icon-button"
         @click="goBack"
@@ -15,14 +19,19 @@
     <button
       class="button primary-button button-fixed-width-medium"
       @click="logIn"
-			v-if="!haveLoggedIn"
+      v-if="!haveLoggedIn"
     >
-			<img class="img-icon img-icon-google" :src="googleLogo" alt="Google-Logo" /> LOG IN 
+      <img
+        class="img-icon img-icon-google"
+        :src="googleLogo"
+        alt="Google-Logo"
+      />
+      LOG IN
     </button>
     <button
       class="button primary-button button-fixed-width-medium"
       @click="logOut"
-			v-else
+      v-else
     >
       LOG OUT
     </button>
@@ -48,9 +57,9 @@ export default {
       handler: function (newValue) {
         let path = newValue.currentRoute._rawValue.path.toLowerCase();
         this.showBackButton =
-          path != "/main/chooseactions" && path != "/main/landingpage";
-				let userId = this.$cookies.get("userId");
-				this.haveLoggedIn = (userId != undefined) && (userId != "");
+		path != "/main/chooseactions" && path != "/main/landingpage" && path != "/main/createaccount";
+        let userID = this.$cookies.get("userID");
+        this.haveLoggedIn = userID != undefined && userID != "";
       },
       immediate: true,
       deep: true,
@@ -62,7 +71,7 @@ export default {
     },
     logIn: async function () {
       try {
-				//const googleUser = await this.$gAuth.signIn();
+        //const googleUser = await this.$gAuth.signIn();
         //if (!googleUser) {
         //  return null;
         //}
@@ -76,23 +85,26 @@ export default {
         //  this.$gAuth.instance.currentUser.get().getAuthResponse()
         //);
 
-				//const authCode = await this.$gAuth.getAuthCode();
-				//this.axios.post("https://ntustsers.xyz/api/signIn", {
-				//	token: authCode, 
-				//})
-				//.then((response) => {
-				//	console.log(response.data.id_token.email);
-				//	this.$cookies.set("userId", response.data.id_token.email);
-				//	this.haveLoggedIn = true;
-				//	this.$router.push({ path: "chooseactions" });
-				//});
+        //const authCode = await this.$gAuth.getAuthCode();
+        //this.axios.post("https://ntustsers.xyz/api/signIn", {
+        //	token: authCode,
+        //})
+        //.then((response) => {
+        //	let success = response.data.success;
+        //	if (success) {
+        //		console.log(response.data.userInfo.user_ID);
+        //		this.$cookies.set("userID", response.data.userInfo.user_ID);
+        //		this.haveLoggedIn = true;
+        //		this.$router.push({ path: "chooseactions" });
+        //	}
+        //});
 
-				// For testing
-				let account = "aabb9052@gmail.com";
-				console.log(account);
-				this.$cookies.set("userId", account);
-				this.haveLoggedIn = true;
-				this.$router.push({ path: "chooseactions" });
+        // For testing
+        let account = "aabb9052@gmail.com";
+        console.log(account);
+        this.$cookies.set("userID", account);
+        this.haveLoggedIn = true;
+        this.$router.push({ path: "chooseactions" });
       } catch (error) {
         //on fail do something
         console.error(error);
@@ -100,14 +112,14 @@ export default {
       }
     },
     logOut: async function () {
-			try {
-				//await this.$gAuth.signOut();
-				this.$cookies.remove("userId");
-				this.haveLoggedIn = false;
-				this.$router.push({ path: "landingPage" });
-			} catch (error) {
-				console.error(error);
-			}
+      try {
+        //await this.$gAuth.signOut();
+        this.$cookies.remove("userID");
+        this.haveLoggedIn = false;
+        this.$router.push({ path: "landingPage" });
+      } catch (error) {
+        console.error(error);
+      }
     },
     goBack: function () {
       this.$router.go(-1);
@@ -115,14 +127,14 @@ export default {
   },
   mounted() {
     this.haveLoggedIn =
-      this.$cookies.get("userId") != undefined &&
-      this.$cookies.get("userId") != "";
+      this.$cookies.get("userID") != undefined &&
+      this.$cookies.get("userID") != "";
   },
-	setup() {
-		return {
-			googleLogo,  
-		};
-	}, 
+  setup() {
+    return {
+      googleLogo,
+    };
+  },
 };
 </script>
 

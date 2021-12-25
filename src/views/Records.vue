@@ -60,7 +60,27 @@ export default {
   created() {},
   mounted() {
     // Fetch future and past meetings.
-    this.useDefaultValue();
+    this.axios
+      .post("https://ntustsers.xyz/api/getAllReservations", {
+        user_ID: this.$cookies.get("userID"),
+      })
+      .then((response) => {
+        let success = response.data.success;
+        console.log(response.data);
+        if (success) {
+          let reservations = response.data.allReservations;
+          for (let i = 0; i < reservations.length; i++) {
+            let meeting = {};
+            meeting.id = reservations[i][0];
+            meeting.name = reservations[i][1];
+            meeting.description = reservations[i][2];
+            this.futureMeetings.push(meeting);
+          }
+        } else {
+          console.log("getAllReservations failed");
+        }
+      });
+    //this.useDefaultValue();
     this.currentTab = "future";
   },
   watch: {
@@ -83,12 +103,34 @@ export default {
     },
     modifyMeeting: function (index) {
       this.$router.push({
-        path: "filloutmeetinginfo",
-        query: { meetingid: this.presentedMeetings[index].id },
+        name: "FillOutMeetingInfo",
+        params: { meetingID: this.presentedMeetings[index].id },
       });
     },
     deleteMeeting: function (index) {
-      // Call api to delete a meeting, and then refetch presentedMeetings.
+      // Call api to delete a meeting.
+      let meetingID = "";
+      if (this.currentTab == "future") {
+        meetingID = this.futureMeetings[index].id;
+      } else {
+        meetingID = this.pastMeetings[index].id;
+      }
+      this.axios
+        .post("https://ntustsers.xyz/api/cancelReservation", {
+          meeting_ID: meetingID,
+        })
+        .then((response) => {
+          let success = response.data.success;
+          if (success) {
+            if (this.currentTab == "future") {
+              this.futureMeetings.splice(index, 1);
+            } else {
+              this.pastMeetings.spice(index, 1);
+            }
+          } else {
+            console.log("cancelReservation failed");
+          }
+        });
       window.alert("Delete meeting " + index.toString());
     },
     switchTab: function (tab) {

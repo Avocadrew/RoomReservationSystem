@@ -24,7 +24,7 @@
 
     <div class="container line-container">
       <p class="label">Phone Number:</p>
-      <p>{{ profile.phonenumber }}</p>
+      <p>{{ profile.phoneNumber }}</p>
     </div>
 
     <div class="container container-flex container-flex-row">
@@ -48,7 +48,7 @@ export default {
         gender: "",
         email: "",
         occupation: "",
-        phonenumber: "",
+        phoneNumber: "",
       },
     };
   },
@@ -56,8 +56,24 @@ export default {
   computed: {},
   created() {},
   mounted() {
-    this.useDefaultValue();
-    console.log(this.profile.name);
+    //this.useDefaultValue();
+    this.axios
+      .post("https://ntustsers.xyz/api/getDetailedUserInformation", {
+        UserID: this.$cookies.get("userID"),
+      })
+      .then((response) => {
+        let success = response.data.success;
+        if (success) {
+          let profile = response.data.detailedUserInformation;
+          this.profile.email = profile[0];
+          this.profile.gender = profile[1];
+          this.profile.name = profile[2];
+          this.profile.occupation = profile[3];
+          this.profile.phoneNumber = profile[4];
+        } else {
+          console.log("getDetailedUserInformation failed");
+        }
+      });
   },
   methods: {
     useDefaultValue: function () {
@@ -65,7 +81,7 @@ export default {
       this.profile.gender = "Male";
       this.profile.email = "willy123456@gmail.com";
       this.profile.occupation = "Student";
-      this.profile.phonenumber = "0912-345678";
+      this.profile.phoneNumber = "0912-345678";
     },
     goToEditPersonalInformation: function () {
       this.$router.push({ path: "editpersonalinformation" });

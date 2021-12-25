@@ -15,11 +15,11 @@ import CreateAndModifyAGroup from "../views/CreateAndModifyAGroup.vue";
 import Records from "../views/Records.vue";
 
 const routes = [
-	{
-		path: "", 
-		name: "Root", 
-		redirect: "/main", 
-	}, 
+  {
+    path: "",
+    name: "Root",
+    redirect: "/main",
+  },
   {
     path: "/main",
     name: "Main",
@@ -65,12 +65,12 @@ const routes = [
       },
       {
         path: "filloutmeetinginfo",
-        name: "FillOutMeetingInfo",
+        name: "",
         component: FillOutMeetingInfo,
         children: [
           {
             path: "",
-            name: "CreateAndModifyAGroup",
+            name: "FillOutMeetingInfo",
             component: CreateAndModifyAGroup,
           },
         ],
