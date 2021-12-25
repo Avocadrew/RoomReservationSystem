@@ -43,7 +43,7 @@ export default {
       };
     },
     account: function () {
-      return this.$cookies.get("userId");
+      return this.$cookies.get("userID");
     },
     viewingMode: function () {
       if (this.account == undefined || this.account == "") {
