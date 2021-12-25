@@ -137,6 +137,7 @@ export default {
   },
 	created() {},
   mounted() {
+		let times = this.getTimesString();
     if (this.$route.params.meetingID) {
       // Fetch the meeting.
 			this.$refs.loadingAnimation.start();
@@ -150,7 +151,32 @@ export default {
             let reservation = response.data.reservation;
             this.meeting.id = this.$route.params.meetingID;
             this.meeting.name = reservation.title;
-            this.meeting.time = reservation.time;
+						let startingTimeIndex = -1;
+						let endingTimeIndex = -1;
+						for (let i = 0; i < times.length; i++) {
+							for (let j = 0; j < reservation.time.length; j++) {
+								console.log(times[i].startingTime, reservation.time[j]);
+								if (times[i].startingTime == reservation.time[j]) {
+									startingTimeIndex = i;
+									break;
+								}
+							}
+							if (startingTimeIndex != -1) {
+								break;
+							}
+						}
+						for (let i = times.length - 1; i >= 0; i--) {
+							for (let j = 0; j < reservation.time.length; j++) {
+								if (times[i].startingTime == reservation.time[j]) {
+									endingTimeIndex = i;
+									break;
+								}
+							}
+							if (endingTimeIndex != -1) {
+								break;
+							}
+						}
+						this.meeting.time = times[startingTimeIndex].startingTime + " ~ " + times[endingTimeIndex].endingTime;
             this.meeting.date = reservation.date;
             this.meeting.description = reservation.description;
             this.meeting.room = reservation["room number"];
@@ -184,7 +210,32 @@ export default {
     } else {
       this.meeting.room = this.$route.params.room;
       this.meeting.date = this.$route.params.chosenDate;
-      this.meeting.time = this.$route.params.selectedTime;
+			let startingTimeIndex = -1;
+			let endingTimeIndex = -1;
+			for (let i = 0; i < times.length; i++) {
+				for (let j = 0; j < this.$route.params.selectedTime.length; j++) {
+					if (times[i].startingTime == this.$route.params.selectedTime[j]) {
+						startingTimeIndex = i;
+						break;
+					}
+				}
+				if (startingTimeIndex != -1) {
+					break;
+				}
+			}
+			for (let i = times.length - 1; i >= 0; i--) {
+				for (let j = 0; j < this.$route.params.selectedTime.length; j++) {
+					if (times[i].startingTime == this.$route.params.selectedTime[j]) {
+						endingTimeIndex = i;
+						break;
+					}
+				}
+				if (endingTimeIndex != -1) {
+					break;
+				}
+			}
+			console.log(startingTimeIndex, endingTimeIndex);
+			this.meeting.time = times[startingTimeIndex].startingTime + " ~ " + times[endingTimeIndex].endingTime;
       this.mode = "reserve";
 
 			this.$refs.loadingAnimation.start();
@@ -288,6 +339,8 @@ export default {
     deleteGroup: function (index) {
       // Call api to delete a group.
 			this.$refs.loadingAnimation.start();
+			console.log("userID", this.$cookies.get("userID"));
+			console.log("groupID", this.groups[index].groupID);
       this.axios
         .post("https://ntustsers.xyz/api/deleteGroup", {
           userID: this.$cookies.get("userID"),
@@ -318,7 +371,7 @@ export default {
         .then((response) => {
           let success = response.data.success;
           if (success) {
-            console.log("meeting_ID", response.data.meeting_ID);
+            console.log("meeting_ID", response.data.reservation_ID);
             this.$router.push({ path: "chooseactions" });
           } else {
             console.log("reserveOneTime failed");
@@ -334,6 +387,60 @@ export default {
     },
     updateTempGroup(newGroup) {
       this.tempGroup = newGroup;
+    },
+		getTimesString: function () {
+      let t = [];
+      let startingTime = {
+        hours: this.$AVAILABLE_TIME.STARTING_HOURS,
+        minutes: this.$AVAILABLE_TIME.STARTING_MINUTES,
+      };
+      let endingTime = {
+        hours: this.$AVAILABLE_TIME.STARTING_HOURS,
+        minutes: this.$AVAILABLE_TIME.STARTING_MINUTES,
+      };
+      let maxTime = {
+        hours: this.$AVAILABLE_TIME.ENDING_HOURS,
+        minutes: this.$AVAILABLE_TIME.ENDING_MINUTES,
+      };
+      let interval = this.$AVAILABLE_TIME.INTERVAL;
+
+      endingTime.minutes += interval;
+      while (endingTime.minutes >= 60) {
+        endingTime.minutes -= 60;
+        endingTime.hours++;
+      }
+
+      function isOutOfBound(time, maxTime) {
+        if (time.hours == maxTime.hours) {
+          if (time.minutes > maxTime.minutes) {
+            return true;
+          } else if (time.hours > maxTime.hours) {
+            return true;
+          }
+        }
+        return false;
+      }
+
+      while (!isOutOfBound(endingTime, maxTime)) {
+        t.push({
+					startingTime: startingTime.hours.toString() + ":" + ("0" + startingTime.minutes.toString()).slice(-2),
+					endingTime: endingTime.hours.toString() + ":" + ("0" + endingTime.minutes.toString()).slice(-2),
+        });
+
+        startingTime.minutes += interval;
+        while (startingTime.minutes >= 60) {
+          startingTime.minutes -= 60;
+          startingTime.hours++;
+        }
+
+        endingTime.minutes += interval;
+        while (endingTime.minutes >= 60) {
+          endingTime.minutes -= 60;
+          endingTime.hours++;
+        }
+      }
+
+      return t;
     },
   },
 };
