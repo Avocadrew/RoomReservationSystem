@@ -10,7 +10,7 @@
     </div>
     <div class="container line-container">
       <p class="label">Time:</p>
-      <p>{{ meeting.time }}</p>
+      <p>{{ meeting.timeString }}</p>
     </div>
     <div class="container line-container">
       <p class="label">Room:</p>
@@ -176,7 +176,8 @@ export default {
 								break;
 							}
 						}
-						this.meeting.time = times[startingTimeIndex].startingTime + " ~ " + times[endingTimeIndex].endingTime;
+						this.meeting.time = reservation.time;
+						this.meeting.timeString = times[startingTimeIndex].startingTime + " ~ " + times[endingTimeIndex].endingTime;
             this.meeting.date = reservation.date;
             this.meeting.description = reservation.description;
             this.meeting.room = reservation["room number"];
@@ -234,8 +235,8 @@ export default {
 					break;
 				}
 			}
-			console.log(startingTimeIndex, endingTimeIndex);
-			this.meeting.time = times[startingTimeIndex].startingTime + " ~ " + times[endingTimeIndex].endingTime;
+			this.meeting.time = this.$route.params.selectedTime;
+			this.meeting.timeString = times[startingTimeIndex].startingTime + " ~ " + times[endingTimeIndex].endingTime;
       this.mode = "reserve";
 
 			this.$refs.loadingAnimation.start();
@@ -364,7 +365,7 @@ export default {
           group_ID: this.meeting.groupID,
           title: this.meeting.name,
           date: this.meeting.date,
-          time: this.meeting.time,
+          time: this.meeting.timeString,
           description: this.meeting.description,
           room: this.meeting.room,
         })
