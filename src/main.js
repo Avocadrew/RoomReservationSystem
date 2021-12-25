@@ -34,8 +34,6 @@ app
   .component("Datepicker", Datepicker)
   .mount("#app");
 
-this.axios.defaults.timeout = 3600000;
-
 app.config.globalProperties.$MONTHS = [
   "January",
   "February",

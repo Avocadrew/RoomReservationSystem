@@ -74,6 +74,7 @@ export default {
       // Get one day reservation information.
       //this.generateTestData();
       //this.$refs.floatingWindow.openWindow();
+			console.log("HI");
       this.axios
         .post("https://ntustsers.xyz/api/getDailyReservation", {
           room_number: this.room,
