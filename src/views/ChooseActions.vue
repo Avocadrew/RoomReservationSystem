@@ -1,6 +1,6 @@
 <template>
   <div class="container container-flex container-flex-column">
-    <h3>Menu</h3>
+    <h2>Menu</h2>
     <div class="container container-flex container-flex-column">
       <button
         class="button primary-button button-fixed-width-big"

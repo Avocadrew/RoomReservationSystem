@@ -1,6 +1,6 @@
 <template>
   <div class="container container-flex container-flex-column">
-    <h3>Personal Information</h3>
+    <h2>Personal Information</h2>
 
     <div class="container line-container">
       <p class="label">Name:</p>
@@ -36,11 +36,17 @@
       </button>
     </div>
   </div>
+	<LoadingAnimation ref="loadingAnimation" />
 </template>
 
 <script>
+import LoadingAnimation from "@/components/LoadingAnimation.vue";
+
 export default {
   name: "PersonalInformation",
+  components: {
+		LoadingAnimation, 
+  },
   data() {
     return {
       profile: {
@@ -52,11 +58,11 @@ export default {
       },
     };
   },
-  components: {},
   computed: {},
   created() {},
   mounted() {
     //this.useDefaultValue();
+		this.$refs.loadingAnimation.start();
     this.axios
       .post("https://ntustsers.xyz/api/getDetailedUserInformation", {
         UserID: this.$cookies.get("userID"),
@@ -70,6 +76,7 @@ export default {
           this.profile.name = profile[2];
           this.profile.occupation = profile[3];
           this.profile.phoneNumber = profile[4];
+					this.$refs.loadingAnimation.stop();
         } else {
           console.log("getDetailedUserInformation failed");
         }

@@ -3,4 +3,6 @@
 .v-select {
 	min-width: var.$v-select-min-width;
 	margin: var.$small-margin;
+	background-color: var.$light-color;
+	border-radius: var.$v-select-border-radius;
 }

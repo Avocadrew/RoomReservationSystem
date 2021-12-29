@@ -24,17 +24,21 @@
       </button>
     </div>
   </div>
+	<LoadingAnimation ref="loadingAnimation" />
 </template>
 
 <script>
 import googleLogo from "@/assets/Google-icon-logo.svg";
+import LoadingAnimation from "@/components/LoadingAnimation.vue";
 
 export default {
   name: "LandingPage",
+  components: {
+		LoadingAnimation, 
+  },
   data() {
     return {};
   },
-  components: {},
   computed: {},
   created() {
     let account = this.$cookies.get("userID");
@@ -60,26 +64,36 @@ export default {
         //  this.$gAuth.instance.currentUser.get().getAuthResponse()
         //);
 
-        //const authCode = await this.$gAuth.getAuthCode();
-        //this.axios.post("https://ntustsers.xyz/api/signIn", {
-        //	token: authCode,
-        //})
-        //.then((response) => {
-        //	let success = response.data.success;
-        //	if (success) {
-        //		console.log(response.data.userInfo.user_ID);
-        //		this.$cookies.set("userID", response.data.userInfo.user_ID);
-        //		this.haveLoggedIn = true;
-        //		this.$router.push({ path: "chooseactions" });
-        //	}
-        //});
+        const authCode = await this.$gAuth.getAuthCode();
+				this.$refs.loadingAnimation.start();
+        this.axios.post("https://ntustsers.xyz/api/signIn", {
+        	token: authCode,
+        })
+        .then((response) => {
+        	let success = response.data.success;
+        	if (success) {
+        		console.log(response.data.userInfo.user_ID);
+        		this.$cookies.set("userID", response.data.userInfo.user_ID);
+        		this.haveLoggedIn = true;
+						this.$refs.loadingAnimation.stop();
+						if (response.data.userInfo.is_registered == false) {
+							this.$router.push({ path: "createaccount" });
+						}
+						else {
+							this.$router.push({ path: "chooseactions" });
+						}
+        	}
+					else {
+						console.log("signIn failed");
+					}
+        });
 
         // For testing
-        let account = "aabb9052@gmail.com";
-        console.log(account);
-        this.$cookies.set("userID", account);
-        this.haveLoggedIn = true;
-        this.$router.push({ path: "chooseactions" });
+				//let account = "aabb9052@gmail.com";
+        //console.log(account);
+        //this.$cookies.set("userID", account);
+        //this.haveLoggedIn = true;
+        //this.$router.push({ path: "chooseactions" });
       } catch (error) {
         //on fail do something
         console.error(error);

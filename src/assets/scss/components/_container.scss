@@ -5,6 +5,13 @@
 	margin: var.$container-margin;
 	padding: var.$container-padding;
 
+	&.container-router-view {
+		height: 100%;
+		width: 100%;
+		overflow: auto;
+		background-color: var.$container-router-view-background-color;
+	}
+
 	&.container-useless-wrapper {
 		margin: 0;
 		padding: 0;
@@ -61,7 +68,8 @@
 
 		&-body {
 			margin-top: 0;
-			border: 0.1rem solid var.$secondary-color;
+			border: 0.3rem solid var.$secondary-color;
+			border-radius: var.$container-tab-body-border-radius;
 		}
 	}
 
@@ -120,8 +128,9 @@
 			position: absolute;
 			bottom: var.$floating-container-padding;
 			height: var.$floating-container-footer-height;
-			left: var.$floating-container-padding;
-			width: var.$floating-container-footer-width;
+			right: var.$floating-container-padding;
+			width: fit-content;
+			width: -moz-fit-content;
 			display: flex;
 			//align-items: center;
 			flex-direction: row;

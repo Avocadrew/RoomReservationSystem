@@ -30,10 +30,12 @@ $floating-container-padding: $small-padding;
 $floating-container-header-height: 4rem;
 $floating-container-header-width: calc(100% - #{$floating-container-padding * 2});
 $floating-container-footer-height: 4rem;
-$floating-container-footer-width: calc(100% - #{$floating-container-padding * 2});
+//$floating-container-footer-width: calc(100% - #{$floating-container-padding * 2}); // Using fit-content in _container.scss
 $floating-container-body-margin: calc(#{$floating-container-header-height} - #{$floating-container-margin} - #{$floating-container-padding}) 0 0;
 $floating-container-body-padding: calc(#{$floating-container-footer-height} - #{$floating-container-margin} - #{$floating-container-padding});
 $floating-container-body-height: calc(100% - #{$floating-container-header-height} - #{$floating-container-margin} * 2 - #{$floating-container-padding} * 2);
+$container-tab-body-border-radius: 0 0.5rem 0.5rem 0.5rem;
+$container-router-view-background-color: rgba(255, 255, 255, 0.3);
 
 $button-font-color: $light-color;
 $button-border-radius: 2rem;
@@ -60,9 +62,14 @@ $top-bar-height: 4rem;
 $top-bar-elements-margin: 0 $small-margin;
 
 $v-select-min-width: 10rem;
+$v-select-border-radius: 4px;
 
 $p-margin: 0 $small-margin 0 0;
 $p-textBox-max-width: 20rem;
+$h2-background-color: $light-color;
+$h2-color: $primary-color;
+$h2-border-radius: 2rem;
+$h2-padding: 0.5rem 1rem;
 
 $img-icon-google-width: 1rem;
 $img-icon-google-height: 1rem;

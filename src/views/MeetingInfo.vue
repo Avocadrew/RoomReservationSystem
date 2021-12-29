@@ -1,6 +1,6 @@
 <template>
   <div class="container container-flex container-flex-column">
-    <h3>{{ meeting.name }}</h3>
+    <h2>{{ meeting.name }}</h2>
     <div class="container line-container">
       <p class="label">Date:</p>
       <p>{{ meeting.date }}</p>

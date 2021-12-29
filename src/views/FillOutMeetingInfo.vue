@@ -155,7 +155,6 @@ export default {
 						let endingTimeIndex = -1;
 						for (let i = 0; i < times.length; i++) {
 							for (let j = 0; j < reservation.time.length; j++) {
-								console.log(times[i].startingTime, reservation.time[j]);
 								if (times[i].startingTime == reservation.time[j]) {
 									startingTimeIndex = i;
 									break;
@@ -182,7 +181,6 @@ export default {
             this.meeting.description = reservation.description;
             this.meeting.room = reservation["room number"];
 						this.meeting.groupID = reservation.group_ID;
-						console.log(this.meeting);
 
             // Fetch groups
             this.axios
@@ -193,10 +191,10 @@ export default {
                 let success = response.data.success;
                 if (success) {
 									let groups = response.data.groupList;
-									console.log(groups);
 									for (let i = 0; i < groups.length; i++) {
 										this.groups.push({"id": groups[i].groupID, "name": groups[i].GroupName, "members": groups[i].emails});
 									}
+									this.$refs.loadingAnimation.stop();
                 } else {
                   console.log("getGroupList failed");
                 }
@@ -204,7 +202,6 @@ export default {
           } else {
             console.log("checkReservation failed");
           }
-					this.$refs.loadingAnimation.stop();
         });
       this.mode = "edit";
       //this.useDefaultValue();
@@ -247,7 +244,6 @@ export default {
         })
         .then((response) => {
           let groups = response.data.groupList;
-          console.log(groups);
           for (let i = 0; i < groups.length; i++) {
 						this.groups.push({"id": groups[i].groupID, "name": groups[i].GroupName, "members": groups[i].emails});
           }
@@ -267,9 +263,6 @@ export default {
       //this.meeting.description =
       //  "Group 06 will discuss for the system of the game. ";
       //this.meeting.groupID = "id1";
-    },
-    testEvent: function () {
-      console.log(this.meetingGroup);
     },
     createAGroup: function () {
       this.tempGroup = {
@@ -298,7 +291,6 @@ export default {
           })
           .then((response) => {
             let success = response.data.success;
-            console.log(response.data);
             if (success) {
               this.tempGroup.id = response.data.groupID;
               this.groups.push(this.tempGroup);
@@ -340,12 +332,10 @@ export default {
     deleteGroup: function (index) {
       // Call api to delete a group.
 			this.$refs.loadingAnimation.start();
-			console.log("userID", this.$cookies.get("userID"));
-			console.log("groupID", this.groups[index].groupID);
       this.axios
         .post("https://ntustsers.xyz/api/deleteGroup", {
           userID: this.$cookies.get("userID"),
-          groupID: this.groups[index].groupID,
+          groupID: this.groups[index].id,
         })
         .then((response) => {
           let success = response.data.success;
@@ -359,15 +349,6 @@ export default {
     },
     reserve: function () {
 			this.$refs.loadingAnimation.start();
-			console.log({
-          user_ID: this.$cookies.get("userID"),
-          group_ID: this.meeting.groupID,
-          title: this.meeting.name,
-          date: this.meeting.date,
-          time: this.meeting.time,
-          description: this.meeting.description,
-          room: this.meeting.room,
-        });
       this.axios
         .post("https://ntustsers.xyz/api/reserveOneTime", {
           user_ID: this.$cookies.get("userID"),
@@ -381,7 +362,6 @@ export default {
         .then((response) => {
           let success = response.data.success;
           if (success) {
-            console.log("meeting_ID", response.data.reservation_ID);
             this.$router.push({ path: "chooseactions" });
           } else {
             console.log("reserveOneTime failed");
@@ -393,7 +373,38 @@ export default {
       this.$router.go(-1);
     },
     save: function () {
-      window.alert("Save");
+			this.$refs.loadingAnimation.start();
+      this.axios
+        .post("https://ntustsers.xyz/api/cancelReservation", {
+          meeting_ID: this.meeting.id, 
+        })
+        .then((response) => {
+					let success = response.data.success;
+					if (success) {
+						this.axios
+							.post("https://ntustsers.xyz/api/reserveOneTime", {
+								user_ID: this.$cookies.get("userID"),
+								group_ID: this.meeting.groupID,
+								title: this.meeting.name,
+								date: this.meeting.date,
+								time: this.meeting.time,
+								description: this.meeting.description,
+								room: this.meeting.room,
+							})
+							.then((response) => {
+								let success = response.data.success;
+								if (success) {
+									this.$router.push({ path: "chooseactions" });
+								} else {
+									console.log("reserveOneTime failed");
+								}
+								this.$refs.loadingAnimation.stop();
+							});
+					}
+					else {
+						console.log("cancelReservation failed");
+					}
+				});
     },
     updateTempGroup(newGroup) {
       this.tempGroup = newGroup;

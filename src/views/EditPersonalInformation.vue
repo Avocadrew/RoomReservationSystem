@@ -1,6 +1,6 @@
 <template>
   <div class="container container-flex container-flex-column">
-    <h3>Edit Personal Information</h3>
+    <h2>Personal Information</h2>
 
     <div class="container line-container">
       <p class="label">Name:</p>
@@ -47,11 +47,17 @@
       </button>
     </div>
   </div>
+	<LoadingAnimation ref="loadingAnimation" />
 </template>
 
 <script>
+import LoadingAnimation from "@/components/LoadingAnimation.vue";
+
 export default {
   name: "EditPersonalInformation",
+  components: {
+		LoadingAnimation, 
+  },
   data() {
     return {
       profile: {
@@ -63,11 +69,11 @@ export default {
       },
     };
   },
-  components: {},
   computed: {},
   created() {},
   mounted() {
     //this.useDefaultValue();
+		this.$refs.loadingAnimation.start();
     this.axios
       .post("https://ntustsers.xyz/api/getDetailedUserInformation", {
         UserID: this.$cookies.get("userID"),
@@ -81,6 +87,7 @@ export default {
           this.profile.name = profile[2];
           this.profile.occupation = profile[3];
           this.profile.phoneNumber = profile[4];
+					this.$refs.loadingAnimation.stop();
         } else {
           console.log("getDetailedUserInformation failed");
         }
@@ -99,6 +106,7 @@ export default {
       this.$router.go(-1);
     },
     confirm: function () {
+			this.$refs.loadingAnimation.start();
       this.axios
         .post("https://ntustsers.xyz/api/saveDetailedUserInformation", {
           UserID: this.$cookies.get("userID"),
@@ -111,6 +119,7 @@ export default {
           let success = response.data.success;
           if (success) {
             this.$router.go(-1);
+						this.$refs.loadingAnimation.stop();
           } else {
             console.log("saveDetailedUserInformation failed");
           }

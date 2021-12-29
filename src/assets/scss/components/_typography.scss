@@ -2,6 +2,7 @@
 
 p {
 	margin: var.$p-margin;
+	font-weight: bold;
 
 	&:last-child {
 		margin: 0;
@@ -9,7 +10,6 @@ p {
 
 	&.label {
 		color: var.$primary-color;
-		font-weight: bold;
 	}
 
 	&.textBox {
@@ -17,6 +17,9 @@ p {
 	}
 }
 
-h3 {
-	color: var.$primary-color;
+h2 {
+	//background-color: var.$h2-background-color;
+	//border-radius: var.$h2-border-radius;
+	color: var.$h2-color;
+	//padding: var.$h2-padding;
 }

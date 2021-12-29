@@ -1,6 +1,6 @@
 <template>
   <div class="container container-flex container-flex-column">
-    <h3>Records</h3>
+    <h2>Records</h2>
     <div class="container container-flex container-flex-column">
       <div class="container container-tab-buttons">
         <button
@@ -20,32 +20,47 @@
       </div>
       <div class="container container-tab-body">
         <div
-          class="container line-container"
+          class="container container-useless-wrapper"
           v-for="(meeting, index) in presentedMeetings"
           :key="index"
+					v-if="presentedMeetings.length != 0"
         >
-          <div
-            class="
-              container container-useless-wrapper container-fixed-width-small
-            "
-          >
-            <p class="p-fixed-width">{{ meeting.name }}</p>
-          </div>
-          <button class="button icon-button" @click="modifyMeeting(index)">
-            <mdicon name="pencil" :size="20" />
-          </button>
-          <button class="button icon-button" @click="deleteMeeting(index)">
-            <mdicon name="delete" :size="20" />
-          </button>
+					<div class="container line-container">
+						<div
+							class="
+								container container-useless-wrapper container-fixed-width-small
+							"
+						>
+							<p>{{ meeting.name }}</p>
+						</div>
+						<button class="button icon-button" @click="modifyMeeting(index)">
+							<mdicon name="pencil" :size="20" />
+						</button>
+						<button class="button icon-button" @click="deleteMeeting(index)">
+							<mdicon name="delete" :size="20" />
+						</button>
+					</div>
+					<hr v-show="index != presentedMeetings.length - 1" />
         </div>
+				<div class="container line-container" v-else>
+					<div class="container container-useless-wrapper container-fixed-width-small">
+						<p>None</p>
+					</div>
+				</div>
       </div>
     </div>
   </div>
+	<LoadingAnimation ref="loadingAnimation" />
 </template>
 
 <script>
+import LoadingAnimation from "@/components/LoadingAnimation.vue";
+
 export default {
   name: "Records",
+  components: {
+		LoadingAnimation, 
+  },
   data() {
     return {
       tempMeeting: {},
@@ -55,18 +70,17 @@ export default {
       currentTab: "future",
     };
   },
-  components: {},
   computed: {},
   created() {},
   mounted() {
     // Fetch future and past meetings.
+		this.$refs.loadingAnimation.start();
     this.axios
       .post("https://ntustsers.xyz/api/getAllReservations", {
         user_ID: this.$cookies.get("userID"),
       })
       .then((response) => {
         let success = response.data.success;
-        console.log(response.data);
         if (success) {
           let reservations = response.data.allReservations;
           for (let i = 0; i < reservations.length; i++) {
@@ -75,6 +89,7 @@ export default {
             meeting.name = reservations[i][1];
             meeting.description = reservations[i][2];
             this.futureMeetings.push(meeting);
+						this.$refs.loadingAnimation.stop();
           }
         } else {
           console.log("getAllReservations failed");
@@ -129,9 +144,9 @@ export default {
             }
           } else {
             console.log("cancelReservation failed");
+						console.log("Error: ", response.data.error);
           }
         });
-      window.alert("Delete meeting " + index.toString());
     },
     switchTab: function (tab) {
       this.currentTab = tab;
