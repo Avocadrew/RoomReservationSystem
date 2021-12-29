@@ -82,10 +82,11 @@ export default {
   computed: {},
   created() {},
   mounted() {
-    this.profile.email = this.cookies.get("userID");
+    this.profile.email = this.$cookies.get("userID");
   },
   methods: {
     createAccount: function () {
+			console.log("HI");
       this.$refs.loadingAnimation.start();
       this.axios
         .post("https://ntustsers.xyz/api/saveDetailedUserInformation", {
