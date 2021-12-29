@@ -103,8 +103,6 @@ export default {
       this.$router.push({ path: "reservation/choosetypes" });
     },
     goToGuest: function () {
-      this.$cookies.set("userID", "testAccount");
-      window.alert(this.$cookies.get("userID"));
       this.$router.push({ path: "single" });
     },
   },
