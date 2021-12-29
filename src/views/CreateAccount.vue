@@ -89,7 +89,7 @@ export default {
       this.$refs.loadingAnimation.start();
       this.axios
         .post("https://ntustsers.xyz/api/saveDetailedUserInformation", {
-          userID: this.profile.email,
+          UserID: this.profile.email,
           gender: this.profile.gender,
           name: this.profile.name,
           jobTitle: this.profile.occupation,
