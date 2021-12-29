@@ -10,7 +10,7 @@ import Datepicker from "vue3-date-time-picker";
 import "vue3-date-time-picker/dist/main.css";
 import * as mdijs from "@mdi/js";
 import VueCookies from "vue3-cookies";
-//import GAuth from "vue3-google-oauth2";
+import GAuth from "vue3-google-oauth2";
 import axios from "axios";
 import VueAxios from "vue-axios";
 
@@ -23,10 +23,10 @@ app
     expireTimes: "30d",
     secure: true,
   })
-  //.use(GAuth, {
-  //  clientId:
-  //    "317495594650-cif7424dmuo2a96s3qp2bt29jcfpms3o.apps.googleusercontent.com",
-  //})
+  .use(GAuth, {
+    clientId:
+      "317495594650-cif7424dmuo2a96s3qp2bt29jcfpms3o.apps.googleusercontent.com",
+  })
   .use(VueAxios, axios)
   .component("Calendar", Calendar)
   .component("DatePicker", DatePicker)
