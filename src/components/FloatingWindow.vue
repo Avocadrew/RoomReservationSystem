@@ -12,13 +12,13 @@
       />
     </div>
     <div class="floating-container-footer">
-			<button
-				class="button primary-button button-fixed-width-medium"
-				@click="done"
-				v-show="showDoneButton"
-			>
-				DONE
-			</button>
+      <button
+        class="button primary-button button-fixed-width-medium"
+        @click="done"
+        v-show="showDoneButton"
+      >
+        DONE
+      </button>
     </div>
   </div>
 </template>

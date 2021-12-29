@@ -36,7 +36,7 @@
       </button>
     </div>
   </div>
-	<LoadingAnimation ref="loadingAnimation" />
+  <LoadingAnimation ref="loadingAnimation" />
 </template>
 
 <script>
@@ -45,7 +45,7 @@ import LoadingAnimation from "@/components/LoadingAnimation.vue";
 export default {
   name: "PersonalInformation",
   components: {
-		LoadingAnimation, 
+    LoadingAnimation,
   },
   data() {
     return {
@@ -62,7 +62,7 @@ export default {
   created() {},
   mounted() {
     //this.useDefaultValue();
-		this.$refs.loadingAnimation.start();
+    this.$refs.loadingAnimation.start();
     this.axios
       .post("https://ntustsers.xyz/api/getDetailedUserInformation", {
         UserID: this.$cookies.get("userID"),
@@ -76,7 +76,7 @@ export default {
           this.profile.name = profile[2];
           this.profile.occupation = profile[3];
           this.profile.phoneNumber = profile[4];
-					this.$refs.loadingAnimation.stop();
+          this.$refs.loadingAnimation.stop();
         } else {
           console.log("getDetailedUserInformation failed");
         }

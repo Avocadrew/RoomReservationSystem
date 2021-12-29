@@ -36,7 +36,7 @@
       LOG OUT
     </button>
   </div>
-	<LoadingAnimation ref="loadingAnimation" />
+  <LoadingAnimation ref="loadingAnimation" />
 </template>
 
 <script>
@@ -46,7 +46,7 @@ import LoadingAnimation from "@/components/LoadingAnimation.vue";
 export default {
   name: "TopBar",
   components: {
-		LoadingAnimation, 
+    LoadingAnimation,
   },
   data: function () {
     return {
@@ -62,7 +62,9 @@ export default {
       handler: function (newValue) {
         let path = newValue.currentRoute._rawValue.path.toLowerCase();
         this.showBackButton =
-		path != "/main/chooseactions" && path != "/main/landingpage" && path != "/main/createaccount";
+          path != "/main/chooseactions" &&
+          path != "/main/landingpage" &&
+          path != "/main/createaccount";
         let userID = this.$cookies.get("userID");
         this.haveLoggedIn = userID != undefined && userID != "";
       },
@@ -91,31 +93,30 @@ export default {
         //);
 
         const authCode = await this.$gAuth.getAuthCode();
-				this.$refs.loadingAnimation.start();
-        this.axios.post("https://ntustsers.xyz/api/signIn", {
-        	token: authCode,
-        })
-        .then((response) => {
-        	let success = response.data.success;
-        	if (success) {
-        		console.log(response.data.userInfo.user_ID);
-        		this.$cookies.set("userID", response.data.userInfo.user_ID);
-        		this.haveLoggedIn = true;
-						this.$refs.loadingAnimation.stop();
-						if (response.data.userInfo.is_registered == false) {
-							this.$router.push({ path: "createaccount" });
-						}
-						else {
-							this.$router.push({ path: "chooseactions" });
-						}
-        	}
-					else {
-						console.log("signIn failed");
-					}
-        });
+        this.$refs.loadingAnimation.start();
+        this.axios
+          .post("https://ntustsers.xyz/api/signIn", {
+            token: authCode,
+          })
+          .then((response) => {
+            let success = response.data.success;
+            if (success) {
+              console.log(response.data.userInfo.user_ID);
+              this.$cookies.set("userID", response.data.userInfo.user_ID);
+              this.haveLoggedIn = true;
+              this.$refs.loadingAnimation.stop();
+              if (response.data.userInfo.is_registered == false) {
+                this.$router.push({ path: "createaccount" });
+              } else {
+                this.$router.push({ path: "chooseactions" });
+              }
+            } else {
+              console.log("signIn failed");
+            }
+          });
 
         // For testing
-				//let account = "aabb9052@gmail.com";
+        //let account = "aabb9052@gmail.com";
         //console.log(account);
         //this.$cookies.set("userID", account);
         //this.haveLoggedIn = true;

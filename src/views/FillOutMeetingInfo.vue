@@ -78,7 +78,7 @@
     @done="saveGroup"
     @updateInfo="updateTempGroup"
   />
-	<LoadingAnimation ref="loadingAnimation" />
+  <LoadingAnimation ref="loadingAnimation" />
 </template>
 
 <script>
@@ -89,7 +89,7 @@ export default {
   name: "FillOutMeetingInfo",
   components: {
     FloatingWindow,
-		LoadingAnimation, 
+    LoadingAnimation,
   },
   data() {
     return {
@@ -135,12 +135,12 @@ export default {
       return group;
     },
   },
-	created() {},
+  created() {},
   mounted() {
-		let times = this.getTimesString();
+    let times = this.getTimesString();
     if (this.$route.params.meetingID) {
       // Fetch the meeting.
-			this.$refs.loadingAnimation.start();
+      this.$refs.loadingAnimation.start();
       this.axios
         .post("https://ntustsers.xyz/api/checkReservation", {
           meeting_ID: this.$route.params.meetingID,
@@ -151,36 +151,39 @@ export default {
             let reservation = response.data.reservation;
             this.meeting.id = this.$route.params.meetingID;
             this.meeting.name = reservation.title;
-						let startingTimeIndex = -1;
-						let endingTimeIndex = -1;
-						for (let i = 0; i < times.length; i++) {
-							for (let j = 0; j < reservation.time.length; j++) {
-								if (times[i].startingTime == reservation.time[j]) {
-									startingTimeIndex = i;
-									break;
-								}
-							}
-							if (startingTimeIndex != -1) {
-								break;
-							}
-						}
-						for (let i = times.length - 1; i >= 0; i--) {
-							for (let j = 0; j < reservation.time.length; j++) {
-								if (times[i].startingTime == reservation.time[j]) {
-									endingTimeIndex = i;
-									break;
-								}
-							}
-							if (endingTimeIndex != -1) {
-								break;
-							}
-						}
-						this.meeting.time = reservation.time;
-						this.meeting.timeString = times[startingTimeIndex].startingTime + " ~ " + times[endingTimeIndex].endingTime;
+            let startingTimeIndex = -1;
+            let endingTimeIndex = -1;
+            for (let i = 0; i < times.length; i++) {
+              for (let j = 0; j < reservation.time.length; j++) {
+                if (times[i].startingTime == reservation.time[j]) {
+                  startingTimeIndex = i;
+                  break;
+                }
+              }
+              if (startingTimeIndex != -1) {
+                break;
+              }
+            }
+            for (let i = times.length - 1; i >= 0; i--) {
+              for (let j = 0; j < reservation.time.length; j++) {
+                if (times[i].startingTime == reservation.time[j]) {
+                  endingTimeIndex = i;
+                  break;
+                }
+              }
+              if (endingTimeIndex != -1) {
+                break;
+              }
+            }
+            this.meeting.time = reservation.time;
+            this.meeting.timeString =
+              times[startingTimeIndex].startingTime +
+              " ~ " +
+              times[endingTimeIndex].endingTime;
             this.meeting.date = reservation.date;
             this.meeting.description = reservation.description;
             this.meeting.room = reservation["room number"];
-						this.meeting.groupID = reservation.group_ID;
+            this.meeting.groupID = reservation.group_ID;
 
             // Fetch groups
             this.axios
@@ -190,11 +193,15 @@ export default {
               .then((response) => {
                 let success = response.data.success;
                 if (success) {
-									let groups = response.data.groupList;
-									for (let i = 0; i < groups.length; i++) {
-										this.groups.push({"id": groups[i].groupID, "name": groups[i].GroupName, "members": groups[i].emails});
-									}
-									this.$refs.loadingAnimation.stop();
+                  let groups = response.data.groupList;
+                  for (let i = 0; i < groups.length; i++) {
+                    this.groups.push({
+                      id: groups[i].groupID,
+                      name: groups[i].GroupName,
+                      members: groups[i].emails,
+                    });
+                  }
+                  this.$refs.loadingAnimation.stop();
                 } else {
                   console.log("getGroupList failed");
                 }
@@ -208,35 +215,38 @@ export default {
     } else {
       this.meeting.room = this.$route.params.room;
       this.meeting.date = this.$route.params.chosenDate;
-			let startingTimeIndex = -1;
-			let endingTimeIndex = -1;
-			for (let i = 0; i < times.length; i++) {
-				for (let j = 0; j < this.$route.params.selectedTime.length; j++) {
-					if (times[i].startingTime == this.$route.params.selectedTime[j]) {
-						startingTimeIndex = i;
-						break;
-					}
-				}
-				if (startingTimeIndex != -1) {
-					break;
-				}
-			}
-			for (let i = times.length - 1; i >= 0; i--) {
-				for (let j = 0; j < this.$route.params.selectedTime.length; j++) {
-					if (times[i].startingTime == this.$route.params.selectedTime[j]) {
-						endingTimeIndex = i;
-						break;
-					}
-				}
-				if (endingTimeIndex != -1) {
-					break;
-				}
-			}
-			this.meeting.time = this.$route.params.selectedTime;
-			this.meeting.timeString = times[startingTimeIndex].startingTime + " ~ " + times[endingTimeIndex].endingTime;
+      let startingTimeIndex = -1;
+      let endingTimeIndex = -1;
+      for (let i = 0; i < times.length; i++) {
+        for (let j = 0; j < this.$route.params.selectedTime.length; j++) {
+          if (times[i].startingTime == this.$route.params.selectedTime[j]) {
+            startingTimeIndex = i;
+            break;
+          }
+        }
+        if (startingTimeIndex != -1) {
+          break;
+        }
+      }
+      for (let i = times.length - 1; i >= 0; i--) {
+        for (let j = 0; j < this.$route.params.selectedTime.length; j++) {
+          if (times[i].startingTime == this.$route.params.selectedTime[j]) {
+            endingTimeIndex = i;
+            break;
+          }
+        }
+        if (endingTimeIndex != -1) {
+          break;
+        }
+      }
+      this.meeting.time = this.$route.params.selectedTime;
+      this.meeting.timeString =
+        times[startingTimeIndex].startingTime +
+        " ~ " +
+        times[endingTimeIndex].endingTime;
       this.mode = "reserve";
 
-			this.$refs.loadingAnimation.start();
+      this.$refs.loadingAnimation.start();
       // Fetch groups
       this.axios
         .post("https://ntustsers.xyz/api/getGroupList", {
@@ -245,12 +255,16 @@ export default {
         .then((response) => {
           let groups = response.data.groupList;
           for (let i = 0; i < groups.length; i++) {
-						this.groups.push({"id": groups[i].groupID, "name": groups[i].GroupName, "members": groups[i].emails});
+            this.groups.push({
+              id: groups[i].groupID,
+              name: groups[i].GroupName,
+              members: groups[i].emails,
+            });
           }
-					if (groups.length > 0) {
-						this.meeting.groupID = this.groups[0].id;
-					}
-					this.$refs.loadingAnimation.stop();
+          if (groups.length > 0) {
+            this.meeting.groupID = this.groups[0].id;
+          }
+          this.$refs.loadingAnimation.stop();
         });
     }
   },
@@ -278,44 +292,43 @@ export default {
       this.$refs.floatingWindow.openWindow();
     },
     saveGroup: function () {
-
       if (!this.tempGroup.id) {
         // Call api to create a new group using this.tempGroup.
-				this.$refs.loadingAnimation.start();
+        this.$refs.loadingAnimation.start();
         this.axios
           .post("https://ntustsers.xyz/api/addGroup", {
             groupName: this.tempGroup.name,
             emails: this.tempGroup.members,
             userID: this.$cookies.get("userID"),
-						description: "", 
+            description: "",
           })
           .then((response) => {
             let success = response.data.success;
             if (success) {
               this.tempGroup.id = response.data.groupID;
               this.groups.push(this.tempGroup);
-							this.meeting.groupID = response.data.groupID;
+              this.meeting.groupID = response.data.groupID;
             } else {
               console.log("addGroup failed");
             }
-						this.$refs.loadingAnimation.stop();
+            this.$refs.loadingAnimation.stop();
           });
       } else {
-				for (let i = 0; i < this.groups.length; i++) {
-					if (this.tempGroup == this.groups[i]) {
-						return;
-					}
-				}
-				
+        for (let i = 0; i < this.groups.length; i++) {
+          if (this.tempGroup == this.groups[i]) {
+            return;
+          }
+        }
+
         // Call api to save a group using this.tempGroup.
-				this.$refs.loadingAnimation.start();
+        this.$refs.loadingAnimation.start();
         this.axios
           .post("https://ntustsers.xyz/api/saveGroup", {
             groupID: this.tempGroup.id,
             groupName: this.tempGroup.name,
             emails: this.tempGroup.members,
             userID: this.$cookies.get("userID"),
-						description: "", 
+            description: "",
           })
           .then((response) => {
             let success = response.data.success;
@@ -325,13 +338,13 @@ export default {
             } else {
               console.log("saveGroup failed");
             }
-						this.$refs.loadingAnimation.stop();
+            this.$refs.loadingAnimation.stop();
           });
       }
     },
     deleteGroup: function (index) {
       // Call api to delete a group.
-			this.$refs.loadingAnimation.start();
+      this.$refs.loadingAnimation.start();
       this.axios
         .post("https://ntustsers.xyz/api/deleteGroup", {
           userID: this.$cookies.get("userID"),
@@ -344,11 +357,11 @@ export default {
           } else {
             console.log("deleteGroup failed");
           }
-					this.$refs.loadingAnimation.stop();
+          this.$refs.loadingAnimation.stop();
         });
     },
     reserve: function () {
-			this.$refs.loadingAnimation.start();
+      this.$refs.loadingAnimation.start();
       this.axios
         .post("https://ntustsers.xyz/api/reserveOneTime", {
           user_ID: this.$cookies.get("userID"),
@@ -366,50 +379,49 @@ export default {
           } else {
             console.log("reserveOneTime failed");
           }
-					this.$refs.loadingAnimation.stop();
+          this.$refs.loadingAnimation.stop();
         });
     },
     cancel: function () {
       this.$router.go(-1);
     },
     save: function () {
-			this.$refs.loadingAnimation.start();
+      this.$refs.loadingAnimation.start();
       this.axios
         .post("https://ntustsers.xyz/api/cancelReservation", {
-          meeting_ID: this.meeting.id, 
+          meeting_ID: this.meeting.id,
         })
         .then((response) => {
-					let success = response.data.success;
-					if (success) {
-						this.axios
-							.post("https://ntustsers.xyz/api/reserveOneTime", {
-								user_ID: this.$cookies.get("userID"),
-								group_ID: this.meeting.groupID,
-								title: this.meeting.name,
-								date: this.meeting.date,
-								time: this.meeting.time,
-								description: this.meeting.description,
-								room: this.meeting.room,
-							})
-							.then((response) => {
-								let success = response.data.success;
-								if (success) {
-									this.$router.push({ path: "chooseactions" });
-								} else {
-									console.log("reserveOneTime failed");
-								}
-								this.$refs.loadingAnimation.stop();
-							});
-					}
-					else {
-						console.log("cancelReservation failed");
-					}
-				});
+          let success = response.data.success;
+          if (success) {
+            this.axios
+              .post("https://ntustsers.xyz/api/reserveOneTime", {
+                user_ID: this.$cookies.get("userID"),
+                group_ID: this.meeting.groupID,
+                title: this.meeting.name,
+                date: this.meeting.date,
+                time: this.meeting.time,
+                description: this.meeting.description,
+                room: this.meeting.room,
+              })
+              .then((response) => {
+                let success = response.data.success;
+                if (success) {
+                  this.$router.push({ path: "chooseactions" });
+                } else {
+                  console.log("reserveOneTime failed");
+                }
+                this.$refs.loadingAnimation.stop();
+              });
+          } else {
+            console.log("cancelReservation failed");
+          }
+        });
     },
     updateTempGroup(newGroup) {
       this.tempGroup = newGroup;
     },
-		getTimesString: function () {
+    getTimesString: function () {
       let t = [];
       let startingTime = {
         hours: this.$AVAILABLE_TIME.STARTING_HOURS,
@@ -444,8 +456,14 @@ export default {
 
       while (!isOutOfBound(endingTime, maxTime)) {
         t.push({
-					startingTime: startingTime.hours.toString() + ":" + ("0" + startingTime.minutes.toString()).slice(-2),
-					endingTime: endingTime.hours.toString() + ":" + ("0" + endingTime.minutes.toString()).slice(-2),
+          startingTime:
+            startingTime.hours.toString() +
+            ":" +
+            ("0" + startingTime.minutes.toString()).slice(-2),
+          endingTime:
+            endingTime.hours.toString() +
+            ":" +
+            ("0" + endingTime.minutes.toString()).slice(-2),
         });
 
         startingTime.minutes += interval;

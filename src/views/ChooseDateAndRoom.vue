@@ -11,7 +11,7 @@
     @done="done"
     @updateInfo="updateInfo"
   />
-	<LoadingAnimation ref="loadingAnimation" />
+  <LoadingAnimation ref="loadingAnimation" />
 </template>
 
 <script>
@@ -22,7 +22,7 @@ export default {
   name: "ChooseDateAndRoom",
   components: {
     FloatingWindow,
-		LoadingAnimation, 
+    LoadingAnimation,
   },
   data() {
     return {
@@ -70,26 +70,28 @@ export default {
       };
     },
     chooseDate: function (day) {
-			console.log(day.year, day.month, day.day);
-			console.log(new Date().getYear(), new Date().getMonth() + 1, new Date().getDate());
-			if (day.year < new Date().getYear() + 1900) {
-				return;
-			}
-			else if (day.year == new Date().getYear() + 1900) {
-				if (day.month < new Date().getMonth() + 1) {
-					return;
-				}
-				else if (day.month == new Date().getMonth() + 1) {
-					if (day.day < new Date().getDate()) {
-						return;
-					}
-				}
-			}
+      console.log(day.year, day.month, day.day);
+      console.log(
+        new Date().getYear(),
+        new Date().getMonth() + 1,
+        new Date().getDate()
+      );
+      if (day.year < new Date().getYear() + 1900) {
+        return;
+      } else if (day.year == new Date().getYear() + 1900) {
+        if (day.month < new Date().getMonth() + 1) {
+          return;
+        } else if (day.month == new Date().getMonth() + 1) {
+          if (day.day < new Date().getDate()) {
+            return;
+          }
+        }
+      }
       this.chosenDate = day;
       // Get one day reservation information.
       //this.generateTestData();
       //this.$refs.floatingWindow.openWindow();
-			this.$refs.loadingAnimation.start();
+      this.$refs.loadingAnimation.start();
       this.axios
         .post("https://ntustsers.xyz/api/getDailyReservation", {
           room_number: this.room,
@@ -104,7 +106,7 @@ export default {
           if (response.data.success) {
             this.dailyReservation = response.data.dailyReservation;
             console.log(response.data);
-						this.$refs.loadingAnimation.stop();
+            this.$refs.loadingAnimation.stop();
             this.$refs.floatingWindow.openWindow();
           } else {
             console.log("getDailyReservation failed");

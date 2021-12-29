@@ -47,7 +47,7 @@
       </button>
     </div>
   </div>
-	<LoadingAnimation ref="loadingAnimation" />
+  <LoadingAnimation ref="loadingAnimation" />
 </template>
 
 <script>
@@ -56,7 +56,7 @@ import LoadingAnimation from "@/components/LoadingAnimation.vue";
 export default {
   name: "EditPersonalInformation",
   components: {
-		LoadingAnimation, 
+    LoadingAnimation,
   },
   data() {
     return {
@@ -73,7 +73,7 @@ export default {
   created() {},
   mounted() {
     //this.useDefaultValue();
-		this.$refs.loadingAnimation.start();
+    this.$refs.loadingAnimation.start();
     this.axios
       .post("https://ntustsers.xyz/api/getDetailedUserInformation", {
         UserID: this.$cookies.get("userID"),
@@ -87,7 +87,7 @@ export default {
           this.profile.name = profile[2];
           this.profile.occupation = profile[3];
           this.profile.phoneNumber = profile[4];
-					this.$refs.loadingAnimation.stop();
+          this.$refs.loadingAnimation.stop();
         } else {
           console.log("getDetailedUserInformation failed");
         }
@@ -106,7 +106,7 @@ export default {
       this.$router.go(-1);
     },
     confirm: function () {
-			this.$refs.loadingAnimation.start();
+      this.$refs.loadingAnimation.start();
       this.axios
         .post("https://ntustsers.xyz/api/saveDetailedUserInformation", {
           UserID: this.$cookies.get("userID"),
@@ -119,7 +119,7 @@ export default {
           let success = response.data.success;
           if (success) {
             this.$router.go(-1);
-						this.$refs.loadingAnimation.stop();
+            this.$refs.loadingAnimation.stop();
           } else {
             console.log("saveDetailedUserInformation failed");
           }

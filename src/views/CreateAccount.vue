@@ -9,9 +9,22 @@
 
     <div class="container line-container">
       <p class="label">Gender:</p>
-      <input type="radio" id="male" name="gender" value="Male" checked v-model="profile.gender" />
+      <input
+        type="radio"
+        id="male"
+        name="gender"
+        value="Male"
+        checked
+        v-model="profile.gender"
+      />
       <label for="male">Male</label>
-      <input type="radio" id="female" name="gender" value="Female" v-model="profile.gender" />
+      <input
+        type="radio"
+        id="female"
+        name="gender"
+        value="Female"
+        v-model="profile.gender"
+      />
       <label for="female">Female</label>
     </div>
 
@@ -27,7 +40,12 @@
 
     <div class="container line-container">
       <p class="label">Phone Number:</p>
-      <input type="tel" name="phone" pattern="09[0-9]{8}" v-model="profile.phoneNumber" />
+      <input
+        type="tel"
+        name="phone"
+        pattern="09[0-9]{8}"
+        v-model="profile.phoneNumber"
+      />
     </div>
 
     <div>
@@ -39,7 +57,7 @@
       </button>
     </div>
   </div>
-	<LoadingAnimation ref="loadingAnimation" />
+  <LoadingAnimation ref="loadingAnimation" />
 </template>
 
 <script>
@@ -47,9 +65,9 @@ import LoadingAnimation from "@/components/LoadingAnimation.vue";
 
 export default {
   name: "CreateAccount",
-	components: {
-		LoadingAnimation, 
-	},
+  components: {
+    LoadingAnimation,
+  },
   data() {
     return {
       profile: {
@@ -58,36 +76,35 @@ export default {
         email: "",
         occupation: "",
         phoneNumber: "",
-			},
-		};
+      },
+    };
   },
   computed: {},
-  created() {
-  },
+  created() {},
   mounted() {
-		this.profile.email = this.cookies.get("userID");
+    this.profile.email = this.cookies.get("userID");
   },
   methods: {
-		createAccount: function() {
-				this.$refs.loadingAnimation.start();
-        this.axios.post("https://ntustsers.xyz/api/saveDetailedUserInformation", {
-					userID: this.cookies.get("userID"), 
-					gender: this.profile.gender, 
-					name: this.profile.name, 
-					jobTitle: this.profile.occupation, 
-					phone: this.profile.phoneNumber, 
+    createAccount: function () {
+      this.$refs.loadingAnimation.start();
+      this.axios
+        .post("https://ntustsers.xyz/api/saveDetailedUserInformation", {
+          userID: this.cookies.get("userID"),
+          gender: this.profile.gender,
+          name: this.profile.name,
+          jobTitle: this.profile.occupation,
+          phone: this.profile.phoneNumber,
         })
         .then((response) => {
-        	let success = response.data.success;
-        	if (success) {
-						this.$refs.loadingAnimation.stop();
-						this.$router.push({ path: "chooseactions" });
-        	}
-					else {
-						console.log("saveDetailedUserInformation failed");
-					}
+          let success = response.data.success;
+          if (success) {
+            this.$refs.loadingAnimation.stop();
+            this.$router.push({ path: "chooseactions" });
+          } else {
+            console.log("saveDetailedUserInformation failed");
+          }
         });
-		}, 
+    },
   },
 };
 </script>
