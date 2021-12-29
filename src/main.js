@@ -25,7 +25,7 @@ app
   })
   .use(GAuth, {
     clientId:
-      "317495594650-cif7424dmuo2a96s3qp2bt29jcfpms3o.apps.googleusercontent.com",
+      "317495594650-nn5m556dfgm30dhperr4h2apva3lcp5d.apps.googleusercontent.com",
   })
   .use(VueAxios, axios)
   .component("Calendar", Calendar)
