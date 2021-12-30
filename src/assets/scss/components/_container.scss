@@ -2,6 +2,7 @@
 
 .container {
 
+	z-index: 0;
 	margin: var.$container-margin;
 	padding: var.$container-padding;
 
@@ -76,11 +77,12 @@
 	&.floating-container {
 		position: absolute;
 		height: 100%;
-		width: var.$floating-container-width;
+		width: 100%;
+		max-width: var.$floating-container-width;
 		max-height: var.$floating-container-max-height;
-		top: var.$top-bar-height;
+		top: var.$floating-container-top;
 		left: calc(50% - #{var.$floating-container-width / 2} - #{var.$container-margin} - #{var.$container-padding});
-		z-index: 1;
+		z-index: 2;
 		box-shadow: var.$floating-container-box-shadow-color;
 		border-radius: var.$floating-container-border-radius;
 		background-color: var.$floating-container-background-color;
@@ -123,7 +125,6 @@
 			overflow: auto;
 		}
 
-		// You can only put two elements in this container. 
 		& > .floating-container-footer {
 			position: absolute;
 			bottom: var.$floating-container-padding;
@@ -149,6 +150,16 @@
 				}
 			}
 		}
+	}
+
+	&.container-gray-background {
+		position: absolute;
+		top: 0;
+		left: 0;
+		height: 100%;
+		width: 100%;
+		z-index: 1;
+		background-color: var.$container-gray-background-background-color;
 	}
 
 	&.container-fixed-width {

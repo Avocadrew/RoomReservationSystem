@@ -20,6 +20,7 @@ $container-padding: $small-padding;
 $container-fixed-width-small: 10rem;
 $container-fixed-width-medium: 14rem;
 $container-fixed-width-big: 18rem;
+$floating-container-top: 2rem;
 $floating-container-width: 80%;
 $floating-container-max-height: 80%;
 $floating-container-border-radius: 0.5rem;
@@ -34,6 +35,7 @@ $floating-container-footer-height: 4rem;
 $floating-container-body-margin: calc(#{$floating-container-header-height} - #{$floating-container-margin} - #{$floating-container-padding}) 0 0;
 $floating-container-body-padding: calc(#{$floating-container-footer-height} - #{$floating-container-margin} - #{$floating-container-padding});
 $floating-container-body-height: calc(100% - #{$floating-container-header-height} - #{$floating-container-margin} * 2 - #{$floating-container-padding} * 2);
+$container-gray-background-background-color: rgba(0, 0, 0, 0.3);
 $container-tab-body-border-radius: 0 0.5rem 0.5rem 0.5rem;
 $container-router-view-background-color: rgba(255, 255, 255, 0.3);
 
@@ -81,3 +83,12 @@ $loading-animation-icon-height: 2rem;
 $loading-animation-icon-border: 5px solid $primary-color;
 $loading-animation-icon-border-radius-big: 1.1rem;
 $loading-animation-icon-border-radius-small: 0.8rem;
+
+$pop-up-leave-from-and-enter-to-transform: translateY(0);
+$pop-up-enter-from-and-leave-to-transform: translateY(calc(100vh));
+$pop-up-enter-active-transition: all 0.6s cubic-bezier(0.175, 0.885, .32, 1.275);
+$pop-up-leave-active-transition: all 0.3s linear;
+$fade-leave-from-and-enter-to-opacity: 1;
+$fade-enter-from-and-leave-to-opacity: 0;
+$fade-enter-active-transition: all 0.3s ease-in;
+$fade-leave-active-transition: all 0.3s ease-out;

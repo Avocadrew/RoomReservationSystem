@@ -1,0 +1,33 @@
+@use "variable.scss" as var;
+
+.pop-up-enter-from, .pop-up-leave-to {
+	transform: var.$pop-up-enter-from-and-leave-to-transform;
+}
+
+.pop-up-leave-from, .pop-up-enter-to {
+	transform: var.$pop-up-leave-from-and-enter-to-transform;
+}
+
+.pop-up-enter-active {
+	transition: var.$pop-up-enter-active-transition;
+}
+
+.pop-up-leave-active {
+	transition: var.$pop-up-leave-active-transition;
+}
+
+.fade-enter-from, .fade-leave-to {
+	opacity: var.$fade-enter-from-and-leave-to-opacity;
+}
+
+.fade-leave-from, .fade-enter-to {
+	opacity: var.$fade-leave-from-and-enter-to-opacity;
+}
+
+.fade-enter-active {
+	transition: var.$fade-enter-active-transition;
+}
+
+.fade-leave-active {
+	transition: var.$fade-leave-active-transition;
+}
