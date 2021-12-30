@@ -20,5 +20,5 @@
 	height: calc(100% - #{var.$top-bar-height});
 	width: 100%;
 	margin-top: var.$top-bar-height;
-	overflow: auto;
+	overflow: hidden;
 }
