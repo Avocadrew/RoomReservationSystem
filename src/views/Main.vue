@@ -2,7 +2,7 @@
   <div>
     <TopBar />
     <div class="post-top-bar">
-      <img class="background" src="@/assets/background.png" alt="background" />
+      <img class="background" src="@/assets/background.jpg" alt="background" />
       <div class="container container-useless-wrapper container-router-view">
 				<router-view />
       </div>
