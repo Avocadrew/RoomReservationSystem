@@ -72,7 +72,7 @@ export default {
     return {
       profile: {
         name: "",
-        gender: "",
+        gender: "Male",
         email: "",
         occupation: "",
         phoneNumber: "",
