@@ -87,13 +87,6 @@ export default {
   methods: {
     createAccount: function () {
       this.$refs.loadingAnimation.start();
-			console.log({
-          UserID: this.profile.email,
-          gender: this.profile.gender,
-          name: this.profile.name,
-          jobTitle: this.profile.occupation,
-          phone: this.profile.phoneNumber,
-        });
       this.axios
         .post("https://ntustsers.xyz/api/saveDetailedUserInformation", {
           UserID: this.profile.email,

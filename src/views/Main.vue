@@ -4,7 +4,7 @@
     <div class="post-top-bar">
       <img class="background" src="@/assets/background.png" alt="background" />
       <div class="container container-useless-wrapper container-router-view">
-				<router-view class="router-view" />
+				<router-view />
       </div>
     </div>
   </div>
