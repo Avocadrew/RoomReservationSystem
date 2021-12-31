@@ -37,7 +37,7 @@ $floating-container-body-padding: calc(#{$floating-container-footer-height} - #{
 $floating-container-body-height: calc(100% - #{$floating-container-header-height} - #{$floating-container-margin} * 2 - #{$floating-container-padding} * 2);
 $container-gray-background-background-color: rgba(0, 0, 0, 0.3);
 $container-tab-body-border-radius: 0 0.5rem 0.5rem 0.5rem;
-$container-router-view-background-color: rgba(255, 255, 255, 0.3);
+$container-router-view-background-color: transparent; //rgba(255, 255, 255, 0.3)
 
 $button-font-color: $light-color;
 $button-border-radius: 2rem;
