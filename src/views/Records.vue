@@ -83,18 +83,18 @@ export default {
   mounted() {
     // Fetch future and past meetings.
     this.$refs.loadingAnimation.start();
-		console.log(this.$cookies.get("userID"));
+    console.log(this.$cookies.get("userID"));
     this.axios
       .post("https://ntustsers.xyz/api/getAllReservations", {
         user_ID: this.$cookies.get("userID"),
       })
       .then((response) => {
-				console.log(response);
+        console.log(response);
         let success = response.data.success;
         if (success) {
           let reservations = response.data.allReservations;
-					let futureReservations = reservations.reservation_future;
-					let pastReservations = reservations.reservation_past;
+          let futureReservations = reservations.reservation_future;
+          let pastReservations = reservations.reservation_past;
           for (let i = 0; i < futureReservations.length; i++) {
             let meeting = {};
             meeting.id = futureReservations[i][0];
@@ -109,7 +109,7 @@ export default {
             meeting.description = pastReservations[i][2];
             this.pastMeetings.push(meeting);
           }
-					this.$refs.loadingAnimation.stop();
+          this.$refs.loadingAnimation.stop();
         } else {
           console.log("getAllReservations failed");
         }

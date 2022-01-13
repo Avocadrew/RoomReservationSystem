@@ -83,7 +83,7 @@ export default {
               }
             } else {
               console.log("signIn failed");
-							window.alert("SignIn failed, please try again later. ");
+              window.alert("SignIn failed, please try again later. ");
             }
           });
 

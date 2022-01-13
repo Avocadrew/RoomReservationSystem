@@ -194,15 +194,15 @@ export default {
                 let success = response.data.success;
                 if (success) {
                   let groups = response.data.groupList;
-									if (groups) {
-										for (let i = 0; i < groups.length; i++) {
-											this.groups.push({
-												id: groups[i].groupID,
-												name: groups[i].GroupName,
-												members: groups[i].emails,
-											});
-										}
-									}
+                  if (groups) {
+                    for (let i = 0; i < groups.length; i++) {
+                      this.groups.push({
+                        id: groups[i].groupID,
+                        name: groups[i].GroupName,
+                        members: groups[i].emails,
+                      });
+                    }
+                  }
                   this.$refs.loadingAnimation.stop();
                 } else {
                   console.log("getGroupList failed");
@@ -256,18 +256,18 @@ export default {
         })
         .then((response) => {
           let groups = response.data.groupList;
-					if (groups) {
-						for (let i = 0; i < groups.length; i++) {
-							this.groups.push({
-								id: groups[i].groupID,
-								name: groups[i].GroupName,
-								members: groups[i].emails,
-							});
-						}
-						if (groups.length > 0) {
-							this.meeting.groupID = this.groups[0].id;
-						}
-					}
+          if (groups) {
+            for (let i = 0; i < groups.length; i++) {
+              this.groups.push({
+                id: groups[i].groupID,
+                name: groups[i].GroupName,
+                members: groups[i].emails,
+              });
+            }
+            if (groups.length > 0) {
+              this.meeting.groupID = this.groups[0].id;
+            }
+          }
           this.$refs.loadingAnimation.stop();
         });
     }

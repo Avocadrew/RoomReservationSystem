@@ -2,11 +2,15 @@
   <div>
     <TopBar />
     <div class="post-top-bar">
-      <img class="background" src="@/assets/whiteBackground.jpg" alt="background" />
+      <img
+        class="background"
+        src="@/assets/whiteBackground.jpg"
+        alt="background"
+      />
       <div class="container container-useless-wrapper container-router-view">
-				<router-view />
+        <router-view />
       </div>
-			<a href="http://www.freepik.com">Designed by Freepik</a>
+      <a href="http://www.freepik.com">Designed by Freepik</a>
     </div>
   </div>
 </template>
@@ -25,9 +29,9 @@ export default {
   mounted() {
     eruda.init();
   },
-	updated() {
-		console.log(this.$route.fullPath);
-	}, 
+  updated() {
+    console.log(this.$route.fullPath);
+  },
   data() {
     return {};
   },

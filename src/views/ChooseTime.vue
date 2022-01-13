@@ -25,7 +25,7 @@
       v-for="(time, index) in times"
       :key="index"
       :disabled="viewingMode"
-      @click="select(time)"
+      @click="select(index, time)"
     >
       {{ time.startingTime.hours }} :
       {{ ("0" + time.startingTime.minutes).slice(-2) }} ~
@@ -41,6 +41,7 @@ export default {
   data() {
     return {
       selectedTime: [],
+      isSelected: [],
     };
   },
   props: {
@@ -112,22 +113,41 @@ export default {
         this.emit("updateInfo", this.selectedTime);
       }
     },
+    times: function (newValue) {
+      this.isSelected.clear();
+      for (let i = 0; i < newValue.length; i++) {
+        this.isSelected.push(false);
+      }
+    },
   },
   created() {},
   mounted() {},
   methods: {
-    select: function (time) {
+    select: function (index, time) {
       let timeString =
         time.startingTime.hours +
         ":" +
         ("0" + time.startingTime.minutes).slice(-2);
-      let index = this.selectedTime.indexOf(timeString);
+      let selectedIndex = this.selectedTime.indexOf(timeString);
       if (this.params.dailyReservation[timeString]) {
         window.alert("This time is reserved, please choose another time. ");
-      } else if (index > -1) {
-        this.selectedTime.splice(index, 1);
+      } else if (selectedIndex > -1) {
+        this.selectedTime.splice(selectedIndex, 1);
+        this.isSelected[index] = false;
       } else {
-        this.selectedTime.push(timeString);
+        if (this.selectedTime.length == 0) {
+          this.selectedTime.push(timeString);
+          this.isSelected[index] = true;
+        } else if (
+          (index == 0 || this.isSelected[index - 1] == true) &&
+          (index == this.isSelected.length - 1 ||
+            this.isSelected[index + 1] == true)
+        ) {
+          this.selectedTime.push(timeString);
+          this.isSelected[index] = true;
+        } else {
+          window.alert("Please choose contiguous time. ");
+        }
       }
       this.$emit("updateInfo", this.selectedTime);
     },
