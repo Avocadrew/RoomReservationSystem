@@ -139,9 +139,10 @@ export default {
           this.selectedTime.push(timeString);
           this.isSelected[index] = true;
         } else if (
-          (index == 0 || this.isSelected[index - 1] == true) &&
-          (index == this.isSelected.length - 1 ||
-            this.isSelected[index + 1] == true)
+          index == 0 ||
+          this.isSelected[index - 1] == true ||
+          index == this.isSelected.length - 1 ||
+          this.isSelected[index + 1] == true
         ) {
           this.selectedTime.push(timeString);
           this.isSelected[index] = true;
