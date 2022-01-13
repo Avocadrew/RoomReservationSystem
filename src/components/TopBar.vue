@@ -101,7 +101,6 @@ export default {
           .then((response) => {
             let success = response.data.success;
             if (success) {
-              console.log(response.data.userInfo.user_ID);
               this.$cookies.set("userID", response.data.userInfo.user_ID);
               this.haveLoggedIn = true;
               this.$refs.loadingAnimation.stop();
