@@ -4,13 +4,17 @@
     <div class="post-top-bar">
       <img
         class="background"
-        src="@/assets/whiteBackground.jpg"
+        src="@/assets/background.jpg"
         alt="background"
       />
-      <div class="container container-useless-wrapper container-router-view">
-        <router-view />
+      <div class="container container-flex container-useless-wrapper container-router-view">
+				<div class="card">
+					<router-view />
+				</div>
       </div>
-      <a href="http://www.freepik.com">Designed by Freepik</a>
+			<!--
+      <a href="http://www.freepik.com">Background designed by Freepik</a>
+			-->
     </div>
   </div>
 </template>

@@ -21,6 +21,7 @@
 	&.container-flex {
 		display: flex;
 		align-items: center;
+		justify-content: center;
 
 		&.container-flex-row {
 			flex-direction: row;
@@ -163,6 +164,9 @@
 	}
 
 	&.container-fixed-width {
+		&-tiny {
+			width: var.$container-fixed-width-tiny;
+		}
 		&-small {
 			width: var.$container-fixed-width-small;
 		}

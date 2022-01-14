@@ -17,6 +17,7 @@ $big-padding: 10rem;
 
 $container-margin: $small-margin;
 $container-padding: $small-padding;
+$container-fixed-width-tiny: 5rem;
 $container-fixed-width-small: 10rem;
 $container-fixed-width-medium: 14rem;
 $container-fixed-width-big: 18rem;
@@ -92,3 +93,11 @@ $fade-leave-from-and-enter-to-opacity: 1;
 $fade-enter-from-and-leave-to-opacity: 0;
 $fade-enter-active-transition: all 0.3s ease-in;
 $fade-leave-active-transition: all 0.3s ease-out;
+
+$card-background-color: rgba(255, 255, 255, 0.8);
+$card-margin: $small-margin;
+$card-padding: $small-padding;
+$card-height: calc(100% - #{$card-margin} * 2 - #{$card-padding} * 2);
+$card-width: calc(100% - #{$card-margin} * 2 - #{$card-padding} * 2);
+$card-max-width: 30rem;
+$card-border-radius: 0.5rem;
