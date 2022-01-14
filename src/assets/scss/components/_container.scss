@@ -78,11 +78,11 @@
 	&.floating-container {
 		position: absolute;
 		height: 100%;
-		width: 100%;
-		max-width: var.$floating-container-width;
+		width: var.$floating-container-width;
+		max-width: var.$floating-container-max-width;
 		max-height: var.$floating-container-max-height;
 		top: var.$floating-container-top;
-		left: calc(50% - #{var.$floating-container-width / 2} - #{var.$container-margin} - #{var.$container-padding});
+		left: calc(50% - #{var.$floating-container-max-width / 2} - #{var.$container-margin} - #{var.$container-padding});
 		z-index: 2;
 		box-shadow: var.$floating-container-box-shadow-color;
 		border-radius: var.$floating-container-border-radius;
