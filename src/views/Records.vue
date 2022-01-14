@@ -35,14 +35,25 @@
             >
               <p>{{ meeting.name }}</p>
             </div>
-						<div class="container container-flex container-useless-wrapper container-fixed-width-tiny">
-							<button class="button icon-button" @click="modifyMeeting(index)" v-show="currentTab=='future'">
-								<mdicon name="pencil" :size="20" />
-							</button>
-							<button class="button icon-button" @click="deleteMeeting(index)">
-								<mdicon name="delete" :size="20" />
-							</button>
-						</div>
+            <div
+              class="
+                container
+                container-flex
+                container-useless-wrapper
+                container-fixed-width-tiny
+              "
+            >
+              <button
+                class="button icon-button"
+                @click="modifyMeeting(index)"
+                v-show="currentTab == 'future'"
+              >
+                <mdicon name="pencil" :size="20" />
+              </button>
+              <button class="button icon-button" @click="deleteMeeting(index)">
+                <mdicon name="delete" :size="20" />
+              </button>
+            </div>
           </div>
           <hr v-show="index != presentedMeetings.length - 1" />
         </div>

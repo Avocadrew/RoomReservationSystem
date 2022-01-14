@@ -2,17 +2,20 @@
   <div>
     <TopBar />
     <div class="post-top-bar">
-      <img
-        class="background"
-        src="@/assets/background.jpg"
-        alt="background"
-      />
-      <div class="container container-flex container-useless-wrapper container-router-view">
-				<div class="card">
-					<router-view />
-				</div>
+      <img class="background" src="@/assets/background.jpg" alt="background" />
+      <div
+        class="
+          container
+          container-flex
+          container-useless-wrapper
+          container-router-view
+        "
+      >
+        <div class="card">
+          <router-view />
+        </div>
       </div>
-			<!--
+      <!--
       <a href="http://www.freepik.com">Background designed by Freepik</a>
 			-->
     </div>
