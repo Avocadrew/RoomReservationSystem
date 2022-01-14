@@ -85,8 +85,35 @@ export default {
     this.profile.email = this.$cookies.get("userID");
   },
   methods: {
+    checkPersonalInformationValidation: function () {
+      if (!this.profile.name || this.profile.name.length == 0) {
+        let message = "Your name can't be emtpy. Please fill in your name. ";
+        return { success: false, message: message };
+      }
+      if (!this.profile.occupation || this.profile.occupation.length == 0) {
+        let message =
+          "Your occupation can't be emtpy. Please fill in your occupation. ";
+        return { success: false, message: message };
+      }
+      if (!this.profile.gender) {
+        let message = "Please select a gender. ";
+        return { success: false, message: message };
+      }
+      if (!this.profile.phoneNumber || this.profile.phoneNumber.length == 0) {
+        let message =
+          "Your phone number can't be emtpy. Please fill in your phone number. ";
+        return { success: false, message: message };
+      }
+      return { success: true, message: "" };
+    },
     createAccount: function () {
       this.$refs.loadingAnimation.start();
+      let validation = this.checkPersonalInformationValidation();
+      if (!validation.success) {
+        this.$refs.loadingAnimation.stop();
+        window.alert(validation.message);
+        return;
+      }
       this.axios
         .post("https://ntustsers.xyz/api/saveDetailedUserInformation", {
           UserID: this.profile.email,
