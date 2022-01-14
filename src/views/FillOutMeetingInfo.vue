@@ -1,8 +1,12 @@
 <template>
   <div class="container container-flex container-flex-column">
-    <div class="container line-container">
+    <div class="container line-container" v-if="mode != 'inspect'">
       <p class="label">Meeting Name:</p>
       <input type="text" name="name" v-model="meeting.name" />
+    </div>
+    <div class="container line-container" v-else>
+      <p class="label">Meeting Name:</p>
+      <p>{{ meeting.name }}</p>
     </div>
     <div class="container line-container">
       <p class="label">Date:</p>
@@ -16,7 +20,7 @@
       <p class="label">Room:</p>
       <p>{{ meeting.room }}</p>
     </div>
-    <div class="container area-container">
+    <div class="container area-container" v-if="mode != 'inspect'">
       <div class="container line-container">
         <p class="label">Group:</p>
         <button class="button primary-button sub-button" @click="createAGroup">
@@ -24,28 +28,51 @@
         </button>
       </div>
       <div
-        class="container line-container"
-        v-for="(group, index) in groups"
-        :key="index"
+        class="container container-useless-wrapper"
+        v-if="groups.length != 0"
       >
-        <input
-          type="radio"
-          name="group"
-          :value="group.id"
-          v-model="meeting.groupID"
-        />
-        <label :for="index">{{ group.name }}</label>
-        <button class="button icon-button" @click="modifyGroup(index)">
-          <mdicon name="pencil" :size="20" />
-        </button>
-        <button class="button icon-button" @click="deleteGroup(index)">
-          <mdicon name="delete" :size="20" />
-        </button>
+        <div
+          class="container line-container"
+          v-for="(group, index) in groups"
+          :key="index"
+        >
+          <input
+            type="radio"
+            name="group"
+            :value="group.id"
+            v-model="meeting.groupID"
+          />
+          <label :for="index">{{ group.name }}</label>
+          <button class="button icon-button" @click="modifyGroup(index)">
+            <mdicon name="pencil" :size="20" />
+          </button>
+          <button class="button icon-button" @click="deleteGroup(index)">
+            <mdicon name="delete" :size="20" />
+          </button>
+        </div>
+      </div>
+      <div class="container line-container" v-else>
+        <p>You don't have any group yet, please create a new group.</p>
       </div>
     </div>
-    <div class="container area-container">
+    <div class="container line-container" v-else>
+      <p class="label">Group:</p>
+      <p>{{ meeting.groupName }}</p>
+      <button
+        class="button icon-button"
+        @click="inspectGroup(index)"
+        v-show="!theGroupIsDeleted"
+      >
+        <mdicon name="magnify" :size="20" />
+      </button>
+    </div>
+    <div class="container area-container" v-if="mode != 'inspect'">
       <p class="label">Description:</p>
       <textarea name="description" v-model="meeting.description" />
+    </div>
+    <div class="container area-container" v-else>
+      <p class="label">Description:</p>
+      <textarea name="description" v-model="meeting.description" readonly />
     </div>
     <div class="container container-flex container-flex-row">
       <button
@@ -68,6 +95,13 @@
         v-show="mode == 'edit'"
       >
         SAVE
+      </button>
+      <button
+        class="button primary-button button-fixed-width-medium"
+        @click="back()"
+        v-show="mode == 'inspect'"
+      >
+        BACK
       </button>
     </div>
   </div>
@@ -94,6 +128,7 @@ export default {
   data() {
     return {
       mode: "reserve",
+      theGroupIsDeleted: false,
       meeting: {
         name: "",
         date: "",
@@ -101,6 +136,7 @@ export default {
         room: "",
         description: "",
         groupID: "",
+        groupName: "",
       },
       groups: [
         //{
@@ -121,6 +157,7 @@ export default {
         id: "",
         name: "testGroup",
         members: ["hello@gmail.com", "hi@gmail.com"],
+        readonly: false,
       },
     };
   },
@@ -184,6 +221,7 @@ export default {
             this.meeting.description = reservation.description;
             this.meeting.room = reservation["room number"];
             this.meeting.groupID = reservation.group_ID;
+            this.meeting.groupName = "<deleted>";
 
             // Fetch groups
             this.axios
@@ -195,24 +233,41 @@ export default {
                 if (success) {
                   let groups = response.data.groupList;
                   if (groups) {
+                    this.theGroupIsDeleted = true;
                     for (let i = 0; i < groups.length; i++) {
                       this.groups.push({
                         id: groups[i].groupID,
                         name: groups[i].GroupName,
                         members: groups[i].emails,
                       });
+                      console.log(groups[i].groupID, this.meeting.groupID);
+                      if (groups[i].groupID == this.meeting.groupID) {
+                        this.meeting.groupName = groups[i].GroupName;
+                        this.meeting.groupID = groups[i].groupID;
+                        this.theGroupIsDeleted = false;
+                      }
                     }
                   }
                   this.$refs.loadingAnimation.stop();
                 } else {
                   console.log("getGroupList failed");
                 }
+              })
+              .catch((err) => {
+                this.$refs.loadingAnimation.stop();
+                window.alert(err + ". Please try again later. ");
+                this.$router.go(-1);
               });
           } else {
             console.log("checkReservation failed");
           }
+        })
+        .catch((err) => {
+          this.$refs.loadingAnimation.stop();
+          window.alert(err + ". Please try again later. ");
+          this.$router.go(-1);
         });
-      this.mode = "edit";
+      this.mode = this.$route.params.mode;
       //this.useDefaultValue();
     } else {
       this.meeting.room = this.$route.params.room;
@@ -269,6 +324,11 @@ export default {
             }
           }
           this.$refs.loadingAnimation.stop();
+        })
+        .catch((err) => {
+          this.$refs.loadingAnimation.stop();
+          window.alert(err + ". Please try again later. ");
+          this.$router.go(-1);
         });
     }
   },
@@ -291,6 +351,19 @@ export default {
       this.window.title = "Create a Group";
       this.$refs.floatingWindow.openWindow();
     },
+    checkGroupValidation: function () {
+      if (!this.tempGroup.name || this.tempGroup.name.length == 0) {
+        let message =
+          "Please fill in the group name. \nCreating a group failed. ";
+        return { success: false, message: message };
+      }
+      if (!this.tempGroup.members || this.tempGroup.members.length == 0) {
+        let message =
+          "Please fill in members' emails. \nCreating a group failed. ";
+        return { success: false, message: message };
+      }
+      return { success: true, message: "" };
+    },
     modifyGroup: function (index) {
       this.tempGroup = this.groups[index];
       this.$refs.floatingWindow.openWindow();
@@ -299,6 +372,12 @@ export default {
       if (!this.tempGroup.id) {
         // Call api to create a new group using this.tempGroup.
         this.$refs.loadingAnimation.start();
+        let validation = this.checkGroupValidation();
+        if (!validation.success) {
+          window.alert(validation.message);
+          this.$refs.loadingAnimation.stop();
+          return;
+        }
         this.axios
           .post("https://ntustsers.xyz/api/addGroup", {
             groupName: this.tempGroup.name,
@@ -316,6 +395,10 @@ export default {
               console.log("addGroup failed");
             }
             this.$refs.loadingAnimation.stop();
+          })
+          .catch((err) => {
+            this.$refs.loadingAnimation.stop();
+            window.alert(err + ". Please try again later. ");
           });
       } else {
         for (let i = 0; i < this.groups.length; i++) {
@@ -343,6 +426,10 @@ export default {
               console.log("saveGroup failed");
             }
             this.$refs.loadingAnimation.stop();
+          })
+          .catch((err) => {
+            this.$refs.loadingAnimation.stop();
+            window.alert(err + ". Please try again later. ");
           });
       }
     },
@@ -357,15 +444,45 @@ export default {
         .then((response) => {
           let success = response.data.success;
           if (success) {
+            if (this.meeting.groupID == this.groups[index].id) {
+              this.meeting.groupID = "";
+            }
             this.groups.splice(index, 1);
           } else {
             console.log("deleteGroup failed");
           }
           this.$refs.loadingAnimation.stop();
+        })
+        .catch((err) => {
+          this.$refs.loadingAnimation.stop();
+          window.alert(err + ". Please try again later. ");
         });
+    },
+    inspectGroup: function (index) {
+      this.tempGroup = this.groups[index];
+      this.tempGroup.readonly = true;
+      this.$refs.floatingWindow.openWindow();
+    },
+    checkMeetingValidation: function () {
+      if (!this.meeting.name || this.meeting.name.length == 0) {
+        let message = "Please fill in the meeting name. ";
+        return { success: false, message: message };
+      }
+      if (!this.meeting.groupID || this.meeting.groupID.length == 0) {
+        let message =
+          "Please select a group. \nIf you don't have any group, please create one. ";
+        return { success: false, message: message };
+      }
+      return { success: true, message: "" };
     },
     reserve: function () {
       this.$refs.loadingAnimation.start();
+      let validation = this.checkMeetingValidation();
+      if (!validation.success) {
+        window.alert(validation.message);
+        this.$refs.loadingAnimation.stop();
+        return;
+      }
       this.axios
         .post("https://ntustsers.xyz/api/reserveOneTime", {
           user_ID: this.$cookies.get("userID"),
@@ -384,6 +501,10 @@ export default {
             console.log("reserveOneTime failed");
           }
           this.$refs.loadingAnimation.stop();
+        })
+        .catch((err) => {
+          this.$refs.loadingAnimation.stop();
+          window.alert(err + ". Please try again later. ");
         });
     },
     cancel: function () {
@@ -391,6 +512,12 @@ export default {
     },
     save: function () {
       this.$refs.loadingAnimation.start();
+      let validation = this.checkMeetingValidation();
+      if (!validation.success) {
+        window.alert(validation.message);
+        this.$refs.loadingAnimation.stop();
+        return;
+      }
       this.axios
         .post("https://ntustsers.xyz/api/cancelReservation", {
           meeting_ID: this.meeting.id,
@@ -416,11 +543,22 @@ export default {
                   console.log("reserveOneTime failed");
                 }
                 this.$refs.loadingAnimation.stop();
+              })
+              .catch((err) => {
+                this.$refs.loadingAnimation.stop();
+                window.alert(err + ". Please try again later. ");
               });
           } else {
             console.log("cancelReservation failed");
           }
+        })
+        .catch((err) => {
+          this.$refs.loadingAnimation.stop();
+          window.alert(err + ". Please try again later. ");
         });
+    },
+    back: function () {
+      this.$router.go(-1);
     },
     updateTempGroup(newGroup) {
       this.tempGroup = newGroup;

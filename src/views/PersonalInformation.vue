@@ -80,6 +80,11 @@ export default {
         } else {
           console.log("getDetailedUserInformation failed");
         }
+      })
+      .catch((err) => {
+        this.$refs.loadingAnimation.stop();
+        window.alert("Error: " + err + ". Please try again later. ");
+        this.$router.go(-1);
       });
   },
   methods: {

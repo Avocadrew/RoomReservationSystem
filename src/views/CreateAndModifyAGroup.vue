@@ -1,10 +1,14 @@
 <template>
   <div class="container container-flex container-flex-column">
-    <div class="container line-container">
+    <div class="container line-container" v-if="!readonly">
       <p class="label">Group Name:</p>
       <input type="text" name="name" v-model="newGroup.name" />
     </div>
-    <div class="container area-container">
+    <div class="container line-container" v-else>
+      <p class="label">Group Name:</p>
+      <p>{{ newGroup.name }}</p>
+    </div>
+    <div class="container area-container" v-if="!readonly">
       <div class="container line-container">
         <p class="label">Group Members' emails:</p>
         <button class="button icon-button" @click="addNewMember">
@@ -26,6 +30,18 @@
         </button>
       </div>
     </div>
+    <div class="container area-container" v-else>
+      <div class="container line-container">
+        <p class="label">Group Members' emails:</p>
+      </div>
+      <div
+        class="container line-container container-useless-wrapper"
+        v-for="(member, index) in newGroup.members"
+        :key="index"
+      >
+        <p>{{ index.toString() + ". " + newGroup.members[index] }}</p>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -36,6 +52,7 @@ export default {
   data() {
     return {
       newGroup: Object,
+      readonly: false,
     };
   },
   props: {
@@ -59,6 +76,7 @@ export default {
   created() {},
   mounted() {
     this.newGroup = this.params;
+    this.readonly = this.newGroup.readonly;
   },
   methods: {
     addNewMember: function () {

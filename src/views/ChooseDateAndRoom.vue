@@ -111,6 +111,10 @@ export default {
           } else {
             console.log("getDailyReservation failed");
           }
+        })
+        .catch((err) => {
+          this.$refs.loadingAnimation.stop();
+          window.alert(err + ". Please try again later. ");
         });
     },
     done: function () {

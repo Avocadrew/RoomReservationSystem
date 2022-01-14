@@ -91,6 +91,11 @@ export default {
         } else {
           console.log("getDetailedUserInformation failed");
         }
+      })
+      .catch((err) => {
+        this.$refs.loadingAnimation.stop();
+        this.$router.go(-1);
+        window.alert(err + ". Please try again later. ");
       });
     console.log(this.profile.name);
   },
@@ -102,11 +107,34 @@ export default {
       this.profile.occupation = "";
       this.profile.phoneNumber = "";
     },
+    checkPersonalInformationValidation: function () {
+      if (!this.profile.name || this.profile.name.length == 0) {
+        let message = "Your name can't be emtpy. Please fill in your name. ";
+        return { success: false, message: message };
+      }
+      if (!this.profile.occupation || this.profile.occupation.length == 0) {
+        let message =
+          "Your occupation can't be emtpy. Please fill in your occupation. ";
+        return { success: false, message: message };
+      }
+      if (!this.profile.phoneNumber || this.profile.phoneNumber.length == 0) {
+        let message =
+          "Your phone number can't be emtpy. Please fill in your phone number. ";
+        return { success: false, message: message };
+      }
+      return { success: true, message: "" };
+    },
     cancel: function () {
       this.$router.go(-1);
     },
     confirm: function () {
       this.$refs.loadingAnimation.start();
+      let validation = this.checkPersonalInformationValidation();
+      if (!validation.success) {
+        this.$refs.loadingAnimation.stop();
+        window.alert(validation.message);
+        return;
+      }
       this.axios
         .post("https://ntustsers.xyz/api/saveDetailedUserInformation", {
           UserID: this.$cookies.get("userID"),
@@ -123,6 +151,11 @@ export default {
           } else {
             console.log("saveDetailedUserInformation failed");
           }
+        })
+        .catch((err) => {
+          this.$router.go(-1);
+          this.$refs.loadingAnimation.stop();
+          window.alert(err + ". Please try again later. ");
         });
     },
   },

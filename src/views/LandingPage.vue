@@ -85,6 +85,10 @@ export default {
               console.log("signIn failed");
               window.alert("SignIn failed, please try again later. ");
             }
+          })
+          .catch((err) => {
+            this.$refs.loadingAnimation.stop();
+            window.alert(err + ". Please try again later. ");
           });
 
         // For testing

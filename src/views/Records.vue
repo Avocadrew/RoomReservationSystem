@@ -46,9 +46,16 @@
               <button
                 class="button icon-button"
                 @click="modifyMeeting(index)"
-                v-show="currentTab == 'future'"
+                v-if="currentTab == 'future'"
               >
                 <mdicon name="pencil" :size="20" />
+              </button>
+              <button
+                class="button icon-button"
+                @click="inspectMeeting(index)"
+                v-else
+              >
+                <mdicon name="magnify" :size="20" />
               </button>
               <button class="button icon-button" @click="deleteMeeting(index)">
                 <mdicon name="delete" :size="20" />
@@ -126,6 +133,11 @@ export default {
         } else {
           console.log("getAllReservations failed");
         }
+      })
+      .catch((err) => {
+        this.$refs.loadingAnimation.stop();
+        window.alert(err + ". Please try again later. ");
+        this.$router.go(-1);
       });
     //this.useDefaultValue();
     this.currentTab = "future";
@@ -151,7 +163,16 @@ export default {
     modifyMeeting: function (index) {
       this.$router.push({
         name: "FillOutMeetingInfo",
-        params: { meetingID: this.presentedMeetings[index].id },
+        params: { meetingID: this.presentedMeetings[index].id, mode: "edit" },
+      });
+    },
+    inspectMeeting: function (index) {
+      this.$router.push({
+        name: "FillOutMeetingInfo",
+        params: {
+          meetingID: this.presentedMeetings[index].id,
+          mode: "inspect",
+        },
       });
     },
     deleteMeeting: function (index) {
@@ -162,6 +183,7 @@ export default {
       } else {
         meetingID = this.pastMeetings[index].id;
       }
+      this.$refs.loadingAnimation.start();
       this.axios
         .post("https://ntustsers.xyz/api/cancelReservation", {
           meeting_ID: meetingID,
@@ -174,10 +196,15 @@ export default {
             } else {
               this.pastMeetings.spice(index, 1);
             }
+            this.$refs.loadingAnimation.stop();
           } else {
             console.log("cancelReservation failed");
             console.log("Error: ", response.data.error);
           }
+        })
+        .catch((err) => {
+          this.$refs.loadingAnimation.stop();
+          window.alert(err + ". Please try again later. ");
         });
     },
     switchTab: function (tab) {

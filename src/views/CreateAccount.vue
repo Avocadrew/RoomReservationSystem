@@ -103,6 +103,10 @@ export default {
           } else {
             console.log("saveDetailedUserInformation failed");
           }
+        })
+        .catch((err) => {
+          this.$refs.loadingAnimation.stop();
+          window.alert(err + ". Please try again later. ");
         });
     },
   },
