@@ -121,7 +121,15 @@ export default {
     },
   },
   created() {},
-  mounted() {},
+  mounted() {
+    if (
+      !this.$cookies.get("userID") ||
+      this.$cookies.get("userID").length == 0
+    ) {
+      this.$router.push({ path: "landingpage" });
+      return;
+    }
+  },
   methods: {
     select: function (index, time) {
       let timeString =

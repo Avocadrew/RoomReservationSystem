@@ -66,7 +66,15 @@ export default {
   },
   watch: {},
   created() {},
-  mounted() {},
+  mounted() {
+    if (
+      !this.$cookies.get("userID") ||
+      this.$cookies.get("userID").length == 0
+    ) {
+      this.$router.push({ path: "landingpage" });
+      return;
+    }
+  },
   methods: {
     generateTestData: function () {
       this.dailyReservation = {

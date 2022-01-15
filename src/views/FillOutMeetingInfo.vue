@@ -174,6 +174,13 @@ export default {
   },
   created() {},
   mounted() {
+    if (
+      !this.$cookies.get("userID") ||
+      this.$cookies.get("userID").length == 0
+    ) {
+      this.$router.push({ path: "landingpage" });
+      return;
+    }
     let times = this.getTimesString();
     if (this.$route.params.meetingID) {
       // Fetch the meeting.

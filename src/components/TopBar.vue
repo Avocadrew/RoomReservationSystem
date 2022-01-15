@@ -131,7 +131,7 @@ export default {
         //await this.$gAuth.signOut();
         this.$cookies.remove("userID");
         this.haveLoggedIn = false;
-        this.$router.push({ path: "landingPage" });
+        this.$router.push({ path: "landingpage" });
       } catch (error) {
         console.error(error);
       }

@@ -75,6 +75,14 @@ export default {
   computed: {},
   created() {},
   mounted() {
+    if (
+      !this.$cookies.get("userID") ||
+      this.$cookies.get("userID").length == 0
+    ) {
+      this.$router.push({ path: "landingpage" });
+      return;
+    }
+
     this.newGroup = this.params;
     this.readonly = this.newGroup.readonly;
   },
