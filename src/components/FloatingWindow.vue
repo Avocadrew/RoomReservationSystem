@@ -20,6 +20,13 @@
         >
           DONE
         </button>
+        <button
+          class="button primary-button button-fixed-width-medium"
+          @click="close"
+          v-show="!showDoneButton"
+        >
+          CLOSE
+        </button>
       </div>
     </div>
   </transition>
@@ -67,6 +74,9 @@ export default {
     },
     emitNewInfo: function (value) {
       this.$emit("updateInfo", value);
+    },
+    close: function () {
+      this.closeWindow();
     },
   },
 };
