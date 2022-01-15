@@ -78,6 +78,14 @@
       </div>
     </div>
   </div>
+  <div class="container container-flex container-flex-row">
+    <button
+      class="button secondary-button button-fixed-width-medium"
+      @click="back()"
+    >
+      BACK
+    </button>
+  </div>
   <LoadingAnimation ref="loadingAnimation" />
 </template>
 
@@ -239,6 +247,9 @@ export default {
         "Group 06 will discuss for the system of the game. ";
       meeting.groupID = "id2";
       this.pastMeetings.push({ ...meeting });
+    },
+    back: function () {
+      this.$router.go(-1);
     },
   },
 };

@@ -29,6 +29,12 @@
 
     <div class="container container-flex container-flex-row">
       <button
+        class="button secondary-button button-fixed-width-medium"
+        @click="back"
+      >
+        BACK
+      </button>
+      <button
         class="button primary-button button-fixed-width-medium"
         @click="goToEditPersonalInformation"
       >
@@ -97,6 +103,9 @@ export default {
     },
     goToEditPersonalInformation: function () {
       this.$router.push({ path: "editpersonalinformation" });
+    },
+    back: function () {
+      this.$router.go(-1);
     },
   },
 };

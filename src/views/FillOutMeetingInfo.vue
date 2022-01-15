@@ -76,6 +76,13 @@
     </div>
     <div class="container container-flex container-flex-row">
       <button
+        class="button secondary-button button-fixed-width-medium"
+        @click="back()"
+        v-show="mode != 'edit'"
+      >
+        BACK
+      </button>
+      <button
         class="button primary-button button-fixed-width-medium"
         @click="reserve()"
         v-show="mode == 'reserve'"
@@ -95,13 +102,6 @@
         v-show="mode == 'edit'"
       >
         SAVE
-      </button>
-      <button
-        class="button primary-button button-fixed-width-medium"
-        @click="back()"
-        v-show="mode == 'inspect'"
-      >
-        BACK
       </button>
     </div>
   </div>

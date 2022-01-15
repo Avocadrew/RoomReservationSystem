@@ -3,6 +3,14 @@
     <v-select v-model="room" label="Room" :options="$ROOMS" />
     <Calendar @dayclick="chooseDate" :min-date="new Date()" />
   </div>
+  <div class="container container-flex container-flex-row">
+    <button
+      class="button secondary-button button-fixed-width-medium"
+      @click="back()"
+    >
+      BACK
+    </button>
+  </div>
   <FloatingWindow
     :window="window"
     :params="paramsForChooseTime"
@@ -138,6 +146,9 @@ export default {
     },
     updateInfo: function (value) {
       this.selectedTime = value;
+    },
+    back: function () {
+      this.$router.go(-1);
     },
   },
 };
