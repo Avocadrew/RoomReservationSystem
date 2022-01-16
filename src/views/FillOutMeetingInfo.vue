@@ -277,10 +277,10 @@ export default {
       this.mode = this.$route.params.mode;
       //this.useDefaultValue();
     } else {
-      if (!this.$route.params.room || this.$route.params.room.length == 0) {
-        this.$router.push({ path: "landingpage" });
-        return;
-      }
+			if (!this.$route.params.room || this.$route.params.room.length == 0) {
+				this.$router.push({ path: "landingpage" });
+				return;
+			}
       this.meeting.room = this.$route.params.room;
       this.meeting.date = this.$route.params.chosenDate;
       let startingTimeIndex = -1;
@@ -412,11 +412,6 @@ export default {
             window.alert(err + ". Please try again later. ");
           });
       } else {
-        for (let i = 0; i < this.groups.length; i++) {
-          if (this.tempGroup == this.groups[i]) {
-            return;
-          }
-        }
 
         // Call api to save a group using this.tempGroup.
         this.$refs.loadingAnimation.start();
