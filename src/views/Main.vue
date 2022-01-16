@@ -12,7 +12,14 @@
         "
       >
         <div class="card">
-          <router-view />
+          <div class="card-label">
+            <div class="card-label-text">
+              <p>{{ currentPage }}</p>
+            </div>
+          </div>
+          <div class="card-body">
+            <router-view />
+          </div>
         </div>
       </div>
       <!--
@@ -31,6 +38,20 @@ export default {
   components: {
     TopBar,
   },
+  data() {
+    return {
+      currentPage: "Reservation System",
+      pathToLabel: {
+        landingpage: "Reservation System",
+        chooseactions: "Date and Room",
+        single: "Date and Room",
+        filloutmeetinginfo: "Meeting Infos",
+        records: "Records",
+        personalinformation: "Personal Information",
+        editpersonalinformation: "Personal Information",
+      },
+    };
+  },
   computed: {},
   created() {},
   mounted() {
@@ -39,8 +60,16 @@ export default {
   updated() {
     console.log(this.$route.fullPath);
   },
-  data() {
-    return {};
+  watch: {
+    $router: {
+      handler: function () {
+        let path = this.$route.path;
+        path = path.split("/")[path.split("/").length - 1];
+        this.currentPage = this.pathToLabel[path];
+      },
+      deep: true,
+      immediate: true,
+    },
   },
   methods: {},
 };

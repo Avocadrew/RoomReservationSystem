@@ -7,7 +7,9 @@
     }"
   >
     <div class="loading-animation-background"></div>
-    <div class="loading-animation-icon"></div>
+    <div class="loading-animation-outer-circle">
+      <div class="loading-animation-icon"></div>
+    </div>
   </div>
 </template>
 

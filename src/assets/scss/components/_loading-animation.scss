@@ -21,27 +21,55 @@
 		z-index: 1;
 	}
 
-	& > .loading-animation-icon {
-		border: var.$loading-animation-icon-border;
-		border-radius: var.$loading-animation-icon-border-radius-big;
-		width: var.$loading-animation-icon-width;
-		height: var.$loading-animation-icon-height;
+	& > .loading-animation-outer-circle {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		width: var.$loading-animation-outer-circle-width-small;
+		height: var.$loading-animation-outer-circle-height-small;
+		border: var.$loading-animation-outer-circle-border;
+		border-radius: var.$loading-animation-outer-circle-border-radius;
 		z-index: 2;
-		animation-name: loading-animation-icon-animation;
+		animation-name: loading-animation-outer-circle-animation;
 		animation-duration: 1s;
 		animation-iteration-count: infinite;
 		animation-timing-function: ease;
-	} @keyframes loading-animation-icon-animation {
-		0% {
+
+		& > .loading-animation-icon {
+			border: var.$loading-animation-icon-border;
 			border-radius: var.$loading-animation-icon-border-radius-big;
-			transform: rotate(0deg);
+			width: var.$loading-animation-icon-width;
+			height: var.$loading-animation-icon-height;
+			z-index: 2;
+			animation-name: loading-animation-icon-animation;
+			animation-duration: 1s;
+			animation-iteration-count: infinite;
+			animation-timing-function: ease;
+		} @keyframes loading-animation-icon-animation {
+			0% {
+				border-radius: var.$loading-animation-icon-border-radius-big;
+				transform: rotate(0deg);
+			}
+			50% {
+				border-radius: var.$loading-animation-icon-border-radius-small;
+			}
+			100% {
+				border-radius: var.$loading-animation-icon-border-radius-big;
+				transform: rotate(360deg);
+			}
+		}
+	} @keyframes loading-animation-outer-circle-animation {
+		0% {
+			width: var.$loading-animation-outer-circle-width-small;
+			height: var.$loading-animation-outer-circle-height-small;
 		}
 		50% {
-			border-radius: var.$loading-animation-icon-border-radius-small;
+			width: var.$loading-animation-outer-circle-width-big;
+			height: var.$loading-animation-outer-circle-height-big;
 		}
 		100% {
-			border-radius: var.$loading-animation-icon-border-radius-big;
-			transform: rotate(360deg);
+			width: var.$loading-animation-outer-circle-width-small;
+			height: var.$loading-animation-outer-circle-height-small;
 		}
 	}
 

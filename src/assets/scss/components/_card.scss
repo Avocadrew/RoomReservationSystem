@@ -1,6 +1,7 @@
 @use "variable.scss" as var;
 
 .card {
+	position: relative;
 	background-color: var.$card-background-color;
 	border-radius: var.$card-border-radius;
 	height: var.$card-height;
@@ -8,5 +9,61 @@
 	max-width: var.$card-max-width;
 	margin: var.$card-margin;
 	padding: var.$card-padding;
-	overflow: auto;
+	overflow: show;
+
+	& > .card-label {
+		position: absolute;
+		top: var.$card-label-top;
+		left: var.$card-label-left;
+		margin: var.$card-label-margin;
+		padding: var.$card-label-padding;
+		background-color: var.$card-label-background-color;
+		width: fit-content;
+		width: -moz-fit-content;
+		height: var.$card-label-height;
+		box-shadow: var.$card-label-box-shadow;
+		border-radius: var.$card-label-border-radius;
+
+		& > .card-label-text {
+			color: var.$card-label-text-color;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			width: var.$card-label-text-width;
+			height: var.$card-label-text-height;
+		}
+
+		&::before {
+			position: absolute;
+			display: block;
+			content: "";
+			left: var.$card-label-curve-left;
+			width: var.$card-label-curve-width;
+			height: var.$card-label-curve-upper-height;
+			border-radius: var.$card-label-curve-upper-border-radius;
+			background-color: var.$card-label-background-color;
+			z-index: 0;
+		}
+
+		&::after {
+			position: absolute;
+			box-sizing: border-box;
+			display: block;
+			content: "";
+			left: var.$card-label-curve-left;
+			top: var.$card-label-curve-lower-top;
+			width: var.$card-label-curve-width;
+			height: var.$card-label-curve-lower-height;
+			border-top: var.$card-label-curve-lower-border-top;
+			border-right: var.$card-label-curve-lower-border-right;
+			border-radius: var.$card-label-curve-lower-border-radius;
+			background-color: var.$card-label-background-color;
+			box-shadow: var.$card-label-curve-lower-box-shadow;
+			z-index: 1;
+		}
+	}
+
+	& > .card-body {
+		margin: var.$card-body-margin;
+	}
 }

@@ -1,3 +1,4 @@
+@use "sass:math";
 @use "variable.scss" as var;
 
 .container {
@@ -82,8 +83,8 @@
 		max-width: var.$floating-container-max-width;
 		max-height: var.$floating-container-max-height;
 		top: var.$floating-container-top;
-		left: calc(50% - #{var.$floating-container-max-width / 2} - #{var.$container-margin} - #{var.$container-padding});
-		z-index: 2;
+		left: calc(50% - #{math.div(var.$floating-container-max-width, 2)} - #{var.$container-margin} - #{var.$container-padding});
+		z-index: 4;
 		box-shadow: var.$floating-container-box-shadow-color;
 		border-radius: var.$floating-container-border-radius;
 		background-color: var.$floating-container-background-color;
@@ -154,12 +155,12 @@
 	}
 
 	&.container-gray-background {
-		position: absolute;
+		position: fixed;
 		top: 0;
 		left: 0;
 		height: 100%;
 		width: 100%;
-		z-index: 1;
+		z-index: 3;
 		background-color: var.$container-gray-background-background-color;
 	}
 
