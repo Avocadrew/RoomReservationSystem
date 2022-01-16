@@ -119,7 +119,8 @@ $card-label-background-color: $primary-color;
 // card-label-width: fit-content; and card-label-width: -moz-fit-content; are written in _card.scss
 $card-label-height: 2rem;
 $card-label-box-shadow-thickness: 0.3rem;
-$card-label-box-shadow-color: rgba(0, 0, 0, 0.5);
+$card-label-box-shadow-color: rgba(0, 0, 0, 0.5); // Remember to change the color below, to make them look the same. 
+$card-label-curve-lower-border-top-color: rgba(0, 0, 0, 0.15);
 $card-label-box-shadow: -$card-label-box-shadow-thickness $card-label-box-shadow-thickness $card-label-box-shadow-color;
 $card-label-border-radius: 0 0.3rem 0.3rem 0;
 $card-label-text-color: $light-color;
@@ -133,7 +134,7 @@ $card-label-curve-upper-border-radius: 100% 0 0 0 / 50% 50% 50% 50%;
 $card-label-curve-lower-border-radius: 100% 0 0 100% / 50% 50% 50% 50%;
 $card-label-curve-upper-box-shadow: -$card-label-box-shadow-thickness $card-label-box-shadow-thickness $card-label-box-shadow-color;
 $card-label-curve-lower-top: calc(math.div(#{$card-label-curve-upper-height} - #{$card-label-height}, 2));
-$card-label-curve-lower-border-top: $card-label-box-shadow-thickness solid $card-label-box-shadow-color;
+$card-label-curve-lower-border-top: $card-label-box-shadow-thickness solid $card-label-curve-lower-border-top-color;
 $card-label-curve-lower-border-right: 0.2rem solid $card-label-box-shadow-color;
 $card-label-curve-lower-box-shadow: inset 0 0 0 10em rgba(0, 0, 0, 0.4);
-$card-body-margin: 2.5rem 0 0 0;
+$card-body-padding: 2.5rem 0 0 0;

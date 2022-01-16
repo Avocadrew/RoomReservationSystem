@@ -23,6 +23,7 @@
 		height: var.$card-label-height;
 		box-shadow: var.$card-label-box-shadow;
 		border-radius: var.$card-label-border-radius;
+		z-index: 1;
 
 		& > .card-label-text {
 			color: var.$card-label-text-color;
@@ -65,6 +66,9 @@
 	}
 
 	& > .card-body {
-		margin: var.$card-body-margin;
+		padding: var.$card-body-padding;
+		width: 100%;
+		height: var.$card-height;
+		overflow: auto;
 	}
 }
