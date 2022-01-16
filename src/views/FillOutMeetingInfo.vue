@@ -277,10 +277,10 @@ export default {
       this.mode = this.$route.params.mode;
       //this.useDefaultValue();
     } else {
-			if (!this.$route.params.room || this.$route.params.room.length == 0) {
-				this.$router.push({ path: "landingpage" });
-				return;
-			}
+      if (!this.$route.params.room || this.$route.params.room.length == 0) {
+        this.$router.push({ path: "landingpage" });
+        return;
+      }
       this.meeting.room = this.$route.params.room;
       this.meeting.date = this.$route.params.chosenDate;
       let startingTimeIndex = -1;
@@ -376,6 +376,7 @@ export default {
       return { success: true, message: "" };
     },
     modifyGroup: function (index) {
+      this.window.title = "Modify a Group";
       this.tempGroup = this.groups[index];
       this.$refs.floatingWindow.openWindow();
     },
@@ -412,7 +413,6 @@ export default {
             window.alert(err + ". Please try again later. ");
           });
       } else {
-
         // Call api to save a group using this.tempGroup.
         this.$refs.loadingAnimation.start();
         this.axios
