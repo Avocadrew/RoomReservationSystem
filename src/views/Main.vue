@@ -43,7 +43,7 @@ export default {
       currentPage: "Reservation System",
       pathToLabel: {
         landingpage: "Reservation System",
-        chooseactions: "Date and Room",
+        chooseactions: "Menu",
         single: "Date and Room",
         filloutmeetinginfo: "Meeting Infos",
         records: "Records",
