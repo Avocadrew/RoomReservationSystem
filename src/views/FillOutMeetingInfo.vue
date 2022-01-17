@@ -465,6 +465,7 @@ export default {
         });
     },
     inspectGroup: function () {
+      this.window.title = "Inspect a Group";
       for (let i = 0; i < this.groups.length; i++) {
         if (this.meeting.groupID == this.groups[i].id) {
           this.tempGroup = this.groups[i];
