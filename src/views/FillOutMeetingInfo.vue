@@ -506,6 +506,7 @@ export default {
           } else {
             console.log("reserveOneTime failed");
           }
+          window.alert("Reservation complete!");
           this.$refs.loadingAnimation.stop();
         })
         .catch((err) => {
