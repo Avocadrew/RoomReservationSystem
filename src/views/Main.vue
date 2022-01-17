@@ -45,7 +45,7 @@ export default {
         landingpage: "Reservation System",
         chooseactions: "Menu",
         single: "Date and Room",
-        filloutmeetinginfo: "Meeting Infos",
+        filloutmeetinginfo: "Meeting Info",
         records: "Records",
         personalinformation: "Personal Information",
         editpersonalinformation: "Personal Information",
