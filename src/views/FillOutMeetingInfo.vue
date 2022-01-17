@@ -60,7 +60,7 @@
       <p>{{ meeting.groupName }}</p>
       <button
         class="button icon-button"
-        @click="inspectGroup(index)"
+        @click="inspectGroup()"
         v-show="!theGroupIsDeleted"
       >
         <mdicon name="magnify" :size="20" />
@@ -464,8 +464,13 @@ export default {
           window.alert(err + ". Please try again later. ");
         });
     },
-    inspectGroup: function (index) {
-      this.tempGroup = this.groups[index];
+    inspectGroup: function () {
+      for (let i = 0; i < this.groups.length; i++) {
+        if (this.meeting.groupID == this.groups[i].id) {
+          this.tempGroup = this.groups[i];
+          break;
+        }
+      }
       this.tempGroup.readonly = true;
       this.$refs.floatingWindow.openWindow();
     },
