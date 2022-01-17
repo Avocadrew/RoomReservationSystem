@@ -39,7 +39,7 @@
         v-for="(member, index) in newGroup.members"
         :key="index"
       >
-        <p>{{ index.toString() + ". " + newGroup.members[index] }}</p>
+        <p>{{ (index + 1).toString() + ". " + newGroup.members[index] }}</p>
       </div>
     </div>
   </div>
