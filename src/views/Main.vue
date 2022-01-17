@@ -49,13 +49,14 @@ export default {
         records: "Records",
         personalinformation: "Personal Information",
         editpersonalinformation: "Personal Information",
+        createaccount: "Create Account",
       },
     };
   },
   computed: {},
   created() {},
   mounted() {
-		//eruda.init();
+    //eruda.init();
   },
   updated() {
     console.log(this.$route.fullPath);
