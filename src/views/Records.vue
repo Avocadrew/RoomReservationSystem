@@ -210,7 +210,7 @@ export default {
             if (this.currentTab == "future") {
               this.futureMeetings.splice(index, 1);
             } else {
-              this.pastMeetings.spice(index, 1);
+              this.pastMeetings.splice(index, 1);
             }
             this.$refs.loadingAnimation.stop();
           } else {
