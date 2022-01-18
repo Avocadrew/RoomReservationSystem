@@ -132,11 +132,13 @@ export default {
       if (this.params.dailyReservation[timeString]) {
         window.alert("This time is reserved, please choose another time. ");
       } else if (selectedIndex > -1) {
+        console.log(this.isSelected);
+        console.log(index);
         if (
           index == 0 ||
           index == this.isSelected.length - 1 ||
-          this.isSelected[index - 1] == false ||
-          this.isSelected[index + 1] == false
+          !this.isSelected[index - 1] ||
+          !this.isSelected[index + 1]
         ) {
           this.selectedTime.splice(selectedIndex, 1);
           this.isSelected[index] = false;
@@ -148,13 +150,11 @@ export default {
           this.selectedTime.push(timeString);
           this.isSelected[index] = true;
         } else if (
-          (index == 0 && this.isSelected[index + 1] == true) ||
-          (index == this.isSelected.length - 1 &&
-            this.isSelected[index - 1] == true) ||
+          (index == 0 && this.isSelected[index + 1]) ||
+          (index == this.isSelected.length - 1 && this.isSelected[index - 1]) ||
           (index != 0 &&
             index != this.isSelected.length - 1 &&
-            (this.isSelected[index - 1] == true ||
-              this.isSelected[index + 1] == true))
+            (this.isSelected[index - 1] || this.isSelected[index + 1]))
         ) {
           this.selectedTime.push(timeString);
           this.isSelected[index] = true;
