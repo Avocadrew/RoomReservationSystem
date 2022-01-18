@@ -132,17 +132,27 @@ export default {
       if (this.params.dailyReservation[timeString]) {
         window.alert("This time is reserved, please choose another time. ");
       } else if (selectedIndex > -1) {
-        this.selectedTime.splice(selectedIndex, 1);
-        this.isSelected[index] = false;
+        if (
+          index == 0 ||
+          index == this.isSelected.length - 1 ||
+          this.isSelected[index - 1] == false ||
+          this.isSelected[index + 1] == false
+        ) {
+          this.selectedTime.splice(selectedIndex, 1);
+          this.isSelected[index] = false;
+        }
       } else {
         if (this.selectedTime.length == 0) {
           this.selectedTime.push(timeString);
           this.isSelected[index] = true;
         } else if (
-          index == 0 ||
-          this.isSelected[index - 1] == true ||
-          index == this.isSelected.length - 1 ||
-          this.isSelected[index + 1] == true
+          (index == 0 && this.isSelected[index - 1] == true) ||
+          (index == this.isSelected.length - 1 &&
+            this.isSelected[index + 1] == true) ||
+          (index != 0 &&
+            index != this.isSelected.length - 1 &&
+            this.isSelected[index - 1] === true &&
+            this.isSelected[index + 1])
         ) {
           this.selectedTime.push(timeString);
           this.isSelected[index] = true;
