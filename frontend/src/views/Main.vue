@@ -1,5 +1,5 @@
 <template>
-  <div class="container-overflow-hidden">
+  <div>
     <TopBar />
     <div class="post-top-bar">
       <img class="background" src="@/assets/background.jpg" alt="background" />
