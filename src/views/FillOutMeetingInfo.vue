@@ -473,7 +473,7 @@ export default {
           break;
         }
       }
-      this.tempGroup[readonly] = true;
+      this.tempGroup["readonly"] = true;
       this.$refs.floatingWindow.openWindow();
     },
     checkMeetingValidation: function () {
