@@ -182,4 +182,8 @@
 	&.container-no-left-margin {
 		margin-left: 0;
 	}
+
+	&.container-overflow-hidden {
+		overflow: hidden;
+	}
 }
