@@ -469,10 +469,11 @@ export default {
       for (let i = 0; i < this.groups.length; i++) {
         if (this.meeting.groupID == this.groups[i].id) {
           this.tempGroup = this.groups[i];
+	  console.log(this.tempGroup);
           break;
         }
       }
-      this.tempGroup.readonly = true;
+      this.tempGroup[readonly] = true;
       this.$refs.floatingWindow.openWindow();
     },
     checkMeetingValidation: function () {
