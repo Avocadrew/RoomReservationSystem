@@ -133,7 +133,7 @@ $card-label-curve-lower-height: 2rem;
 $card-label-curve-upper-border-radius: 100% 0 0 0 / 50% 50% 50% 50%;
 $card-label-curve-lower-border-radius: 100% 0 0 100% / 50% 50% 50% 50%;
 $card-label-curve-upper-box-shadow: -$card-label-box-shadow-thickness $card-label-box-shadow-thickness $card-label-box-shadow-color;
-$card-label-curve-lower-top: calc(math.div(#{$card-label-curve-upper-height} - #{$card-label-height}, 2));
+$card-label-curve-lower-top: calc(math.div(#{$card-label-curve-upper-height - $card-label-height}, 2));
 $card-label-curve-lower-border-top: $card-label-box-shadow-thickness solid $card-label-curve-lower-border-top-color;
 $card-label-curve-lower-border-right: 0.2rem solid $card-label-box-shadow-color;
 $card-label-curve-lower-box-shadow: inset 0 0 0 10em rgba(0, 0, 0, 0.4);

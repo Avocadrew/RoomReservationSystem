@@ -31,7 +31,7 @@
 
 <script>
 import TopBar from "@/components/TopBar.vue";
-import eruda from "../../node_modules/eruda/eruda.js";
+//import eruda from "../../node_modules/eruda/eruda.js";
 
 export default {
   name: "Main",
@@ -56,7 +56,7 @@ export default {
   computed: {},
   created() {},
   mounted() {
-    eruda.init();
+    //eruda.init();
   },
   updated() {
     console.log(this.$route.fullPath);
