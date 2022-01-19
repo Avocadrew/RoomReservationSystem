@@ -1,0 +1,6 @@
+@use "variable.scss" as var;
+
+.vc-container {
+	margin: var.$small-margin;
+}
+

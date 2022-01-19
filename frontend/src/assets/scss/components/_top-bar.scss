@@ -1,0 +1,24 @@
+@use "variable.scss" as var;
+
+.top-bar {
+	margin: 0;
+	height: var.$top-bar-height;
+	padding: 0;
+	width: 100%;
+	background-color: var.$secondary-color;
+	position: fixed;
+	left: 0;
+	top: 0;
+
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.post-top-bar {
+	position: absolute;
+	height: calc(100% - #{var.$top-bar-height});
+	width: 100%;
+	margin-top: var.$top-bar-height;
+	overflow: hidden;
+}

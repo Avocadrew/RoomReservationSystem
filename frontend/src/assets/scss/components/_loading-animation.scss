@@ -1,0 +1,83 @@
+@use "variable.scss" as var;
+
+.loading-animation {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	z-index: 9999;
+
+	& > .loading-animation-background {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background-color: var.$loading-animation-background-color;
+		z-index: 1;
+	}
+
+	& > .loading-animation-outer-circle {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		width: var.$loading-animation-outer-circle-width-small;
+		height: var.$loading-animation-outer-circle-height-small;
+		border: var.$loading-animation-outer-circle-border;
+		border-radius: var.$loading-animation-outer-circle-border-radius;
+		z-index: 2;
+		animation-name: loading-animation-outer-circle-animation;
+		animation-duration: 1s;
+		animation-iteration-count: infinite;
+		animation-timing-function: ease;
+
+		& > .loading-animation-icon {
+			border: var.$loading-animation-icon-border;
+			border-radius: var.$loading-animation-icon-border-radius-big;
+			width: var.$loading-animation-icon-width;
+			height: var.$loading-animation-icon-height;
+			z-index: 2;
+			animation-name: loading-animation-icon-animation;
+			animation-duration: 1s;
+			animation-iteration-count: infinite;
+			animation-timing-function: ease;
+		} @keyframes loading-animation-icon-animation {
+			0% {
+				border-radius: var.$loading-animation-icon-border-radius-big;
+				transform: rotate(0deg);
+			}
+			50% {
+				border-radius: var.$loading-animation-icon-border-radius-small;
+			}
+			100% {
+				border-radius: var.$loading-animation-icon-border-radius-big;
+				transform: rotate(360deg);
+			}
+		}
+	} @keyframes loading-animation-outer-circle-animation {
+		0% {
+			width: var.$loading-animation-outer-circle-width-small;
+			height: var.$loading-animation-outer-circle-height-small;
+		}
+		50% {
+			width: var.$loading-animation-outer-circle-width-big;
+			height: var.$loading-animation-outer-circle-height-big;
+		}
+		100% {
+			width: var.$loading-animation-outer-circle-width-small;
+			height: var.$loading-animation-outer-circle-height-small;
+		}
+	}
+
+	&.loading-animation-enabled {
+		display: flex;
+	}
+
+	&.loading-animation-disabled {
+		display: none;
+	}
+}

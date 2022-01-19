@@ -1,0 +1,139 @@
+@use "sass:math";
+$primary-color: #1CC497;
+$secondary-color: #88E7DD;
+$negative-color: #EF7C8E;
+$dark-color: black;
+$light-color: white;
+$grey-color: rgba(0, 0, 0, 0.5);
+
+$tiny-margin: 0.3rem;
+$small-margin: 0.5rem;
+$medium-margin: 0.7rem;
+$big-margin: 1rem;
+
+$tiny-padding: 0.3rem;
+$small-padding: 0.5rem;
+$medium-padding: 0.7rem;
+$big-padding: 10rem;
+
+$container-margin: $small-margin;
+$container-padding: $small-padding;
+$container-fixed-width-tiny: 5rem;
+$container-fixed-width-small: 10rem;
+$container-fixed-width-medium: 14rem;
+$container-fixed-width-big: 18rem;
+$floating-container-top: 2rem;
+$floating-container-width: 100%;
+$floating-container-max-width: 80%;
+$floating-container-max-height: 80%;
+$floating-container-border-radius: 0.5rem;
+$floating-container-box-shadow-color: 0 0 1rem $dark-color;
+$floating-container-background-color: $light-color;
+$floating-container-margin: $small-margin;
+$floating-container-padding: $small-padding;
+$floating-container-header-height: 4rem;
+$floating-container-header-width: calc(100% - #{$floating-container-padding * 2});
+$floating-container-footer-height: 4rem;
+//$floating-container-footer-width: calc(100% - #{$floating-container-padding * 2}); // Using fit-content in _container.scss
+$floating-container-body-margin: calc(#{$floating-container-header-height} - #{$floating-container-margin} - #{$floating-container-padding}) 0 0;
+$floating-container-body-padding: calc(#{$floating-container-footer-height} - #{$floating-container-margin} - #{$floating-container-padding});
+$floating-container-body-height: calc(100% - #{$floating-container-header-height} - #{$floating-container-margin} * 2 - #{$floating-container-padding} * 2);
+$container-gray-background-background-color: rgba(0, 0, 0, 0.3);
+$container-tab-body-border-radius: 0 0.5rem 0.5rem 0.5rem;
+$container-router-view-background-color: transparent; //rgba(255, 255, 255, 0.3)
+
+$button-font-color: $light-color;
+$button-border-radius: 2rem;
+$button-font-size: 1.2rem;
+$button-font-weight: bold;
+$button-margin: $small-margin;
+$button-padding: 1rem 0.5rem;
+$button-fixed-width-small: 5rem;
+$button-fixed-width-medium: 7rem;
+$button-fixed-width-big: 10rem;
+$sub-button-font-size: 1rem;
+$sub-button-padding: 0.5rem 0.5rem;
+$button-tab-border-radius: 1rem 1rem 0 0;
+$button-tab-margin: $small-margin $small-margin 0 $small-margin;
+$button-tab-padding: $small-padding $medium-padding;
+$chooseTime-button-font-size: 1rem;
+$chooseTime-button-padding: 0.5rem 0;
+$chooseTime-button-margin: 0;
+$chooseTime-button-border: 0.15rem solid $light-color;
+$chooseTime-button-border-radius: 0.5rem;
+$icon-button-margin: 0 0 0 0.3rem;
+
+$top-bar-height: 4rem;
+$top-bar-elements-margin: 0 $small-margin;
+
+$v-select-min-width: 10rem;
+$v-select-border-radius: 4px;
+
+$p-margin: 0 $small-margin 0 0;
+$p-textBox-max-width: 20rem;
+$h2-background-color: $light-color;
+$h2-color: $primary-color;
+$h2-border-radius: 2rem;
+$h2-padding: 0.5rem 1rem;
+
+$img-icon-google-width: 1rem;
+$img-icon-google-height: 1rem;
+$img-icon-google-margin: 0 $tiny-margin 0 0;
+
+$loading-animation-background-color: $grey-color;
+$loading-animation-icon-width: 2rem;
+$loading-animation-icon-height: 2rem;
+$loading-animation-icon-border: 5px solid $primary-color;
+$loading-animation-icon-border-radius-big: 1.1rem;
+$loading-animation-icon-border-radius-small: 0.8rem;
+$loading-animation-outer-circle-width-small: 4rem;
+$loading-animation-outer-circle-height-small: 4rem;
+$loading-animation-outer-circle-width-big: 5rem;
+$loading-animation-outer-circle-height-big: 5rem;
+$loading-animation-outer-circle-border: 5px solid $primary-color;
+$loading-animation-outer-circle-border-radius: 5rem;
+
+$pop-up-leave-from-and-enter-to-transform: translateY(0);
+$pop-up-leave-from-and-enter-to-opacity: 1;
+$pop-up-enter-from-and-leave-to-transform: translateY(calc(100vh));
+$pop-up-enter-from-and-leave-to-opacity: 0;
+$pop-up-enter-active-transition: all 0.6s cubic-bezier(0.175, 0.885, .32, 1.275);
+$pop-up-leave-active-transition: all 0.3s linear;
+$fade-leave-from-and-enter-to-opacity: 1;
+$fade-enter-from-and-leave-to-opacity: 0;
+$fade-enter-active-transition: all 0.3s ease-in;
+$fade-leave-active-transition: all 0.3s ease-out;
+
+$card-background-color: rgba(255, 255, 255, 0.8);
+$card-margin: $big-margin;
+$card-padding: $small-padding;
+$card-height: calc(100% - #{$card-margin} * 2 - #{$card-padding} * 2);
+$card-width: calc(100% - #{$card-margin} * 2 - #{$card-padding} * 2);
+$card-max-width: 30rem;
+$card-border-radius: 0.5rem;
+$card-label-top: 1rem;
+$card-label-left: 0;
+$card-label-margin: 0;
+$card-label-padding: 0 0.5rem;
+$card-label-background-color: $primary-color;
+// card-label-width: fit-content; and card-label-width: -moz-fit-content; are written in _card.scss
+$card-label-height: 2rem;
+$card-label-box-shadow-thickness: 0.3rem;
+$card-label-box-shadow-color: rgba(0, 0, 0, 0.5); // Remember to change the color below, to make them look the same. 
+$card-label-curve-lower-border-top-color: rgba(0, 0, 0, 0.15);
+$card-label-box-shadow: -$card-label-box-shadow-thickness $card-label-box-shadow-thickness $card-label-box-shadow-color;
+$card-label-border-radius: 0 0.3rem 0.3rem 0;
+$card-label-text-color: $light-color;
+$card-label-text-width: 100%;
+$card-label-text-height: 100%;
+$card-label-curve-width: 1.2rem;
+$card-label-curve-left: -$card-label-curve-width;
+$card-label-curve-upper-height: calc($card-label-height + math.div($card-label-height, 2));
+$card-label-curve-lower-height: $card-label-height;
+$card-label-curve-upper-border-radius: 100% 0 0 0 / 50% 50% 50% 50%;
+$card-label-curve-lower-border-radius: 100% 0 0 100% / 50% 50% 50% 50%;
+$card-label-curve-upper-box-shadow: -$card-label-box-shadow-thickness $card-label-box-shadow-thickness $card-label-box-shadow-color;
+$card-label-curve-lower-border-top: $card-label-box-shadow-thickness solid $card-label-curve-lower-border-top-color;
+$card-label-curve-lower-border-right: 0.2rem solid $card-label-box-shadow-color;
+$card-label-curve-lower-box-shadow: inset 0 0 0 10em rgba(0, 0, 0, 0.4);
+$card-body-padding: 2.5rem 0 0 0;

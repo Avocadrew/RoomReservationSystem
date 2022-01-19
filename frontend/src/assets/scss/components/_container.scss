@@ -1,0 +1,190 @@
+@use "sass:math";
+@use "variable.scss" as var;
+
+.container {
+
+	z-index: 0;
+	margin: var.$container-margin;
+	padding: var.$container-padding;
+
+	&.container-router-view {
+		height: 100%;
+		width: 100%;
+		overflow: auto;
+		background-color: var.$container-router-view-background-color;
+	}
+
+	&.container-useless-wrapper {
+		margin: 0;
+		padding: 0;
+		overflow: hidden;
+	}
+
+	&.container-flex {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+
+		&.container-flex-row {
+			flex-direction: row;
+		}
+
+		&.container-flex-column {
+			flex-direction: column;
+		}
+	}
+
+	&-wrap {
+		flex-wrap: wrap;
+	}
+
+	&.line-container {
+		display: flex;
+		align-items: center;
+		flex-direction: row;
+		padding: 0;
+	}
+
+	&.area-container {
+		display: flex;
+		align-items: center;
+		flex-direction: column;
+		padding: 0;
+
+		& > * {
+			margin: 0 0 var.$container-margin 0;
+
+			&:last-child {
+				margin: 0;
+			}
+		}
+	}
+
+	&.container-tab {
+		&-buttons {
+			display: flex;
+			width: 100%;
+			align-items: flex-start;
+			flex-direction: row;
+			padding: 0;
+			margin-bottom: 0;
+		}
+
+		&-body {
+			margin-top: 0;
+			border: 0.3rem solid var.$secondary-color;
+			border-radius: var.$container-tab-body-border-radius;
+		}
+	}
+
+	&.floating-container {
+		position: absolute;
+		height: 100%;
+		width: var.$floating-container-width;
+		max-width: var.$floating-container-max-width;
+		max-height: var.$floating-container-max-height;
+		top: var.$floating-container-top;
+		left: calc(50% - #{math.div(var.$floating-container-max-width, 2)} - #{var.$container-margin} - #{var.$container-padding});
+		z-index: 4;
+		box-shadow: var.$floating-container-box-shadow-color;
+		border-radius: var.$floating-container-border-radius;
+		background-color: var.$floating-container-background-color;
+		margin: var.$floating-container-margin;
+		padding: var.$floating-container-padding;
+		overflow: auto;
+
+		// You can only put two elements in this container. 
+		& > .floating-container-header {
+			position: absolute;
+			top: var.$floating-container-padding;
+			left: var.$floating-container-padding;
+			height: var.$floating-container-header-height;
+			width: var.$floating-container-header-width;
+			background-color: var.$light-color;
+			display: flex;
+			//align-items: center;
+			flex-direction: row;
+
+			& > * {
+				height: fit-content;
+				height: -moz-fit-content;
+
+				&:first-child {
+					flex-grow: 1;
+					flex-shrink: 0;
+				}
+
+				&:last-child {
+					flex-grow: 0;
+					flex-shrink: 1;
+				}
+			}
+		}
+
+		& > .floating-container-body {
+			margin: var.$floating-container-body-margin;
+			padding-bottom: var.$floating-container-body-padding;
+			height: var.$floating-container-body-height;
+			overflow: auto;
+		}
+
+		& > .floating-container-footer {
+			position: absolute;
+			bottom: var.$floating-container-padding;
+			height: var.$floating-container-footer-height;
+			right: var.$floating-container-padding;
+			width: fit-content;
+			width: -moz-fit-content;
+			display: flex;
+			//align-items: center;
+			flex-direction: row;
+			background-color: transparent;
+
+			& > div {
+				flex-grow: 1;
+				display: flex;
+
+				&:first-child {
+					justify-content: flex-start;
+				}
+
+				&:last-child {
+					justify-content: flex-end;
+				}
+			}
+		}
+	}
+
+	&.container-gray-background {
+		position: fixed;
+		top: 0;
+		left: 0;
+		height: 100%;
+		width: 100%;
+		z-index: 3;
+		background-color: var.$container-gray-background-background-color;
+	}
+
+	&.container-fixed-width {
+		&-tiny {
+			width: var.$container-fixed-width-tiny;
+		}
+		&-small {
+			width: var.$container-fixed-width-small;
+		}
+		&-medium {
+			width: var.$container-fixed-width-medium;
+		}
+		&-big {
+			width: var.$container-fixed-width-big;
+		}
+	}
+
+	&.container-no-left-margin {
+		margin-left: 0;
+	}
+
+	&.container-overflow-hidden {
+		overflow: hidden;
+	}
+}

@@ -1,0 +1,28 @@
+@use "variable.scss" as var;
+
+input[type="radio"] {
+	margin: var.$small-margin;
+}
+
+label {
+	color: var.$primary-color;
+}
+
+input[type="text"], input[type="tel"], input[type="number"], input[type="email"] {
+	border: 0.1rem solid var.$primary-color;
+
+	&:focus {
+		border: 0.2rem solid var.$primary-color;
+		outline: none;
+	}
+}
+
+input[type="number"] {
+	width: 1rem;
+}
+
+textarea {
+	border: 0.1rem solid var.$primary-color;
+	width: 15rem;
+	height: 5rem;
+}
