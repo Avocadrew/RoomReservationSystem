@@ -15,8 +15,8 @@ The main goal of the system's design is to improve the user experience of the cu
 - **Simple and Intuitive UI/UX:**
      
      We simplify the user flow for room reservation. Several clicks are all you need when reserving a meeting room.
-
-![Landing](https://user-images.githubusercontent.com/64970325/150075022-592d76ca-3046-4818-b7c5-65a1a1dd3fa6.png)
+     
+[![Landing](https://user-images.githubusercontent.com/64970325/150075022-592d76ca-3046-4818-b7c5-65a1a1dd3fa6.png)](https://www.ntustsers.xyz)
 
 ## How To Build
 - **Frontend**: 
