@@ -3,7 +3,7 @@
 #### B10732012 Jun-Yu (Andrew) Chen, B10832004 Shu-Yan Cheng, Yun-Hsuan Tsai, Hao Kuan, Wei Chen
 
 ## Introduction
-The main goal of the system's design is to improve the user experience of the current NTUST library room reservation system. To achieve this, we added some new concepts and functions into our system:
+The main goal of the system's design is to improve the user experience of the current NTUST library room reservation system with a total redesign. To achieve this, we added some new concepts and functions into our system:
 - **Grouping system:**
 
      We introduced a new concept called "Group" into the reservation system. Users are able to add team members into a group so personnel in the meeting could be tracked, reminder-related functionality is also based on grouping.
