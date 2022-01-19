@@ -25,7 +25,7 @@ The main goal of the system's design is to improve the user experience of the cu
      3. Open a browser and direct to ``http://localhost:8080``. 
      4. Now you are good to go. 
      
-     ___Note: This frontend will still call api to our server, instead of the one you run locally.___
+     ___Note: This frontend will still call api to our server instead of the one you run locally.___
 - **Backend**: 
      1. Install ``python`` and ``virtualenv``. 
      2. Create a virtual environment using ``virtualenv virtualEnv``. (virtualEnv can be replaced by whatever you want)
