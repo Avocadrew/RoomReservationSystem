@@ -140,24 +140,24 @@ def getDailyReservation():
 @app.route("/api/getAllReservations", methods=['POST'])
 def getAllReservations():
 
-    rsvs = reservation_sheet.find(str(request.json['user_ID']), matchCase = True ,matchEntireCell = True, cols = (2, 2))
-    reservation_list = reservation_sheet.get_values('A2', 'H' + str(rsvs[-1].row))
-
     reservation_past = []
     reservation_future = []
 
-    for rsv in reservation_list:
-        if rsv[1] == str(request.json['user_ID']) and rsv[-1] != 'TRUE':
+    rsvs = reservation_sheet.find(str(request.json['user_ID']), matchCase = True ,matchEntireCell = True, cols = (2, 2))
 
-            res_date = datetime.strptime(rsv[3], '%Y-%m-%d').date()
-            dt = datetime.today()
-            only_date = dt.date()
-            if res_date < only_date:
-                reservation_past += [[rsv[0], rsv[4], rsv[5] ]]
-            else:
-                reservation_future += [[rsv[0], rsv[4], rsv[5] ]]
+    if (len(rsvs) != 0):
+        reservation_list = reservation_sheet.get_values('A2', 'H' + str(rsvs[-1].row))
 
-    
+        for rsv in reservation_list:
+            if rsv[1] == str(request.json['user_ID']) and rsv[-1] != 'TRUE':
+
+                res_date = datetime.strptime(rsv[3], '%Y-%m-%d').date()
+                dt = datetime.today()
+                only_date = dt.date()
+                if res_date < only_date:
+                    reservation_past += [[rsv[0], rsv[4], rsv[5] ]]
+                else:
+                    reservation_future += [[rsv[0], rsv[4], rsv[5] ]]
 
     return {"success": True, "allReservations": {"reservation_past": reservation_past, "reservation_future": reservation_future}}
     
