@@ -1,6 +1,6 @@
 # Room Reservation System
+### 110-1 CS3025 Software Engineering Group 6
 #### Jun-Yu (Andrew) Chen, Shu-Yan Cheng, Yun-Hsuan Tsai, Ethan Kuan, Wei Chen
-![Landing](https://user-images.githubusercontent.com/64970325/150074689-b744d8fd-eb20-4d1c-a66c-d8b56616c47f.PNG)
 
 ## Introduction
 The main goal we design the system is to improve the user experience of current library meeting room reservation system. To achieve this, we added some new concepts and functions into our system:
@@ -16,6 +16,8 @@ The main goal we design the system is to improve the user experience of current 
      
      We simplify the user flow for reserving meeting. All you need is several click to reserve a meeting room.
 
+![Landing](https://user-images.githubusercontent.com/64970325/150075022-592d76ca-3046-4818-b7c5-65a1a1dd3fa6.png)
+
 ## How To Build
 - **Frontend**: 
      1. Install npm and run ``npm install`` in ``/frontend``. 
@@ -23,7 +25,7 @@ The main goal we design the system is to improve the user experience of current 
      3. Open a browser and direct to ``http://localhost:8080``. 
      4. Now you are good to go. 
      
-     ___Note: (This frontend will still call api to our server, instead of the one you run locally.)___
+     ___Note: This frontend will still call api to our server, instead of the one you run locally.___
 - **Backend**: 
      1. Install ``python`` and ``virtualenv``. 
      2. Create a virtual environment using ``virtualenv virtualEnv``. (virtualEnv can be replaced by whatever you want)
@@ -32,8 +34,15 @@ The main goal we design the system is to improve the user experience of current 
      5. Run ``python app.py`` in ``/backend`` to start your backend server. 
      6. Now you are good to go. 
     
-     ___Note: (If you want to use this backend server as your api server, replace every___ ``https://ntustsers.xyz/api/`` ___with___ ``http://localhost:5000/api``___.)___
-## Documents
-
+     ___Note: If you want to use this backend server as your api server, replace every___ ``https://ntustsers.xyz/api/`` ___with___ ``http://localhost:5000/api``___.___
+## Documents & Links
+1.   [Software Requirements Specification]()
+2.   [Software Architecture Document]()
+3.   [Software Design Document]()
+4.   [User Guide]()
+5.   [Source Code]()
+6.   [Executable (Deployment Link)](https://www.ntustsers.xyz)
+7.   [Presentation Slides]()
+8.   [Presentation Video](https://youtu.be/LAXDKqn0O7o)
 ## Deployment
-     https://www.ntustsers.xyz
+Our System is currently being deployed at https://www.ntustsers.xyz with full functionality available.
