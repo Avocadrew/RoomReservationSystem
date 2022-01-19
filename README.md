@@ -36,13 +36,13 @@ The main goal we design the system is to improve the user experience of current 
     
      ___Note: If you want to use this backend server as your api server, replace every___ ``https://ntustsers.xyz/api/`` ___with___ ``http://localhost:5000/api``___.___
 ## Documents & Links
--   [Software Requirements Specification]()
--   [Software Architecture Document]()
--   [Software Design Document]()
--   [User Guide]()
--   [Source Code]()
+-   [Software Requirements Specification](https://drive.google.com/file/d/16P3u-TN29-a_zdGoybNxbZJS0BSj8QMu/view?usp=sharing)
+-   [Software Architecture Document](https://drive.google.com/file/d/1u8kIYB3H1p1x4A8SMqJynv2mRLd7J2Jz/view?usp=sharing)
+-   [Software Design Document](https://drive.google.com/file/d/1WpE52fKBgNV14rL6fBHWNQ9GAAQQ2PTi/view?usp=sharing)
+-   [User Guide](https://drive.google.com/file/d/1a1CDlHIwFV-G35-sFf2DcpUd0SS1DqOy/view?usp=sharing)
+-   [Source Code](https://github.com/albert9052/software-engineering-project/)
 -   [Executable (Deployment Link)](https://www.ntustsers.xyz)
--   [Presentation Slides]()
+-   [Presentation Slides](https://drive.google.com/file/d/1uNfKhgFXfIXfwSGeXhlK35-MhsRvUbMY/view?usp=sharing)
 -   [Presentation Video](https://youtu.be/LAXDKqn0O7o)
 ## Deployment
 Our System is currently being deployed at https://www.ntustsers.xyz with full functionality available.
