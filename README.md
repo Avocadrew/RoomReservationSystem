@@ -36,7 +36,7 @@ The main goal of the system's design is to improve the user experience of the cu
     
      ___Note: If you want to use this backend server as your api server, replace every___ ``https://ntustsers.xyz/api/`` ___with___ ``http://localhost:5000/api``___.___
 ## Documents & Links (In Google Drive)
-__For raw files please refer to the [Releases](https://github.com/albert9052/software-engineering-project/releases) tab of this repository.__
+__For raw files please refer to the [Releases](https://github.com/albert9052/software-engineering-project/releases) tab of this repository or download manually from given Google Drive links.__
 -   [Software Requirements Specification](https://drive.google.com/file/d/16P3u-TN29-a_zdGoybNxbZJS0BSj8QMu/view?usp=sharing)
 -   [Software Architecture Document](https://drive.google.com/file/d/1u8kIYB3H1p1x4A8SMqJynv2mRLd7J2Jz/view?usp=sharing)
 -   [Software Design Document](https://drive.google.com/file/d/1WpE52fKBgNV14rL6fBHWNQ9GAAQQ2PTi/view?usp=sharing)
