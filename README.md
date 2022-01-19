@@ -1,6 +1,6 @@
 # Room Reservation System
 ### 110-1 CS3025 Software Engineering Group 6
-#### B10732012 Jun-Yu (Andrew) Chen, B10732004 Shu-Yan Cheng, Yun-Hsuan Tsai, Hao Kuan, Wei Chen
+#### B10732012 Jun-Yu (Andrew) Chen, B10832004 Shu-Yan Cheng, Yun-Hsuan Tsai, Hao Kuan, Wei Chen
 
 ## Introduction
 The main goal of the system's design is to improve the user experience of the current NTUST library room reservation system. To achieve this, we added some new concepts and functions into our system:
